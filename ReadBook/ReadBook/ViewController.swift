@@ -47,6 +47,7 @@ extension ViewController: UITableViewDelegate {
         let vc = ReadViewController()
         vc.info = dataSource[indexPath.row]
         vc.offset = UserDefaults.standard.integer(forKey: dataSource[indexPath.row].title)
+        //  民国谍影 723，全球高武 1049，重回 226
         navigationController?.pushViewController(vc, animated: true)
     }
 }

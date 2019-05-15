@@ -29,12 +29,14 @@ class ReadViewController: UIViewController {
     }()
     private lazy var nextButton: UIButton = {
         let btn = UIButton(title: "下一页", titleColor: UIColor(hex: 0xfe3650), font: UIFont.systemFont(ofSize: 20), target: self, action: #selector(nextButtonClick), type: .custom)
+        btn.setTitle("没有新章节", for: .disabled)
+        btn.setTitleColor(UIColor.darkGray, for: .disabled)
         btn.backgroundColor = UIColor.white
         return btn
     }()
     private lazy var maskView: UIView = {
         let v = UIView(frame: view.bounds)
-        v.backgroundColor = UIColor(white: 0.1, alpha: 0.1)
+        v.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(maskViewTap)))
         v.isHidden = true
         return v
@@ -60,13 +62,13 @@ class ReadViewController: UIViewController {
         previousButton.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.equalTo(100)
+            make.width.equalTo(150)
         }
         
         nextButton.snp.makeConstraints { (make) in
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.equalTo(100)
+            make.width.equalTo(150)
         }
         
         loadData(offset: offset)
@@ -109,6 +111,8 @@ extension ReadViewController {
             
             UserDefaults.standard.set(self.offset, forKey: self.info.title)
             UserDefaults.standard.synchronize()
+            self.nextButton.isEnabled = model.next.offset > 0
+            self.previousButton.isHidden = model.previous.offset < 0
         }
         
     }

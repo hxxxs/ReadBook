@@ -17,7 +17,10 @@
 		9D00E7FB228BE5B000C5A0C0 /* ReadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E7FA228BE5B000C5A0C0 /* ReadModel.swift */; };
 		9D00E7FD228BF82400C5A0C0 /* BookInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */; };
 		9D00E7FF228BF92700C5A0C0 /* Books.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D00E7FE228BF92700C5A0C0 /* Books.json */; };
-		9D00E801228C080000C5A0C0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E800228C080000C5A0C0 /* Common.swift */; };
+		9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A800E228CEABC00737BF8 /* MaskView.swift */; };
+		9D9A8012228CF1EA00737BF8 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D9A8011228CF1EA00737BF8 /* iconfont.ttf */; };
+		9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8013228D008D00737BF8 /* ReadViewModel.swift */; };
+		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +37,10 @@
 		9D00E7FA228BE5B000C5A0C0 /* ReadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadModel.swift; sourceTree = "<group>"; };
 		9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoModel.swift; sourceTree = "<group>"; };
 		9D00E7FE228BF92700C5A0C0 /* Books.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Books.json; sourceTree = "<group>"; };
-		9D00E800228C080000C5A0C0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		9D9A800E228CEABC00737BF8 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
+		9D9A8011228CF1EA00737BF8 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
+		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
+		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,12 +85,11 @@
 		9D00E7E5228BB6F400C5A0C0 /* ReadBook */ = {
 			isa = PBXGroup;
 			children = (
+				9D9A8015228D0C3E00737BF8 /* Common */,
+				9D9A8010228CF1DB00737BF8 /* Resource */,
+				9D9A800A228CEA5C00737BF8 /* ReadModule */,
 				9D00E7E6228BB6F400C5A0C0 /* AppDelegate.swift */,
 				9D00E7E8228BB6F400C5A0C0 /* ViewController.swift */,
-				9D00E7F8228BBBDF00C5A0C0 /* ReadViewController.swift */,
-				9D00E7FA228BE5B000C5A0C0 /* ReadModel.swift */,
-				9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */,
-				9D00E800228C080000C5A0C0 /* Common.swift */,
 				9D00E7EA228BB6F400C5A0C0 /* Main.storyboard */,
 				9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */,
 				9D00E7EF228BB6F600C5A0C0 /* LaunchScreen.storyboard */,
@@ -92,6 +97,66 @@
 				9D00E7FE228BF92700C5A0C0 /* Books.json */,
 			);
 			path = ReadBook;
+			sourceTree = "<group>";
+		};
+		9D9A800A228CEA5C00737BF8 /* ReadModule */ = {
+			isa = PBXGroup;
+			children = (
+				9D9A800D228CEA8300737BF8 /* ViewModel */,
+				9D9A800C228CEA7A00737BF8 /* Model */,
+				9D9A800B228CEA7300737BF8 /* View */,
+			);
+			path = ReadModule;
+			sourceTree = "<group>";
+		};
+		9D9A800B228CEA7300737BF8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9D9A800E228CEABC00737BF8 /* MaskView.swift */,
+				9D00E7F8228BBBDF00C5A0C0 /* ReadViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9D9A800C228CEA7A00737BF8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9D00E7FA228BE5B000C5A0C0 /* ReadModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9D9A800D228CEA8300737BF8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9D9A8013228D008D00737BF8 /* ReadViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9D9A8010228CF1DB00737BF8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				9D9A8011228CF1EA00737BF8 /* iconfont.ttf */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		9D9A8015228D0C3E00737BF8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9D9A8016228D0C4300737BF8 /* Model */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		9D9A8016228D0C4300737BF8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */,
+				9D9A8017228D0C6200737BF8 /* SettingModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C8EAF5A41339BA988AEC0245 /* Pods */ = {
@@ -166,6 +231,7 @@
 				9D00E7FF228BF92700C5A0C0 /* Books.json in Resources */,
 				9D00E7F1228BB6F600C5A0C0 /* LaunchScreen.storyboard in Resources */,
 				9D00E7EE228BB6F600C5A0C0 /* Assets.xcassets in Resources */,
+				9D9A8012228CF1EA00737BF8 /* iconfont.ttf in Resources */,
 				9D00E7EC228BB6F400C5A0C0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,7 +300,9 @@
 				9D00E7FD228BF82400C5A0C0 /* BookInfoModel.swift in Sources */,
 				9D00E7F9228BBBDF00C5A0C0 /* ReadViewController.swift in Sources */,
 				9D00E7E7228BB6F400C5A0C0 /* AppDelegate.swift in Sources */,
-				9D00E801228C080000C5A0C0 /* Common.swift in Sources */,
+				9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */,
+				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
+				9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */,
 				9D00E7FB228BE5B000C5A0C0 /* ReadModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

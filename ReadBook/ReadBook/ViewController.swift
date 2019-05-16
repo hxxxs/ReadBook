@@ -31,7 +31,10 @@ class ViewController: UIViewController {
             let data = try? Data(contentsOf: path),
             let arrays = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: String]] {
             for dict in arrays! {
-                dataSource.append(BookInfoModel.deserialize(from: dict)!)
+                if let info = BookInfoModel.deserialize(from: dict) {
+                    info.offset = UserDefaults.standard.integer(forKey: info.title)
+                    dataSource.append(info)
+                }
             }
             tableView.reloadData()
         }
@@ -45,8 +48,7 @@ extension ViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let vc = ReadViewController()
-        vc.info = dataSource[indexPath.row]
-        vc.offset = UserDefaults.standard.integer(forKey: dataSource[indexPath.row].title)
+        vc.viewModel = ReadViewModel(bookInfo: dataSource[indexPath.row])
         //  民国谍影 723，全球高武 1049，重回 226
         navigationController?.pushViewController(vc, animated: true)
     }

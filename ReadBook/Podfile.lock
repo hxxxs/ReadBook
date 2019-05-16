@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
-  - HandyJSON (4.2.1)
+  - HandyJSON (5.0.0)
   - SnapKit (4.2.0)
   - XSExtension (1.1.5)
 
@@ -19,10 +19,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  HandyJSON: d0c5fc80204f29056d59d3e5c4587fa0b16b60a8
+  HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   XSExtension: dba97ad6d8f09df3adec1dcca16b7143414ff7e1
 
-PODFILE CHECKSUM: cf6eca2cbc8a17b5c21a166971b3093d5fe9c0e0
+PODFILE CHECKSUM: f373e3b047eb38d21b83647d411be382a1151b45
 
 COCOAPODS: 1.5.3

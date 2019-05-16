@@ -20,6 +20,7 @@ class ReadViewController: UIViewController {
         v.isEditable = false
         v.backgroundColor = UIColor.clear
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textViewTap)))
+        v.showsVerticalScrollIndicator = false
         return v
     }()
     private lazy var maskView: MaskView = {

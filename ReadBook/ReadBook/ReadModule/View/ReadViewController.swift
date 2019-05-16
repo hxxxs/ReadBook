@@ -29,8 +29,10 @@ class ReadViewController: UIViewController {
         v.monitorCompletion = { type in
             switch type {
             case 100001: // 上一章
+                self.textView.setContentOffset(CGPoint.zero, animated: false)
                 self.loadData(offset: self.viewModel.bookInfo.offset - 1)
             case 100002: // 下一章
+                self.textView.setContentOffset(CGPoint.zero, animated: false)
                 self.loadData(offset: self.viewModel.bookInfo.offset + 1)
             case 100003: break
             case 100004:
@@ -54,7 +56,7 @@ class ReadViewController: UIViewController {
         didSet {
             guard let model = chapterModel else { return }
             let paragraph = NSMutableParagraphStyle()
-            paragraph.lineSpacing = 8
+            paragraph.lineSpacing = 15
             self.textView.attributedText = NSAttributedString(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"), attributes: [NSAttributedString.Key.paragraphStyle: paragraph,
                                                                                                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
         }

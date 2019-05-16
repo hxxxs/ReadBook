@@ -16,7 +16,7 @@ class ReadViewController: UIViewController {
     
     private lazy var textView: UITextView = {
         let v = UITextView()
-        v.textColor = UIColor.darkGray
+        v.textColor = UIColor(hex: 0x6C7B6E)
         v.isEditable = false
         v.backgroundColor = UIColor.clear
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textViewTap)))
@@ -54,7 +54,7 @@ class ReadViewController: UIViewController {
         didSet {
             guard let model = chapterModel else { return }
             let paragraph = NSMutableParagraphStyle()
-            paragraph.lineSpacing = 5
+            paragraph.lineSpacing = 8
             self.textView.attributedText = NSAttributedString(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"), attributes: [NSAttributedString.Key.paragraphStyle: paragraph,
                                                                                                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
         }
@@ -72,7 +72,7 @@ class ReadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(hex: 0xC7EDCC)
+        view.backgroundColor = UIColor(hex: 0xCDDFD1)
         view.addSubview(textView)
         textView.snp.makeConstraints { (make) in
             make.top.equalTo(topLayoutGuide.snp.bottom)

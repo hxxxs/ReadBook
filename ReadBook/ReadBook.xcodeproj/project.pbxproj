@@ -22,6 +22,7 @@
 		9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8013228D008D00737BF8 /* ReadViewModel.swift */; };
 		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
 		9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033F9228E9584001CC884 /* BookShelfCell.swift */; };
+		9DD033FC228EA7BD001CC884 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		9DD033F9228E9584001CC884 /* BookShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfCell.swift; sourceTree = "<group>"; };
+		9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
 		CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				9DD033F9228E9584001CC884 /* BookShelfCell.swift */,
+				9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
 				9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */,
 				9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */,
+				9DD033FC228EA7BD001CC884 /* BookShelfViewController.swift in Sources */,
 				9D00E7FB228BE5B000C5A0C0 /* ReadModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

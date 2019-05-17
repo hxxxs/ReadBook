@@ -16,5 +16,6 @@ class BookInfoModel: HandyJSON {
     var cmd = ""
     var offset = 0
     var encodeUrl = ""
+    var picUrl = ""
     required init() {}
 }

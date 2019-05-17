@@ -21,6 +21,7 @@
 		9D9A8012228CF1EA00737BF8 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D9A8011228CF1EA00737BF8 /* iconfont.ttf */; };
 		9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8013228D008D00737BF8 /* ReadViewModel.swift */; };
 		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
+		9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033F9228E9584001CC884 /* BookShelfCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		9D9A8011228CF1EA00737BF8 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		9DD033F9228E9584001CC884 /* BookShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfCell.swift; sourceTree = "<group>"; };
 		CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 		9D00E7E5228BB6F400C5A0C0 /* ReadBook */ = {
 			isa = PBXGroup;
 			children = (
+				9DD033F7228E9553001CC884 /* BookShelfModule */,
 				9D9A8015228D0C3E00737BF8 /* Common */,
 				9D9A8010228CF1DB00737BF8 /* Resource */,
 				9D9A800A228CEA5C00737BF8 /* ReadModule */,
@@ -157,6 +160,22 @@
 				9D9A8017228D0C6200737BF8 /* SettingModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9DD033F7228E9553001CC884 /* BookShelfModule */ = {
+			isa = PBXGroup;
+			children = (
+				9DD033F8228E9566001CC884 /* View */,
+			);
+			path = BookShelfModule;
+			sourceTree = "<group>";
+		};
+		9DD033F8228E9566001CC884 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9DD033F9228E9584001CC884 /* BookShelfCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C8EAF5A41339BA988AEC0245 /* Pods */ = {
@@ -250,6 +269,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReadBook/Pods-ReadBook-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/XSExtension/XSExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/XSUtil/XSUtil.framework",
@@ -260,6 +280,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XSExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XSUtil.framework",
@@ -304,6 +325,7 @@
 				9D00E7E7228BB6F400C5A0C0 /* AppDelegate.swift in Sources */,
 				9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */,
 				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
+				9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */,
 				9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */,
 				9D00E7FB228BE5B000C5A0C0 /* ReadModel.swift in Sources */,
 			);

@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         let tv = UITableView(frame: view.bounds, style: .plain)
         tv.delegate = self
         tv.dataSource = self
-        tv.rowHeight = 50
+        tv.rowHeight = 120
         tv.separatorStyle = .none
         return tv
     }()
@@ -63,11 +63,11 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "reuseIdentifier"
-        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? BookShelfCell
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
+            cell = BookShelfCell(style: .default, reuseIdentifier: identifier)
         }
-        cell?.textLabel?.text = dataSource[indexPath.row].title
+        cell?.model = dataSource[indexPath.row]
         return cell!
     }
 }

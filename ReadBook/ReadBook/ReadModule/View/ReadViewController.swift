@@ -9,14 +9,14 @@
 import UIKit
 import Alamofire
 import XSExtension
-import HandyJSON
 import SnapKit
+import XSUtil
 
 class ReadViewController: UIViewController {
     
     private lazy var textView: UITextView = {
         let v = UITextView()
-        v.textColor = UIColor(hex: 0x6C7B6E)
+        v.textColor = UIColor(hex: 0x546356)
         v.isEditable = false
         v.backgroundColor = UIColor.clear
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textViewTap)))
@@ -25,6 +25,7 @@ class ReadViewController: UIViewController {
     }()
     private lazy var maskView: MaskView = {
         let v = MaskView(frame: .zero)
+        v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(maskViewTap)))
         v.monitorCompletion = { type in
             switch type {
@@ -97,12 +98,16 @@ class ReadViewController: UIViewController {
 extension ReadViewController {
     
     func loadData(offset: Int) {
+        XSHUD.show(text: "正在加载中...", autoDismiss: false)
+        textView.isUserInteractionEnabled = false
         viewModel.loadChapterInfo(offset: offset) { (model) in
             self.chapterModel = model
             self.title = model.current.title
             self.maskView.isHidden = true
             
             self.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
+            self.textView.isUserInteractionEnabled = true
+            XSHUD.dismiss()
         }
     }
 }

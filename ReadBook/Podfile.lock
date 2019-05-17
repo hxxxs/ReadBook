@@ -3,12 +3,15 @@ PODS:
   - HandyJSON (5.0.0)
   - SnapKit (4.2.0)
   - XSExtension (1.1.5)
+  - XSUtil (0.1.0):
+    - SnapKit
+    - XSExtension
 
 DEPENDENCIES:
   - Alamofire
   - HandyJSON
   - SnapKit
-  - XSExtension
+  - XSUtil
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -16,13 +19,15 @@ SPEC REPOS:
     - HandyJSON
     - SnapKit
     - XSExtension
+    - XSUtil
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   XSExtension: dba97ad6d8f09df3adec1dcca16b7143414ff7e1
+  XSUtil: 751655a3e7a4b9e6994c97a42af808c43d6633ea
 
-PODFILE CHECKSUM: f373e3b047eb38d21b83647d411be382a1151b45
+PODFILE CHECKSUM: b8baf38d39cc9412e3417204d62a689a69fb0627
 
 COCOAPODS: 1.5.3

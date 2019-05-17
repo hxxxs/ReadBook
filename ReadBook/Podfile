@@ -6,7 +6,7 @@ target 'ReadBook' do
   use_frameworks!
 
   # Pods for ReadBook
-pod 'XSExtension'
+pod 'XSUtil'
 pod 'SnapKit'
 pod 'Alamofire'
 pod 'HandyJSON'

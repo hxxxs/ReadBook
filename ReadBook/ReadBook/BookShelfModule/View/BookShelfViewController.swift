@@ -52,9 +52,6 @@ class BookShelfViewController: UIViewController {
         }
     }
 
-    
-    
-
 }
 
 // MARK: UICollectionViewDelegate

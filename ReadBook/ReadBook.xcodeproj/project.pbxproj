@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9CA76D3787AC2DFCB88443E8 /* Pods_ReadBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */; };
 		9D00E7E7228BB6F400C5A0C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E7E6228BB6F400C5A0C0 /* AppDelegate.swift */; };
-		9D00E7E9228BB6F400C5A0C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E7E8228BB6F400C5A0C0 /* ViewController.swift */; };
 		9D00E7EC228BB6F400C5A0C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D00E7EA228BB6F400C5A0C0 /* Main.storyboard */; };
 		9D00E7EE228BB6F600C5A0C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */; };
 		9D00E7F1228BB6F600C5A0C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D00E7EF228BB6F600C5A0C0 /* LaunchScreen.storyboard */; };
@@ -30,7 +29,6 @@
 		61146BAA73AF53D959DF3DED /* Pods-ReadBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReadBook/Pods-ReadBook.release.xcconfig"; sourceTree = "<group>"; };
 		9D00E7E3228BB6F400C5A0C0 /* ReadBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReadBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D00E7E6228BB6F400C5A0C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9D00E7E8228BB6F400C5A0C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9D00E7EB228BB6F400C5A0C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D00E7F0228BB6F600C5A0C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,12 +92,10 @@
 				9D9A8010228CF1DB00737BF8 /* Resource */,
 				9D9A800A228CEA5C00737BF8 /* ReadModule */,
 				9D00E7E6228BB6F400C5A0C0 /* AppDelegate.swift */,
-				9D00E7E8228BB6F400C5A0C0 /* ViewController.swift */,
 				9D00E7EA228BB6F400C5A0C0 /* Main.storyboard */,
 				9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */,
 				9D00E7EF228BB6F600C5A0C0 /* LaunchScreen.storyboard */,
 				9D00E7F2228BB6F600C5A0C0 /* Info.plist */,
-				9D00E7FE228BF92700C5A0C0 /* Books.json */,
 			);
 			path = ReadBook;
 			sourceTree = "<group>";
@@ -142,6 +138,7 @@
 		9D9A8010228CF1DB00737BF8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9D00E7FE228BF92700C5A0C0 /* Books.json */,
 				9D9A8011228CF1EA00737BF8 /* iconfont.ttf */,
 			);
 			path = Resource;
@@ -158,7 +155,6 @@
 		9D9A8016228D0C4300737BF8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */,
 				9D9A8017228D0C6200737BF8 /* SettingModel.swift */,
 			);
 			path = Model;
@@ -167,6 +163,7 @@
 		9DD033F7228E9553001CC884 /* BookShelfModule */ = {
 			isa = PBXGroup;
 			children = (
+				9DE4C33822922E32007A6BAB /* Model */,
 				9DD033F8228E9566001CC884 /* View */,
 			);
 			path = BookShelfModule;
@@ -179,6 +176,14 @@
 				9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9DE4C33822922E32007A6BAB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C8EAF5A41339BA988AEC0245 /* Pods */ = {
@@ -322,7 +327,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D00E7E9228BB6F400C5A0C0 /* ViewController.swift in Sources */,
 				9D00E7FD228BF82400C5A0C0 /* BookInfoModel.swift in Sources */,
 				9D00E7F9228BBBDF00C5A0C0 /* ReadViewController.swift in Sources */,
 				9D00E7E7228BB6F400C5A0C0 /* AppDelegate.swift in Sources */,

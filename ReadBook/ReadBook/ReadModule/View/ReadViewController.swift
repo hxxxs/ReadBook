@@ -52,7 +52,6 @@ class ReadViewController: UIViewController {
         }
         return v
     }()
-    
     private var chapterModel: ReadModel? {
         didSet {
             guard let model = chapterModel else { return }
@@ -62,7 +61,6 @@ class ReadViewController: UIViewController {
                                                                                                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
         }
     }
-    
     private var fontSize = SettingModel.textFontSize {
         didSet {
             UserDefaults.standard.set(fontSize, forKey: kTextFontKey)
@@ -71,6 +69,10 @@ class ReadViewController: UIViewController {
     }
     
     var viewModel: ReadViewModel!
+    
+    deinit {
+        XSHUD.dismiss()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +100,6 @@ class ReadViewController: UIViewController {
 extension ReadViewController {
     
     func loadData(offset: Int) {
-        XSHUD.show(text: "正在加载中...", autoDismiss: false)
         textView.isUserInteractionEnabled = false
         viewModel.loadChapterInfo(offset: offset) { (model) in
             self.chapterModel = model
@@ -107,7 +108,6 @@ extension ReadViewController {
             
             self.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
             self.textView.isUserInteractionEnabled = true
-            XSHUD.dismiss()
         }
     }
 }

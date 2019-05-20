@@ -40,6 +40,13 @@ struct BookShelfModel {
     
     private var books: [BookInfoModel]
     
+    static func deleteRead(with model: BookInfoModel) {
+        shared.books = shared.books.filter { (book) -> Bool in
+            return book.title != model.title
+        }
+        save()
+    }
+    
     static func currentRead(with model: BookInfoModel) {
         shared.books = shared.books.filter { (book) -> Bool in
             return book.title != model.title

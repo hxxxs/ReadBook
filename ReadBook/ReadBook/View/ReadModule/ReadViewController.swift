@@ -33,7 +33,8 @@ class ReadViewController: UIViewController {
             case 100002: // 下一章
                 self.textView.setContentOffset(CGPoint.zero, animated: false)
                 self.loadData(offset: self.viewModel.bookInfo.offset + 1)
-            case 100003: break
+            case 100003:
+                XSHUD.show(text: "程序员小哥哥在想解决办法")
             case 100004:
                 if let model = self.chapterModel {
                     self.fontSize -= 1

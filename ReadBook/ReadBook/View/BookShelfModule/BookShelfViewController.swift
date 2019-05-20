@@ -25,8 +25,13 @@ class BookShelfViewController: UIViewController {
         v.register(BookShelfCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         v.backgroundColor = UIColor.white
         v.showsVerticalScrollIndicator = false
+        
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureClick))
+        v.addGestureRecognizer(gesture)
         return v
     }()
+    
+    private lazy var doneItem = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(doneItemClick))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +43,27 @@ class BookShelfViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        navigationItem.rightBarButtonItem = nil
         collectionView.reloadData()
     }
 
+}
+
+// MARK: - Monitor
+
+extension BookShelfViewController {
+    
+    @objc func doneItemClick() {
+        navigationItem.rightBarButtonItem = nil
+        collectionView.reloadData()
+    }
+    
+    @objc func longPressGestureClick() {
+        if navigationItem.rightBarButtonItem == nil {
+            navigationItem.rightBarButtonItem = doneItem
+            collectionView.reloadData()
+        }
+    }
 }
 
 // MARK: UICollectionViewDelegate
@@ -72,6 +94,11 @@ extension BookShelfViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? BookShelfCell
         cell?.model =  BookShelfModel.books[indexPath.row]
+        cell?.showDeleteButton = navigationItem.rightBarButtonItem == nil
+        cell?.deleteButtonCallBack = {[weak self] model in
+            BookShelfModel.deleteRead(with: model)
+            self?.collectionView.reloadData()
+        }
         return cell!
     }
 

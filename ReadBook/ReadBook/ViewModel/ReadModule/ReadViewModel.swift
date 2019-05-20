@@ -38,8 +38,7 @@ struct ReadViewModel {
                     return
             }
             self.bookInfo.offset = model.current.offset
-            UserDefaults.standard.set(model.current.offset, forKey: self.bookInfo.title)
-            UserDefaults.standard.synchronize()
+            BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
             completion(model)
             XSHUD.dismiss()
         }

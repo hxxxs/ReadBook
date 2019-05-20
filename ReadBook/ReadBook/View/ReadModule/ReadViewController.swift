@@ -15,10 +15,10 @@ class ReadViewController: UIViewController {
     private lazy var textView: UITextView = {
         let v = UITextView()
         v.textColor = UIColor(hex: 0x546356)
-        v.isEditable = false
         v.backgroundColor = UIColor.clear
+        v.delegate = self
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textViewTap)))
-        v.showsVerticalScrollIndicator = false
+        v.contentInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         return v
     }()
     private lazy var maskView: MaskView = {
@@ -81,7 +81,7 @@ class ReadViewController: UIViewController {
         view.addSubview(textView)
         textView.snp.makeConstraints { (make) in
             make.top.equalTo(topLayoutGuide.snp.bottom)
-            make.left.right.bottom.equalToSuperview().inset(10)
+            make.left.right.bottom.equalToSuperview()
         }
         
         view.addSubview(maskView)
@@ -124,4 +124,13 @@ extension ReadViewController {
         maskView.isHidden = false
     }
 
+}
+
+// MARK: - UITextViewDelegate
+
+extension ReadViewController: UITextViewDelegate {
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        return false
+    }
 }

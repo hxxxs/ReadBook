@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import XSExtension
 import SnapKit
 import XSUtil
 

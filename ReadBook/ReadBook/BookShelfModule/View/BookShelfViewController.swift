@@ -38,18 +38,31 @@ class BookShelfViewController: UIViewController {
        
         view.addSubview(collectionView)
         
+        let jsonPath = "Books.json".appendDocumentDir
+        var data = NSData(contentsOfFile: jsonPath)
         
-        if let path = Bundle.main.url(forResource: "Books.json", withExtension: nil),
-            let data = try? Data(contentsOf: path),
-            let arrays = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: String]] {
-            for dict in arrays! {
-                if let info = BookInfoModel.deserialize(from: dict) {
-                    info.offset = UserDefaults.standard.integer(forKey: info.title)
-                    dataSource.append(info)
-                }
-            }
-            collectionView.reloadData()
+        if data == nil {
+            let path = Bundle.main.url(forResource: "Books.json", withExtension: nil)
+            data = NSData(contentsOf: path!)
         }
+        
+        guard let arrays = try? JSONSerialization.jsonObject(with: data! as Data, options: []) as? [[String: Any]] else {
+            return
+        }
+        
+        for dict in arrays! {
+            if let info = BookInfoModel.deserialize(from: dict) {
+                info.offset = UserDefaults.standard.integer(forKey: info.title)
+                dataSource.append(info)
+            }
+        }
+        collectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView.reloadData()
     }
 
 }
@@ -60,8 +73,18 @@ extension BookShelfViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ReadViewController()
-        vc.viewModel = ReadViewModel(bookInfo: dataSource[indexPath.row])
+        let model = dataSource[indexPath.row]
+        vc.viewModel = ReadViewModel(bookInfo: model)
         navigationController?.pushViewController(vc, animated: true)
+        
+        dataSource.remove(at: indexPath.row)
+        dataSource.insert(model, at: 0)
+        
+        if let data = try? JSONSerialization.data(withJSONObject: dataSource.toJSON(), options: .prettyPrinted) {
+            let jsonPath = "Books.json".appendDocumentDir
+            (data as NSData).write(toFile: jsonPath, atomically: true)
+        }
+        
     }
 }
 

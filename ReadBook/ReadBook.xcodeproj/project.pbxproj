@@ -89,10 +89,11 @@
 		9D00E7E5228BB6F400C5A0C0 /* ReadBook */ = {
 			isa = PBXGroup;
 			children = (
-				9DD033F7228E9553001CC884 /* BookShelfModule */,
-				9D9A8015228D0C3E00737BF8 /* Common */,
+				9D0CA34822924437003B07F0 /* Tools */,
+				9D0CA343229243DE003B07F0 /* Model */,
+				9D0CA342229243D8003B07F0 /* ViewModel */,
+				9D0CA341229243CF003B07F0 /* View */,
 				9D9A8010228CF1DB00737BF8 /* Resource */,
-				9D9A800A228CEA5C00737BF8 /* ReadModule */,
 				9D00E7E6228BB6F400C5A0C0 /* AppDelegate.swift */,
 				9D00E7EA228BB6F400C5A0C0 /* Main.storyboard */,
 				9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */,
@@ -102,39 +103,63 @@
 			path = ReadBook;
 			sourceTree = "<group>";
 		};
-		9D9A800A228CEA5C00737BF8 /* ReadModule */ = {
+		9D0CA341229243CF003B07F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9D9A800D228CEA8300737BF8 /* ViewModel */,
-				9D9A800C228CEA7A00737BF8 /* Model */,
-				9D9A800B228CEA7300737BF8 /* View */,
+				9DD033F8228E9566001CC884 /* BookShelfModule */,
+				9D0CA344229243F0003B07F0 /* ReadModule */,
 			);
-			path = ReadModule;
+			path = View;
 			sourceTree = "<group>";
 		};
-		9D9A800B228CEA7300737BF8 /* View */ = {
+		9D0CA342229243D8003B07F0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9D0CA34722924422003B07F0 /* ReadModule */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9D0CA343229243DE003B07F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DE4C33822922E32007A6BAB /* BookShelfModule */,
+				9D0CA34622924408003B07F0 /* ReadModule */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9D0CA344229243F0003B07F0 /* ReadModule */ = {
 			isa = PBXGroup;
 			children = (
 				9D9A800E228CEABC00737BF8 /* MaskView.swift */,
 				9D00E7F8228BBBDF00C5A0C0 /* ReadViewController.swift */,
 			);
-			path = View;
+			path = ReadModule;
 			sourceTree = "<group>";
 		};
-		9D9A800C228CEA7A00737BF8 /* Model */ = {
+		9D0CA34622924408003B07F0 /* ReadModule */ = {
 			isa = PBXGroup;
 			children = (
 				9D00E7FA228BE5B000C5A0C0 /* ReadModel.swift */,
 			);
-			path = Model;
+			path = ReadModule;
 			sourceTree = "<group>";
 		};
-		9D9A800D228CEA8300737BF8 /* ViewModel */ = {
+		9D0CA34722924422003B07F0 /* ReadModule */ = {
 			isa = PBXGroup;
 			children = (
 				9D9A8013228D008D00737BF8 /* ReadViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ReadModule;
+			sourceTree = "<group>";
+		};
+		9D0CA34822924437003B07F0 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				9D9A8015228D0C3E00737BF8 /* Common */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		9D9A8010228CF1DB00737BF8 /* Resource */ = {
@@ -162,31 +187,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9DD033F7228E9553001CC884 /* BookShelfModule */ = {
-			isa = PBXGroup;
-			children = (
-				9DE4C33822922E32007A6BAB /* Model */,
-				9DD033F8228E9566001CC884 /* View */,
-			);
-			path = BookShelfModule;
-			sourceTree = "<group>";
-		};
-		9DD033F8228E9566001CC884 /* View */ = {
+		9DD033F8228E9566001CC884 /* BookShelfModule */ = {
 			isa = PBXGroup;
 			children = (
 				9DD033F9228E9584001CC884 /* BookShelfCell.swift */,
 				9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */,
 			);
-			path = View;
+			path = BookShelfModule;
 			sourceTree = "<group>";
 		};
-		9DE4C33822922E32007A6BAB /* Model */ = {
+		9DE4C33822922E32007A6BAB /* BookShelfModule */ = {
 			isa = PBXGroup;
 			children = (
 				9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */,
 				9D0CA33F22923C9A003B07F0 /* BookShelfModel.swift */,
 			);
-			path = Model;
+			path = BookShelfModule;
 			sourceTree = "<group>";
 		};
 		C8EAF5A41339BA988AEC0245 /* Pods */ = {

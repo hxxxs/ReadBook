@@ -25,25 +25,26 @@ class ReadViewController: UIViewController {
         let v = MaskView(frame: .zero)
         v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(maskViewTap)))
-        v.monitorCompletion = { type in
+        v.monitorCompletion = {[weak self] type in
+            guard let strongSelf = self else { return }
             switch type {
             case 100001: // 上一章
-                self.textView.setContentOffset(CGPoint.zero, animated: false)
-                self.loadData(offset: self.viewModel.bookInfo.offset - 1)
+                strongSelf.textView.setContentOffset(CGPoint.zero, animated: false)
+                strongSelf.loadData(offset: strongSelf.viewModel.bookInfo.offset - 1)
             case 100002: // 下一章
-                self.textView.setContentOffset(CGPoint.zero, animated: false)
-                self.loadData(offset: self.viewModel.bookInfo.offset + 1)
+                strongSelf.textView.setContentOffset(CGPoint.zero, animated: false)
+                strongSelf.loadData(offset: strongSelf.viewModel.bookInfo.offset + 1)
             case 100003:
                 XSHUD.show(text: "程序员小哥哥在想解决办法")
             case 100004:
-                if let model = self.chapterModel {
-                    self.fontSize -= 1
-                    self.chapterModel = model
+                if let model = strongSelf.chapterModel {
+                    strongSelf.fontSize -= 1
+                    strongSelf.chapterModel = model
                 }
             case 100005:
-                if let model = self.chapterModel {
-                    self.fontSize += 1
-                    self.chapterModel = model
+                if let model = strongSelf.chapterModel {
+                    strongSelf.fontSize += 1
+                    strongSelf.chapterModel = model
                 }
             default:
                 break
@@ -100,13 +101,13 @@ extension ReadViewController {
     
     func loadData(offset: Int) {
         textView.isUserInteractionEnabled = false
-        viewModel.loadChapterInfo(offset: offset) { (model) in
-            self.chapterModel = model
-            self.title = model.current.title
-            self.maskView.isHidden = true
+        viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
+            self?.chapterModel = model
+            self?.title = model.current.title
+            self?.maskView.isHidden = true
             
-            self.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
-            self.textView.isUserInteractionEnabled = true
+            self?.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
+            self?.textView.isUserInteractionEnabled = true
         }
     }
 }

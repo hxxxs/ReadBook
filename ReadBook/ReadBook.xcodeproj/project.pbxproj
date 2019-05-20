@@ -96,9 +96,7 @@
 				9D9A8010228CF1DB00737BF8 /* Resource */,
 				9D00E7E6228BB6F400C5A0C0 /* AppDelegate.swift */,
 				9D00E7EA228BB6F400C5A0C0 /* Main.storyboard */,
-				9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */,
 				9D00E7EF228BB6F600C5A0C0 /* LaunchScreen.storyboard */,
-				9D00E7F2228BB6F600C5A0C0 /* Info.plist */,
 			);
 			path = ReadBook;
 			sourceTree = "<group>";
@@ -165,6 +163,8 @@
 		9D9A8010228CF1DB00737BF8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9D00E7F2228BB6F600C5A0C0 /* Info.plist */,
+				9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */,
 				9D00E7FE228BF92700C5A0C0 /* Books.json */,
 				9D9A8011228CF1EA00737BF8 /* iconfont.ttf */,
 			);
@@ -504,7 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 425MA8C7FZ;
-				INFOPLIST_FILE = ReadBook/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ReadBook/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -524,7 +524,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 425MA8C7FZ;
-				INFOPLIST_FILE = ReadBook/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ReadBook/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

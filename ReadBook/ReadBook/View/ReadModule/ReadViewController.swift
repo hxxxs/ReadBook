@@ -86,8 +86,7 @@ class ReadViewController: UIViewController {
         
         view.addSubview(maskView)
         maskView.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
-            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            make.edges.equalToSuperview()
         }
         
         loadData(offset: viewModel.bookInfo.offset)

@@ -2,11 +2,20 @@
     {
         "title" : "全球高武",
         "id": "10899536148534750089",
-        "md": "3163220789412855037",
-        "cmd": "3163220789412840473",
+        "md": "4765685124541850502",
+        "cmd": "4765685124541842482",
         "encodeUrl": "http://www.31xs.com/14/14572/48887231.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012237441/150",
         "offset": "1074"
+    },
+    {
+        "title" : "民国谍影",
+        "id": "7897166711122501765",
+        "md": "6916298100905867271",
+        "cmd": "6916298100905853685",
+        "encodeUrl": "http://www.wutuxs.com/html/8/8002/7071536.html",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011489683/150",
+        "offset": "757"
     },
     {
         "title" : "重生80当大佬",
@@ -16,15 +25,6 @@
         "encodeUrl": "http://www.31xs.com/134/134094/47631095.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012749331/150",
         "offset": "232"
-    },
-    {
-        "title" : "民国谍影",
-        "id": "7897166711122501765",
-        "md": "2922211285060974374",
-        "cmd": "2922211285060960979",
-        "encodeUrl": "http://www.31xs.com/92/92362/48890722.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011489683/150",
-        "offset": "755"
     },
     {
         "title" : "我有一座恐怖屋",
@@ -74,10 +74,10 @@
     {
         "title" : "我的1979",
         "id": "16974760499887505192",
-        "md": "16871903328090673915",
-        "cmd": "16871903328090670733",
-        "encodeUrl": "http://www.biququ.com/html/9834/122921678.html",
+        "md": "14570633254257999837",
+        "cmd": "14570633254257985165",
+        "encodeUrl": "http://www.147xs.com/book/1465/21971678.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1003541158/150",
-        "offset": "1677"
+        "offset": "1679"
     }
 ]

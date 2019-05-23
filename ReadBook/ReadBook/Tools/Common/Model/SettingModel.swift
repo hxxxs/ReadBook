@@ -13,6 +13,6 @@ let kTextFontKey = "kTextFontKey"
 class SettingModel {
     static var textFontSize: CGFloat {
         let fontSize = UserDefaults.standard.integer(forKey: kTextFontKey)
-        return fontSize > 0 ? CGFloat(fontSize) : 20
+        return fontSize > 0 ? CGFloat(fontSize) : 24
     }
 }

@@ -167,6 +167,8 @@ extension ReadViewController {
             if player == nil {
                 player = AVSpeechSynthesizer()
                 player?.delegate = self
+                try? AVAudioSession.sharedInstance().setCategory(.playback)
+                UIApplication.shared.beginReceivingRemoteControlEvents()
             }
             let utterance = AVSpeechUtterance(string: content.replacingOccurrences(of: "<br/>", with: ""))
             //  语速（0 - 1）

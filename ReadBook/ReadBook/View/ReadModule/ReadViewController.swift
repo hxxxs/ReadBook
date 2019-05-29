@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import XSUtil
+import AVFoundation
 
 class ReadViewController: UIViewController {
     
@@ -35,7 +36,12 @@ class ReadViewController: UIViewController {
                 strongSelf.textView.setContentOffset(CGPoint.zero, animated: false)
                 strongSelf.loadData(offset: strongSelf.viewModel.bookInfo.offset + 1)
             case 100003:
-                XSHUD.show(text: "程序员小哥哥在想解决办法")
+//                XSHUD.show(text: "程序员小哥哥在想解决办法")
+                if strongSelf.player == nil {
+                    strongSelf.startRead()
+                } else {
+                    strongSelf.continueRead()
+                }
             case 100004:
                 if let model = strongSelf.chapterModel {
                     strongSelf.fontSize -= 1
@@ -59,6 +65,10 @@ class ReadViewController: UIViewController {
             paragraph.lineSpacing = 15
             self.textView.attributedText = NSAttributedString(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"), attributes: [NSAttributedString.Key.paragraphStyle: paragraph,
                                                                                                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
+            
+            if player != nil {
+                self.startRead()
+            }
         }
     }
     private var fontSize = SettingModel.textFontSize {
@@ -67,6 +77,8 @@ class ReadViewController: UIViewController {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    private var player: AVSpeechSynthesizer?
     
     var viewModel: ReadViewModel!
     
@@ -111,15 +123,80 @@ extension ReadViewController {
     }
 }
 
+// MARK: - AVSpeechSynthesizerDelegate
+
+extension ReadViewController: AVSpeechSynthesizerDelegate {
+
+    /// 取消
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        player = nil
+    }
+    
+    /// 完成
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        if let model = chapterModel, model.next.offset > 0 {
+            textView.setContentOffset(CGPoint.zero, animated: false)
+            loadData(offset: viewModel.bookInfo.offset + 1)
+        } else {
+            stopRead()
+        }
+    }
+}
+
+// MARK: - Read
+
+extension ReadViewController {
+    
+    func stopRead() {
+        player?.stopSpeaking(at: .immediate)
+    }
+    
+    func continueRead() {
+        player?.continueSpeaking()
+    }
+    
+    func pauseRead() {
+        player?.pauseSpeaking(at: AVSpeechBoundary.immediate)
+    }
+    
+    func startRead() {
+        maskView.isHidden = true
+        if let content = chapterModel?.chapter.content {
+            if player == nil {
+                player = AVSpeechSynthesizer()
+                player?.delegate = self
+            }
+            let utterance = AVSpeechUtterance(string: content.replacingOccurrences(of: "<br/>", with: ""))
+            //  语速（0 - 1）
+            utterance.rate = 0.6
+            //  音量，默认1
+            utterance.volume = 1
+            //  语调（0.5 - 2.0）
+            utterance.pitchMultiplier = 1.2
+            //  播放下一句时有短暂的停顿
+            utterance.postUtteranceDelay = 1
+            //  语言
+            utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
+            player!.speak(utterance)
+        }
+    }
+}
+
 // MARK: - Monitor
 
 extension ReadViewController {
     
     @objc func maskViewTap() {
+        if player != nil {
+            continueRead()
+        }
         maskView.isHidden = true
     }
     
     @objc func textViewTap() {
+        if player != nil {
+            pauseRead()
+        }
         maskView.isHidden = false
     }
 

@@ -28,9 +28,9 @@ class MaskView: UIView {
     }()
     
     private lazy var catalogButton: UIButton = {
-        let attr = NSMutableAttributedString(attributedString: NSAttributedString(string: "\u{e601}", attributes: [NSAttributedString.Key.font : UIFont(name: "iconFont", size: 40)!]))
+        let attr = NSMutableAttributedString(attributedString: NSAttributedString(string: "\u{e610}", attributes: [NSAttributedString.Key.font : UIFont(name: "iconFont", size: 40)!]))
         attr.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 5)]))
-        attr.append(NSAttributedString(string: "目录", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]))
+        attr.append(NSAttributedString(string: "朗读", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]))
         let btn = UIButton(titleColor: UIColor.darkGray, titleAttr: attr, font: UIFont(name: "iconFont", size: 15)!, textAlignment: .center,  numberOfLines: 0, target: self, action: #selector(buttonsClick), type: .custom)
         btn.tag = 100003
         return btn

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,12 +17,12 @@
 		9D00E7FD228BF82400C5A0C0 /* BookInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */; };
 		9D00E7FF228BF92700C5A0C0 /* Books.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D00E7FE228BF92700C5A0C0 /* Books.json */; };
 		9D0CA34022923C9A003B07F0 /* BookShelfModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0CA33F22923C9A003B07F0 /* BookShelfModel.swift */; };
-		9D0CA34C229284EF003B07F0 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D0CA34B229284EF003B07F0 /* iconfont.ttf */; };
 		9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A800E228CEABC00737BF8 /* MaskView.swift */; };
 		9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8013228D008D00737BF8 /* ReadViewModel.swift */; };
 		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
 		9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033F9228E9584001CC884 /* BookShelfCell.swift */; };
 		9DD033FC228EA7BD001CC884 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */; };
+		9F4F5235229EB7D7006B6733 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F4F5234229EB7D7006B6733 /* iconfont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,12 +39,12 @@
 		9D00E7FC228BF82400C5A0C0 /* BookInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoModel.swift; sourceTree = "<group>"; };
 		9D00E7FE228BF92700C5A0C0 /* Books.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Books.json; sourceTree = "<group>"; };
 		9D0CA33F22923C9A003B07F0 /* BookShelfModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfModel.swift; sourceTree = "<group>"; };
-		9D0CA34B229284EF003B07F0 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		9D9A800E228CEABC00737BF8 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		9DD033F9228E9584001CC884 /* BookShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfCell.swift; sourceTree = "<group>"; };
 		9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
+		9F4F5234229EB7D7006B6733 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -163,7 +163,7 @@
 		9D9A8010228CF1DB00737BF8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				9D0CA34B229284EF003B07F0 /* iconfont.ttf */,
+				9F4F5234229EB7D7006B6733 /* iconfont.ttf */,
 				9D00E7F2228BB6F600C5A0C0 /* Info.plist */,
 				9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */,
 				9D00E7FE228BF92700C5A0C0 /* Books.json */,
@@ -277,7 +277,7 @@
 				9D00E7FF228BF92700C5A0C0 /* Books.json in Resources */,
 				9D00E7F1228BB6F600C5A0C0 /* LaunchScreen.storyboard in Resources */,
 				9D00E7EE228BB6F600C5A0C0 /* Assets.xcassets in Resources */,
-				9D0CA34C229284EF003B07F0 /* iconfont.ttf in Resources */,
+				9F4F5235229EB7D7006B6733 /* iconfont.ttf in Resources */,
 				9D00E7EC228BB6F400C5A0C0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,30 +291,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ReadBook/Pods-ReadBook-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/XSExtension/XSExtension.framework",
-				"${BUILT_PRODUCTS_DIR}/XSUtil/XSUtil.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-ReadBook/Pods-ReadBook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XSExtension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XSUtil.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-ReadBook/Pods-ReadBook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReadBook/Pods-ReadBook-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReadBook/Pods-ReadBook-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		759D1CEC9385ECB0E093A762 /* [CP] Check Pods Manifest.lock */ = {

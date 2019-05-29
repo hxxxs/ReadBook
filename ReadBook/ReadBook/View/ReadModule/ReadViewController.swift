@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import XSUtil
 import AVFoundation
+import MediaPlayer
 
 class ReadViewController: UIViewController {
     
@@ -30,17 +31,14 @@ class ReadViewController: UIViewController {
             guard let strongSelf = self else { return }
             switch type {
             case 100001: // 上一章
-                strongSelf.textView.setContentOffset(CGPoint.zero, animated: false)
-                strongSelf.loadData(offset: strongSelf.viewModel.bookInfo.offset - 1)
+                strongSelf.loadPreviousData()
             case 100002: // 下一章
-                strongSelf.textView.setContentOffset(CGPoint.zero, animated: false)
-                strongSelf.loadData(offset: strongSelf.viewModel.bookInfo.offset + 1)
+                strongSelf.loadNextData()
             case 100003:
-//                XSHUD.show(text: "程序员小哥哥在想解决办法")
                 if strongSelf.player == nil {
-                    strongSelf.startRead()
+                    strongSelf.startPlay()
                 } else {
-                    strongSelf.continueRead()
+                    strongSelf.pauseOrContinuePlay()
                 }
             case 100004:
                 if let model = strongSelf.chapterModel {
@@ -67,7 +65,7 @@ class ReadViewController: UIViewController {
                                                                                                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
             
             if player != nil {
-                self.startRead()
+                self.startPlay()
             }
         }
     }
@@ -77,10 +75,10 @@ class ReadViewController: UIViewController {
             UserDefaults.standard.synchronize()
         }
     }
-    
     private var player: AVSpeechSynthesizer?
     
     var viewModel: ReadViewModel!
+    var bookImage: UIImage!
     
     deinit {
         XSHUD.dismiss()
@@ -107,16 +105,52 @@ class ReadViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        stopRead()
+        stopPlay()
     }
 
+    override func remoteControlReceived(with event: UIEvent?) {
+        guard let event = event else { return }
+        if event.type == UIEvent.EventType.remoteControl {
+            switch event.subtype {
+            case UIEvent.EventSubtype.remoteControlPlay://  播放
+                fallthrough
+            case UIEvent.EventSubtype.remoteControlPause:// 暂停
+                fallthrough
+            case UIEvent.EventSubtype.remoteControlTogglePlayPause:// 耳机暂停or播放
+                pauseOrContinuePlay()
+            case UIEvent.EventSubtype.remoteControlNextTrack:// 下一章
+                #warning("阅读未切换")
+                loadNextData()
+            case UIEvent.EventSubtype.remoteControlPreviousTrack:// 上一章
+                #warning("阅读未切换")
+                loadPreviousData()
+            default:
+                break
+            }
+        }
+    }
 }
 
 // MARK: - Net
 
 extension ReadViewController {
     
-    func loadData(offset: Int) {
+    /// 上一章
+    private func loadPreviousData() {
+        textView.setContentOffset(CGPoint.zero, animated: false)
+        loadData(offset: viewModel.bookInfo.offset - 1)
+    }
+    
+    /// 下一章
+    private func loadNextData() {
+        textView.setContentOffset(CGPoint.zero, animated: false)
+        loadData(offset: viewModel.bookInfo.offset + 1)
+    }
+    
+    /// 加载数据
+    ///
+    /// - Parameter offset: 页码
+    private func loadData(offset: Int) {
         textView.isUserInteractionEnabled = false
         viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
             self?.chapterModel = model
@@ -136,10 +170,9 @@ extension ReadViewController: AVSpeechSynthesizerDelegate {
     /// 完成
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if let model = chapterModel, model.next.offset > 0 {
-            textView.setContentOffset(CGPoint.zero, animated: false)
-            loadData(offset: viewModel.bookInfo.offset + 1)
+            loadNextData()
         } else {
-            stopRead()
+            stopPlay()
         }
     }
 }
@@ -148,20 +181,34 @@ extension ReadViewController: AVSpeechSynthesizerDelegate {
 
 extension ReadViewController {
     
-    func stopRead() {
+    /// 锁屏信息
+    private func nowPlayingInfo() {
+        let artwork = MPMediaItemArtwork(image: bookImage)
+        let dic = [MPMediaItemPropertyTitle: viewModel.bookInfo.title,
+                   MPMediaItemPropertyArtist: chapterModel?.current.title ?? "",
+                   MPMediaItemPropertyArtwork: artwork] as [String : Any]
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = dic
+    }
+    
+    /// 停止播放
+    private func stopPlay() {
         player?.stopSpeaking(at: .immediate)
         player = nil
+        UIApplication.shared.endReceivingRemoteControlEvents()
     }
     
-    func continueRead() {
-        player?.continueSpeaking()
+    /// 暂停or继续播放
+    private func pauseOrContinuePlay() {
+        guard let player = player else { return }
+        if player.isPaused {
+            player.continueSpeaking()
+        } else {
+            player.pauseSpeaking(at: AVSpeechBoundary.immediate)
+        }
     }
     
-    func pauseRead() {
-        player?.pauseSpeaking(at: AVSpeechBoundary.immediate)
-    }
-    
-    func startRead() {
+    /// 开始播放
+    private func startPlay() {
         maskView.isHidden = true
         if let content = chapterModel?.chapter.content {
             if player == nil {
@@ -182,6 +229,7 @@ extension ReadViewController {
             //  语言
             utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
             player!.speak(utterance)
+            nowPlayingInfo()
         }
     }
 }
@@ -190,17 +238,13 @@ extension ReadViewController {
 
 extension ReadViewController {
     
-    @objc func maskViewTap() {
-        if player != nil {
-            continueRead()
-        }
+    @objc private func maskViewTap() {
+        pauseOrContinuePlay()
         maskView.isHidden = true
     }
     
-    @objc func textViewTap() {
-        if player != nil {
-            pauseRead()
-        }
+    @objc private func textViewTap() {
+        pauseOrContinuePlay()
         maskView.isHidden = false
     }
 

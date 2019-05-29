@@ -30,6 +30,10 @@ class BookShelfCell: UICollectionViewCell {
     private lazy var textLabel = UILabel(font: UIFont.systemFont(ofSize: 20), textColor: UIColor.darkGray, textAlignment: .center)
     private lazy var deleteButton = UIButton(title: "\u{e613}", titleColor: UIColor.red, bgImage: UIImage.create(color: .white), font: UIFont(name: "iconFont", size: 20)!, target: self, action: #selector(deleteButtonClick), type: .custom)
     
+    var bookImage: UIImage {
+        return imageView.image!
+    }
+    
     var showDeleteButton = true {
         didSet {
             deleteButton.isHidden = showDeleteButton

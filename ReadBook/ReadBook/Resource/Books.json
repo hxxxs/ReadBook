@@ -6,7 +6,7 @@
         "cmd": "4765685124541842482",
         "encodeUrl": "http://www.31xs.com/14/14572/48887231.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012237441/150",
-        "offset": "1074"
+        "offset": "1090"
     },
     {
         "title" : "民国谍影",
@@ -15,7 +15,7 @@
         "cmd": "6916298100905853685",
         "encodeUrl": "http://www.wutuxs.com/html/8/8002/7071536.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011489683/150",
-        "offset": "757"
+        "offset": "753"
     },
     {
         "title" : "重生80当大佬",
@@ -33,7 +33,7 @@
         "cmd": "8383042783195628151",
         "encodeUrl": "http://www.31xs.com/92/92232/48885448.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012284323/150",
-        "offset": "642"
+        "offset": "650"
     },
     {
         "title" : "重生野性时代",
@@ -42,7 +42,7 @@
         "cmd": "931814114071265755",
         "encodeUrl": "http://www.bxwx.la/b/345/345277/2089094.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013026063/150",
-        "offset": "480"
+        "offset": "493"
     },
     {
         "title" : "大医凌然",
@@ -51,7 +51,7 @@
         "cmd": "18111477967913943738",
         "encodeUrl": "http://www.31xs.com/14/14410/48893110.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011486666/150",
-        "offset": "729"
+        "offset": "739"
     },
     {
         "title" : "全球影帝",
@@ -60,7 +60,7 @@
         "cmd": "461530742601941336",
         "encodeUrl": "http://www.biququ.com/html/18679/23348345.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013390519/150",
-        "offset": "334"
+        "offset": "350"
     },
     {
         "title" : "诡秘之主",
@@ -70,14 +70,5 @@
         "encodeUrl": "http://www.31xs.com/14/14157/48891488.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1010868264/150",
         "offset": "1"
-    },
-    {
-        "title" : "我的1979",
-        "id": "16974760499887505192",
-        "md": "14570633254257999837",
-        "cmd": "14570633254257985165",
-        "encodeUrl": "http://www.147xs.com/book/1465/21971678.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1003541158/150",
-        "offset": "1679"
     }
 ]

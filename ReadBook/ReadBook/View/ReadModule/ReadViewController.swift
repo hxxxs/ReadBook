@@ -103,6 +103,12 @@ class ReadViewController: UIViewController {
         
         loadData(offset: viewModel.bookInfo.offset)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        stopRead()
+    }
 
 }
 
@@ -127,11 +133,6 @@ extension ReadViewController {
 
 extension ReadViewController: AVSpeechSynthesizerDelegate {
 
-    /// 取消
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        player = nil
-    }
-    
     /// 完成
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if let model = chapterModel, model.next.offset > 0 {
@@ -149,6 +150,7 @@ extension ReadViewController {
     
     func stopRead() {
         player?.stopSpeaking(at: .immediate)
+        player = nil
     }
     
     func continueRead() {

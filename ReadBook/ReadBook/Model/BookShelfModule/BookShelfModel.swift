@@ -23,7 +23,7 @@ struct BookShelfModel {
         
         if let arrays = try? JSONSerialization.jsonObject(with: data! as Data, options: []) as? [[String: Any]] {
             
-            for dict in arrays! {
+            for dict in arrays {
                 if let info = BookInfoModel.deserialize(from: dict) {
                     books.append(info)
                 }

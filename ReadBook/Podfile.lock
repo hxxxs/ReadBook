@@ -1,9 +1,9 @@
 PODS:
   - Alamofire (4.8.2)
   - HandyJSON (5.0.0)
-  - SDWebImage (5.0.2):
-    - SDWebImage/Core (= 5.0.2)
-  - SDWebImage/Core (5.0.2)
+  - SDWebImage (5.0.4):
+    - SDWebImage/Core (= 5.0.4)
+  - SDWebImage/Core (5.0.4)
   - SnapKit (4.2.0)
   - XSExtension (1.1.5)
   - XSUtil (0.1.0):
@@ -29,11 +29,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
-  SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
+  SDWebImage: c739016e4bdf0a4a1f9a04b5e0385395ad63a282
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   XSExtension: dba97ad6d8f09df3adec1dcca16b7143414ff7e1
   XSUtil: 751655a3e7a4b9e6994c97a42af808c43d6633ea
 
-PODFILE CHECKSUM: acaf8ddd26ce1d75768c341f07cb03ff3ed29958
+PODFILE CHECKSUM: 5c4ae473e720e32a674d54b73cfe8c119d8ebed5
 
 COCOAPODS: 1.7.0

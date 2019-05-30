@@ -22,6 +22,10 @@
 		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
 		9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033F9228E9584001CC884 /* BookShelfCell.swift */; };
 		9DD033FC228EA7BD001CC884 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */; };
+		9DDC9B7D229F6C9A0031AED5 /* XSSpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B7C229F6C9A0031AED5 /* XSSpeechSynthesizer.swift */; };
+		9DDC9B7F229F77D70031AED5 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B7E229F77D70031AED5 /* PlayView.swift */; };
+		9DDC9B81229F81220031AED5 /* PlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B80229F81220031AED5 /* PlayView.xib */; };
+		9DDC9B83229F9BDE0031AED5 /* MaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B82229F9BDE0031AED5 /* MaskView.xib */; };
 		9F4F5235229EB7D7006B6733 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F4F5234229EB7D7006B6733 /* iconfont.ttf */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +48,10 @@
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		9DD033F9228E9584001CC884 /* BookShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfCell.swift; sourceTree = "<group>"; };
 		9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
+		9DDC9B7C229F6C9A0031AED5 /* XSSpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSSpeechSynthesizer.swift; sourceTree = "<group>"; };
+		9DDC9B7E229F77D70031AED5 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
+		9DDC9B80229F81220031AED5 /* PlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayView.xib; sourceTree = "<group>"; };
+		9DDC9B82229F9BDE0031AED5 /* MaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaskView.xib; sourceTree = "<group>"; };
 		9F4F5234229EB7D7006B6733 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,7 +139,10 @@
 			isa = PBXGroup;
 			children = (
 				9D9A800E228CEABC00737BF8 /* MaskView.swift */,
+				9DDC9B82229F9BDE0031AED5 /* MaskView.xib */,
 				9D00E7F8228BBBDF00C5A0C0 /* ReadViewController.swift */,
+				9DDC9B7E229F77D70031AED5 /* PlayView.swift */,
+				9DDC9B80229F81220031AED5 /* PlayView.xib */,
 			);
 			path = ReadModule;
 			sourceTree = "<group>";
@@ -155,6 +166,7 @@
 		9D0CA34822924437003B07F0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				9DDC9B7B229F68FA0031AED5 /* Speech */,
 				9D9A8015228D0C3E00737BF8 /* Common */,
 			);
 			path = Tools;
@@ -194,6 +206,14 @@
 				9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */,
 			);
 			path = BookShelfModule;
+			sourceTree = "<group>";
+		};
+		9DDC9B7B229F68FA0031AED5 /* Speech */ = {
+			isa = PBXGroup;
+			children = (
+				9DDC9B7C229F6C9A0031AED5 /* XSSpeechSynthesizer.swift */,
+			);
+			path = Speech;
 			sourceTree = "<group>";
 		};
 		9DE4C33822922E32007A6BAB /* BookShelfModule */ = {
@@ -280,9 +300,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D00E7FF228BF92700C5A0C0 /* Books.json in Resources */,
+				9DDC9B83229F9BDE0031AED5 /* MaskView.xib in Resources */,
 				9D00E7F1228BB6F600C5A0C0 /* LaunchScreen.storyboard in Resources */,
 				9D00E7EE228BB6F600C5A0C0 /* Assets.xcassets in Resources */,
 				9F4F5235229EB7D7006B6733 /* iconfont.ttf in Resources */,
+				9DDC9B81229F81220031AED5 /* PlayView.xib in Resources */,
 				9D00E7EC228BB6F400C5A0C0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +364,8 @@
 				9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */,
 				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
 				9D0CA34022923C9A003B07F0 /* BookShelfModel.swift in Sources */,
+				9DDC9B7F229F77D70031AED5 /* PlayView.swift in Sources */,
+				9DDC9B7D229F6C9A0031AED5 /* XSSpeechSynthesizer.swift in Sources */,
 				9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */,
 				9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */,
 				9DD033FC228EA7BD001CC884 /* BookShelfViewController.swift in Sources */,
@@ -429,6 +453,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -483,6 +508,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -495,14 +521,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 425MA8C7FZ;
 				INFOPLIST_FILE = "$(SRCROOT)/ReadBook/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.index.ReadBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -515,14 +541,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 425MA8C7FZ;
 				INFOPLIST_FILE = "$(SRCROOT)/ReadBook/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.index.ReadBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

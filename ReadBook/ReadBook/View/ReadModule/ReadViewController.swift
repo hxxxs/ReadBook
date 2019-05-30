@@ -14,6 +14,7 @@ import MediaPlayer
 
 class ReadViewController: UIViewController {
     
+    /// 文字视图
     private lazy var textView: UITextView = {
         let v = UITextView()
         v.textColor = UIColor(hex: 0x546356)
@@ -23,8 +24,10 @@ class ReadViewController: UIViewController {
         v.contentInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         return v
     }()
+    
+    /// 蒙层视图
     private lazy var maskView: MaskView = {
-        let v = MaskView(frame: .zero)
+        let v = MaskView.viewFromNib() as! MaskView
         v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(maskViewTap)))
         v.monitorCompletion = {[weak self] type in
@@ -35,11 +38,7 @@ class ReadViewController: UIViewController {
             case 100002: // 下一章
                 strongSelf.loadNextData()
             case 100003:
-                if strongSelf.player == nil {
-                    strongSelf.startPlay()
-                } else {
-                    strongSelf.pauseOrContinuePlay()
-                }
+                strongSelf.startPlay()
             case 100004:
                 if let model = strongSelf.chapterModel {
                     strongSelf.fontSize -= 1
@@ -56,6 +55,8 @@ class ReadViewController: UIViewController {
         }
         return v
     }()
+    
+    /// 章节模型
     private var chapterModel: ReadModel? {
         didSet {
             guard let model = chapterModel else { return }
@@ -64,23 +65,62 @@ class ReadViewController: UIViewController {
             self.textView.attributedText = NSAttributedString(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"), attributes: [NSAttributedString.Key.paragraphStyle: paragraph,
                                                                                                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
             
-            if player != nil {
+            if speechSynthesizer != nil {
                 self.startPlay()
             }
         }
     }
+    
+    /// 文字大小
     private var fontSize = SettingModel.textFontSize {
         didSet {
             UserDefaults.standard.set(fontSize, forKey: kTextFontKey)
             UserDefaults.standard.synchronize()
         }
     }
-    private var player: AVSpeechSynthesizer?
     
+    /// 语音合成器
+    private var speechSynthesizer: XSSpeechSynthesizer?
+    
+    /// 蒙层视图
+    private lazy var playView: PlayView = {
+        let v = PlayView.viewFromNib() as! PlayView
+        v.isHidden = true
+        v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playViewTap)))
+        v.monitorCompletion = {[weak self] (view, type) in
+            view.isHidden = true
+            guard let strongSelf = self else { return }
+            switch type {
+            case 100001:
+                strongSelf.speechSynthesizer?.stopSpeaking(at: .immediate)
+                break
+            case 100002:
+                strongSelf.timing(delay: 1 * 60)
+                break
+            case 100003:
+                strongSelf.timing(delay: 30 * 60)
+                break
+            case 100004:
+                strongSelf.timing(delay: 60 * 60)
+                break
+            case 100005:
+                strongSelf.timing(delay: 120 * 60)
+                break
+            default:
+                break
+            }
+        }
+        return v
+    }()
+    
+    /// 阅读视图模型
     var viewModel: ReadViewModel!
+    
+    /// 图书封面图片
     var bookImage: UIImage!
     
     deinit {
+        print("ReadViewController OUT")
         XSHUD.dismiss()
     }
     
@@ -89,23 +129,35 @@ class ReadViewController: UIViewController {
 
         view.backgroundColor = UIColor(hex: 0xCDDFD1)
         view.addSubview(textView)
+        view.addSubview(maskView)
+        view.addSubview(playView)
+        
+        loadData(offset: viewModel.bookInfo.offset)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         textView.snp.makeConstraints { (make) in
-            make.top.equalTo(topLayoutGuide.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+            make.left.bottom.right.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
-        view.addSubview(maskView)
         maskView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
-        loadData(offset: viewModel.bookInfo.offset)
+        playView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        stopPlay()
+        speechSynthesizer?.stopSpeaking(at: .immediate)
+        UIApplication.shared.endReceivingRemoteControlEvents()
+        speechSynthesizer = nil
     }
 
     override func remoteControlReceived(with event: UIEvent?) {
@@ -117,12 +169,10 @@ class ReadViewController: UIViewController {
             case UIEvent.EventSubtype.remoteControlPause:// 暂停
                 fallthrough
             case UIEvent.EventSubtype.remoteControlTogglePlayPause:// 耳机暂停or播放
-                pauseOrContinuePlay()
+                speechSynthesizer?.pauseOrContinuePlay()
             case UIEvent.EventSubtype.remoteControlNextTrack:// 下一章
-                #warning("阅读未切换")
                 loadNextData()
             case UIEvent.EventSubtype.remoteControlPreviousTrack:// 上一章
-                #warning("阅读未切换")
                 loadPreviousData()
             default:
                 break
@@ -144,7 +194,11 @@ extension ReadViewController {
     /// 下一章
     private func loadNextData() {
         textView.setContentOffset(CGPoint.zero, animated: false)
-        loadData(offset: viewModel.bookInfo.offset + 1)
+        if let model = chapterModel, model.next.offset > 0 {
+            loadData(offset: viewModel.bookInfo.offset + 1)
+        } else if speechSynthesizer != nil {
+            speechSynthesizer?.stopSpeaking(at: .immediate)
+        }
     }
     
     /// 加载数据
@@ -169,11 +223,7 @@ extension ReadViewController: AVSpeechSynthesizerDelegate {
 
     /// 完成
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if let model = chapterModel, model.next.offset > 0 {
-            loadNextData()
-        } else {
-            stopPlay()
-        }
+        loadNextData()
     }
 }
 
@@ -181,54 +231,41 @@ extension ReadViewController: AVSpeechSynthesizerDelegate {
 
 extension ReadViewController {
     
+    /// 定时关闭
+    private func timing(delay: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
+            self.speechSynthesizer?.stopSpeaking(at: .immediate)
+        }
+    }
+    
     /// 锁屏信息
     private func nowPlayingInfo() {
-        let artwork = MPMediaItemArtwork(image: bookImage)
+        let artwork = MPMediaItemArtwork(boundsSize: bookImage.size) {[weak self]_ in
+            guard let sf = self else { return UIImage(imageLiteralResourceName: "noData") }
+            return sf.bookImage
+        }
         let dic = [MPMediaItemPropertyTitle: viewModel.bookInfo.title,
                    MPMediaItemPropertyArtist: chapterModel?.current.title ?? "",
                    MPMediaItemPropertyArtwork: artwork] as [String : Any]
         MPNowPlayingInfoCenter.default().nowPlayingInfo = dic
     }
     
-    /// 停止播放
-    private func stopPlay() {
-        player?.stopSpeaking(at: .immediate)
-        player = nil
-        UIApplication.shared.endReceivingRemoteControlEvents()
-    }
-    
-    /// 暂停or继续播放
-    private func pauseOrContinuePlay() {
-        guard let player = player else { return }
-        if player.isPaused {
-            player.continueSpeaking()
-        } else {
-            player.pauseSpeaking(at: AVSpeechBoundary.immediate)
-        }
-    }
-    
     /// 开始播放
     private func startPlay() {
         maskView.isHidden = true
         if let content = chapterModel?.chapter.content {
-            if player == nil {
-                player = AVSpeechSynthesizer()
-                player?.delegate = self
-                try? AVAudioSession.sharedInstance().setCategory(.playback)
-                UIApplication.shared.beginReceivingRemoteControlEvents()
+            if speechSynthesizer == nil {
+                speechSynthesizer = XSSpeechSynthesizer()
+                speechSynthesizer?.delegate = self
             }
-            let utterance = AVSpeechUtterance(string: content.replacingOccurrences(of: "<br/>", with: ""))
-            //  语速（0 - 1）
-            utterance.rate = 0.6
-            //  音量，默认1
-            utterance.volume = 1
-            //  语调（0.5 - 2.0）
-            utterance.pitchMultiplier = 1.2
-            //  播放下一句时有短暂的停顿
-            utterance.postUtteranceDelay = 1
-            //  语言
-            utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
-            player!.speak(utterance)
+            UIApplication.shared.beginReceivingRemoteControlEvents()
+            do {
+               try AVAudioSession.sharedInstance().setCategory(.playback)
+            } catch {
+                
+            }
+            
+            speechSynthesizer?.startPlay(utterance: content.replacingOccurrences(of: "<br/>", with: ""))
             nowPlayingInfo()
         }
     }
@@ -238,14 +275,22 @@ extension ReadViewController {
 
 extension ReadViewController {
     
+    @objc private func playViewTap() {
+        speechSynthesizer?.pauseOrContinuePlay()
+        playView.isHidden = true
+    }
+    
     @objc private func maskViewTap() {
-        pauseOrContinuePlay()
         maskView.isHidden = true
     }
     
     @objc private func textViewTap() {
-        pauseOrContinuePlay()
-        maskView.isHidden = false
+        if speechSynthesizer != nil, speechSynthesizer!.isSpeaking {
+            speechSynthesizer?.pauseOrContinuePlay()
+            playView.isHidden = false
+        } else {
+            maskView.isHidden = false
+        }
     }
 
 }

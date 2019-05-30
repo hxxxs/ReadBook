@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MaskView" customModule="ReadBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEg-kG-ws5">
+                    <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTM-GQ-g3L">
+                            <rect key="frame" x="0.0" y="10" width="414" height="30"/>
+                            <subviews>
+                                <button opaque="NO" tag="100001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkU-hY-mMj">
+                                    <rect key="frame" x="0.0" y="0.0" width="207" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <state key="normal" title="上一章">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="buttonsClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lfl-aW-nSu"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2l-e5-VlZ">
+                                    <rect key="frame" x="207" y="0.0" width="0.5" height="30"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="0.5" id="Sjg-gM-NmB"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" tag="100002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skz-vW-Tv1">
+                                    <rect key="frame" x="207.5" y="0.0" width="206.5" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <state key="normal" title="下一章">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <state key="disabled" title="没有更多章节"/>
+                                    <connections>
+                                        <action selector="buttonsClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QQE-MQ-7dz"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="skz-vW-Tv1" firstAttribute="height" secondItem="TkU-hY-mMj" secondAttribute="height" id="SkF-GF-0y1"/>
+                                <constraint firstItem="skz-vW-Tv1" firstAttribute="width" secondItem="TkU-hY-mMj" secondAttribute="width" id="gZi-yX-31d"/>
+                                <constraint firstAttribute="height" constant="30" id="zwP-as-UyH"/>
+                            </constraints>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVO-ez-C9t">
+                            <rect key="frame" x="15" y="50" width="384" height="0.5"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="xn3-se-HOX"/>
+                            </constraints>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cCs-wc-osY">
+                            <rect key="frame" x="0.0" y="60.5" width="414" height="40"/>
+                            <subviews>
+                                <button opaque="NO" tag="100003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68f-ZR-sXi">
+                                    <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="朗读">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="buttonsClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="ekE-yP-vYl"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="100004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqg-Pk-dkD">
+                                    <rect key="frame" x="138" y="0.0" width="138" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="字体减小">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="buttonsClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="zZj-38-rDD"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="100005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTP-2v-kWu">
+                                    <rect key="frame" x="276" y="0.0" width="138" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="字体放大">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="buttonsClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="BXN-P8-ko7"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="WWh-4S-6qK"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="OTM-GQ-g3L" secondAttribute="trailing" id="1R3-ci-Eza"/>
+                        <constraint firstItem="cCs-wc-osY" firstAttribute="top" secondItem="MVO-ez-C9t" secondAttribute="bottom" constant="10" id="4qm-c9-Mmg"/>
+                        <constraint firstItem="MVO-ez-C9t" firstAttribute="leading" secondItem="wEg-kG-ws5" secondAttribute="leading" constant="15" id="5LO-US-BLg"/>
+                        <constraint firstAttribute="trailing" secondItem="MVO-ez-C9t" secondAttribute="trailing" constant="15" id="Cfg-T3-0di"/>
+                        <constraint firstItem="MVO-ez-C9t" firstAttribute="top" secondItem="OTM-GQ-g3L" secondAttribute="bottom" constant="10" id="Emq-k5-8pm"/>
+                        <constraint firstAttribute="trailing" secondItem="cCs-wc-osY" secondAttribute="trailing" id="KER-hU-2Il"/>
+                        <constraint firstItem="cCs-wc-osY" firstAttribute="leading" secondItem="wEg-kG-ws5" secondAttribute="leading" id="Kvh-eo-63C"/>
+                        <constraint firstItem="OTM-GQ-g3L" firstAttribute="leading" secondItem="wEg-kG-ws5" secondAttribute="leading" id="MbU-RZ-3Rl"/>
+                        <constraint firstItem="OTM-GQ-g3L" firstAttribute="top" secondItem="wEg-kG-ws5" secondAttribute="top" constant="10" id="P0f-ne-ONh"/>
+                        <constraint firstAttribute="height" constant="150" id="pCN-ok-yEz"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="wEg-kG-ws5" secondAttribute="bottom" id="Lna-nw-h3U"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wEg-kG-ws5" secondAttribute="trailing" id="YtW-ZC-TJ1"/>
+                <constraint firstItem="wEg-kG-ws5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="vBt-zB-8dz"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="addFontButton" destination="zTP-2v-kWu" id="P37-dt-7h0"/>
+                <outlet property="nextButton" destination="skz-vW-Tv1" id="xkv-OA-mrj"/>
+                <outlet property="playerButton" destination="68f-ZR-sXi" id="yiO-hC-nn5"/>
+                <outlet property="previousButton" destination="TkU-hY-mMj" id="B6j-hY-JrA"/>
+                <outlet property="reduceFontButton" destination="sqg-Pk-dkD" id="wCV-yc-UXN"/>
+            </connections>
+        </view>
+    </objects>
+</document>

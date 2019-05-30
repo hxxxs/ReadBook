@@ -16,7 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        //  处理静音模式仍然播放
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+        } catch {
+            
+        }
+        
         return true
     }
 

@@ -253,16 +253,12 @@ extension ReadViewController {
     /// 开始播放
     private func startPlay() {
         maskView.isHidden = true
+        
         if let content = chapterModel?.chapter.content {
             if speechSynthesizer == nil {
                 speechSynthesizer = XSSpeechSynthesizer()
                 speechSynthesizer?.delegate = self
-            }
-            UIApplication.shared.beginReceivingRemoteControlEvents()
-            do {
-               try AVAudioSession.sharedInstance().setCategory(.playback)
-            } catch {
-                
+                UIApplication.shared.beginReceivingRemoteControlEvents()
             }
             
             speechSynthesizer?.startPlay(utterance: content.replacingOccurrences(of: "<br/>", with: ""))

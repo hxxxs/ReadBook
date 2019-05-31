@@ -65,7 +65,7 @@ class ReadViewController: UIViewController {
             self.textView.attributedText = NSAttributedString(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"), attributes: [NSAttributedString.Key.paragraphStyle: paragraph,
                                                                                                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
             
-            if speechSynthesizer != nil {
+            if speechSynthesizer != nil, speechSynthesizer!.isSpeaking {
                 self.startPlay()
             }
         }
@@ -261,7 +261,8 @@ extension ReadViewController {
                 UIApplication.shared.beginReceivingRemoteControlEvents()
             }
             
-            speechSynthesizer?.startPlay(utterance: content.replacingOccurrences(of: "<br/>", with: ""))
+            let utterance = (title ?? "") + content.replacingOccurrences(of: "<br/>", with: "")
+            speechSynthesizer?.startPlay(utterance: utterance)
             nowPlayingInfo()
         }
     }

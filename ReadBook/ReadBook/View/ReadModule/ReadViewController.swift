@@ -205,12 +205,11 @@ extension ReadViewController {
             let h = view.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom
             let w = view.width
             
-            let rect = (read as NSString).boundingRect(with: CGSize(width: w - 30, height: 999999), options: .usesLineFragmentOrigin, attributes: attr1, context: nil)
-            let count = Int(rect.height / h)
-            if count != currentPage {
-                currentPage = count
+            let page = Int((read as NSString).boundingRect(with: CGSize(width: w - 30, height: 999999), options: .usesLineFragmentOrigin, attributes: attr1, context: nil).height / h)
+            if page != currentPage {
+                currentPage = page
                 DispatchQueue.main.async {
-                    self.textView.scrollRectToVisible(CGRect(x: 0, y: CGFloat(count) * h , width: w, height: h), animated: true)
+                    self.textView.scrollRectToVisible(CGRect(x: 0, y: CGFloat(page) * h , width: w, height: h), animated: true)
                 }
             }
         }

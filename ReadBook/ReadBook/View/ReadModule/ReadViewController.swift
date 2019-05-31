@@ -68,8 +68,8 @@ class ReadViewController: UIViewController {
     private var chapterModel: ReadModel? {
         didSet {
             guard let model = chapterModel else { return }
-            
-            self.setupTextViewText(unread: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
+            self.content = model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n")
+            self.setupTextViewText(unread: self.content)
             
             if speechSynthesizer != nil, speechSynthesizer!.isSpeaking {
                 self.startPlay()
@@ -87,10 +87,8 @@ class ReadViewController: UIViewController {
             guard let strongSelf = self else { return }
             switch type {
             case 100001:
-                if let model = strongSelf.chapterModel {
-                    strongSelf.chapterModel = model
-                }
                 strongSelf.speechSynthesizer?.stopSpeaking(at: .immediate)
+                strongSelf.setupTextViewText(unread: strongSelf.content)
                 break
             case 100002:
                 strongSelf.timing(delay: 15 * 60)
@@ -124,6 +122,8 @@ class ReadViewController: UIViewController {
     
     /// 当前页
     private var currentPage: Int = 0
+    /// 当前文本
+    private var content = ""
     
     //  MARK: - override
     deinit {
@@ -205,7 +205,7 @@ extension ReadViewController {
             let h = view.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom
             let w = view.width
             
-            let page = Int((read as NSString).boundingRect(with: CGSize(width: w - 30, height: 999999), options: .usesLineFragmentOrigin, attributes: attr1, context: nil).height / h)
+            let page = Int((read as NSString).boundingRect(with: CGSize(width: w - 30, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: attr1, context: nil).height / h)
             if page != currentPage {
                 currentPage = page
                 DispatchQueue.main.async {
@@ -229,16 +229,15 @@ extension ReadViewController {
     
     /// 上一章
     private func loadPreviousData() {
-        textView.setContentOffset(CGPoint.zero, animated: false)
         loadData(offset: viewModel.bookInfo.offset - 1)
     }
     
     /// 下一章
     private func loadNextData() {
-        textView.setContentOffset(CGPoint.zero, animated: false)
         if let model = chapterModel, model.next.offset > 0 {
             loadData(offset: viewModel.bookInfo.offset + 1)
         } else if speechSynthesizer != nil {
+            setupTextViewText(unread: content)
             speechSynthesizer?.stopSpeaking(at: .immediate)
         }
     }
@@ -248,6 +247,7 @@ extension ReadViewController {
     /// - Parameter offset: 页码
     private func loadData(offset: Int) {
         currentPage = 0
+        textView.scrollRectToVisible(CGRect(x: 0, y: 0, width: textView.width, height: textView.height), animated: false)
         textView.isUserInteractionEnabled = false
         viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
             self?.chapterModel = model

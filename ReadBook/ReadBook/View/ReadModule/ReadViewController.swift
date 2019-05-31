@@ -248,6 +248,7 @@ extension ReadViewController {
     ///
     /// - Parameter offset: 页码
     private func loadData(offset: Int) {
+        currentPage = 0
         textView.isUserInteractionEnabled = false
         viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
             self?.chapterModel = model
@@ -286,7 +287,6 @@ extension ReadViewController {
     /// 开始播放
     private func startPlay() {
         maskView.isHidden = true
-        currentPage = 0
         
         if let content = chapterModel?.chapter.content {
             if speechSynthesizer == nil {

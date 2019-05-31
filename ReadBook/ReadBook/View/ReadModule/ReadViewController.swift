@@ -14,6 +14,14 @@ import MediaPlayer
 
 class ReadViewController: UIViewController {
     
+    
+    //  MARK: - Properties Public
+    /// 阅读视图模型
+    var viewModel: ReadViewModel!
+    /// 图书封面图片
+    var bookImage: UIImage!
+    
+    //  MARK: - Properties Private
     /// 文字视图
     private lazy var textView: UITextView = {
         let v = UITextView()
@@ -60,10 +68,8 @@ class ReadViewController: UIViewController {
     private var chapterModel: ReadModel? {
         didSet {
             guard let model = chapterModel else { return }
-            let paragraph = NSMutableParagraphStyle()
-            paragraph.lineSpacing = 15
-            self.textView.attributedText = NSAttributedString(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"), attributes: [NSAttributedString.Key.paragraphStyle: paragraph,
-                                                                                                                                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
+            
+            self.setupTextViewText(unread: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
             
             if speechSynthesizer != nil, speechSynthesizer!.isSpeaking {
                 self.startPlay()
@@ -71,18 +77,7 @@ class ReadViewController: UIViewController {
         }
     }
     
-    /// 文字大小
-    private var fontSize = SettingModel.textFontSize {
-        didSet {
-            UserDefaults.standard.set(fontSize, forKey: kTextFontKey)
-            UserDefaults.standard.synchronize()
-        }
-    }
-    
-    /// 语音合成器
-    private var speechSynthesizer: XSSpeechSynthesizer?
-    
-    /// 蒙层视图
+    /// 播放视图
     private lazy var playView: PlayView = {
         let v = PlayView.viewFromNib() as! PlayView
         v.isHidden = true
@@ -92,10 +87,13 @@ class ReadViewController: UIViewController {
             guard let strongSelf = self else { return }
             switch type {
             case 100001:
+                if let model = strongSelf.chapterModel {
+                    strongSelf.chapterModel = model
+                }
                 strongSelf.speechSynthesizer?.stopSpeaking(at: .immediate)
                 break
             case 100002:
-                strongSelf.timing(delay: 1 * 60)
+                strongSelf.timing(delay: 15 * 60)
                 break
             case 100003:
                 strongSelf.timing(delay: 30 * 60)
@@ -113,12 +111,21 @@ class ReadViewController: UIViewController {
         return v
     }()
     
-    /// 阅读视图模型
-    var viewModel: ReadViewModel!
+    /// 文字大小
+    private var fontSize = SettingModel.textFontSize {
+        didSet {
+            UserDefaults.standard.set(fontSize, forKey: kTextFontKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
     
-    /// 图书封面图片
-    var bookImage: UIImage!
+    /// 语音合成器
+    private var speechSynthesizer: XSSpeechSynthesizer?
     
+    /// 当前页
+    private var currentPage: Int = 0
+    
+    //  MARK: - override
     deinit {
         print("ReadViewController OUT")
         XSHUD.dismiss()
@@ -127,11 +134,7 @@ class ReadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(hex: 0xCDDFD1)
-        view.addSubview(textView)
-        view.addSubview(maskView)
-        view.addSubview(playView)
-        
+        setup()
         loadData(offset: viewModel.bookInfo.offset)
     }
     
@@ -181,6 +184,46 @@ class ReadViewController: UIViewController {
     }
 }
 
+// MARK: - UI
+
+extension ReadViewController {
+    
+    private func setupTextViewText(read: String = "", unread: String) {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineSpacing = 15
+        
+        let attr1 = [NSAttributedString.Key.paragraphStyle: paragraph,
+                     NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)]
+        let attr2 = [NSAttributedString.Key.paragraphStyle: paragraph,
+                     NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]
+        
+        let attr = NSMutableAttributedString(string: read, attributes: attr1)
+        attr.append(NSAttributedString(string: unread, attributes: attr2))
+        textView.attributedText = attr
+        
+        if read.count > 0 {
+            let h = view.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom
+            let w = view.width
+            
+            let rect = (read as NSString).boundingRect(with: CGSize(width: w - 30, height: 999999), options: .usesLineFragmentOrigin, attributes: attr1, context: nil)
+            let count = Int(rect.height / h)
+            if count != currentPage {
+                currentPage = count
+                DispatchQueue.main.async {
+                    self.textView.scrollRectToVisible(CGRect(x: 0, y: CGFloat(count) * h , width: w, height: h), animated: true)
+                }
+            }
+        }
+    }
+    
+    private func setup() {
+        view.backgroundColor = UIColor(hex: 0xCDDFD1)
+        view.addSubview(textView)
+        view.addSubview(maskView)
+        view.addSubview(playView)
+    }
+}
+
 // MARK: - Net
 
 extension ReadViewController {
@@ -217,16 +260,6 @@ extension ReadViewController {
     }
 }
 
-// MARK: - AVSpeechSynthesizerDelegate
-
-extension ReadViewController: AVSpeechSynthesizerDelegate {
-
-    /// 完成
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        loadNextData()
-    }
-}
-
 // MARK: - Read
 
 extension ReadViewController {
@@ -253,6 +286,7 @@ extension ReadViewController {
     /// 开始播放
     private func startPlay() {
         maskView.isHidden = true
+        currentPage = 0
         
         if let content = chapterModel?.chapter.content {
             if speechSynthesizer == nil {
@@ -261,7 +295,7 @@ extension ReadViewController {
                 UIApplication.shared.beginReceivingRemoteControlEvents()
             }
             
-            let utterance = (title ?? "") + content.replacingOccurrences(of: "<br/>", with: "")
+            let utterance = content.replacingOccurrences(of: "<br/>", with: "\n")
             speechSynthesizer?.startPlay(utterance: utterance)
             nowPlayingInfo()
         }
@@ -290,6 +324,25 @@ extension ReadViewController {
         }
     }
 
+}
+
+// MARK: - AVSpeechSynthesizerDelegate
+
+extension ReadViewController: AVSpeechSynthesizerDelegate {
+    
+    /// 即将朗读
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        
+        let str1 = (utterance.speechString as NSString).substring(to: characterRange.location + characterRange.length)
+        let str2 = (utterance.speechString as NSString).substring(from: characterRange.location + characterRange.length)
+        
+        setupTextViewText(read: str1, unread: str2)
+    }
+    
+    /// 完成
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        loadNextData()
+    }
 }
 
 // MARK: - UITextViewDelegate

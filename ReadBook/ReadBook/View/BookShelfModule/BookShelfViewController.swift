@@ -71,7 +71,7 @@ extension BookShelfViewController {
 extension BookShelfViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ReadViewController()
+        let vc = ChapterViewController()
         let model =  BookShelfModel.books[indexPath.row]
         BookShelfModel.currentRead(with: model)
         vc.viewModel = ReadViewModel(bookInfo: model)

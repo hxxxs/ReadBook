@@ -9,8 +9,6 @@
 import UIKit
 import SnapKit
 import XSUtil
-import AVFoundation
-import MediaPlayer
 
 class ChapterViewController: UIViewController {
     
@@ -40,12 +38,12 @@ class ChapterViewController: UIViewController {
             case 100004:
                 if let model = strongSelf.chapterModel {
                     strongSelf.fontSize -= 1
-                    strongSelf.chapterModel = model
+                    strongSelf.setupTextView()
                 }
             case 100005:
                 if let model = strongSelf.chapterModel {
                     strongSelf.fontSize += 1
-                    strongSelf.chapterModel = model
+                    strongSelf.setupTextView()
                 }
             default:
                 break
@@ -97,7 +95,9 @@ class ChapterViewController: UIViewController {
     private var chapterModel: ReadModel? {
         didSet {
             guard let model = chapterModel else { return }
-            self.content = model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n")
+            
+            getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
+            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
             
             if isOpenSpeechPattern {
                 self.startPlay()
@@ -107,15 +107,10 @@ class ChapterViewController: UIViewController {
     
     /// 分页内容
     private var pagingContents = [String]()
+    
     /// 当前页
     private var currentPage: Int = 0
-    /// 当前文本
-    private var content = "" {
-        didSet {
-            getTotalPages(string: content)
-            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
-        }
-    }
+    
     /// 当前分页控制器
     private var currentPagingVC: PagingViewController?
     
@@ -138,14 +133,20 @@ class ChapterViewController: UIViewController {
         loadData(offset: viewModel.bookInfo.offset)
         
         speechViewModel.speechDidFinishCompletion = {[weak self] in
-            self?.pageDown(completion: { (_) in
-                self?.startPlay()
-            })
+            self?.pageDownTap()
         }
         
         speechViewModel.speechProgressCompletion = {[weak self] (read, unread) in
             self?.currentPagingVC?.speechContent(unread: unread, read: read)
         }
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(pageDownTap))
+        leftSwipe.direction = .left
+        view.addGestureRecognizer(leftSwipe)
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(pageUpTap))
+        rightSwipe.direction = .right
+        view.addGestureRecognizer(rightSwipe)
     }
 
     override func viewDidLayoutSubviews() {
@@ -153,7 +154,8 @@ class ChapterViewController: UIViewController {
         
         pageVC.view.snp.makeConstraints { (make) in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.bottom.right.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         maskView.snp.makeConstraints { (make) in
@@ -208,9 +210,6 @@ extension ChapterViewController {
         if let model = chapterModel, model.next.offset > 0 {
             loadData(offset: viewModel.bookInfo.offset + 1)
         }
-//        else if speechSynthesizer != nil {
-//            speechSynthesizer?.stopSpeaking(at: .immediate)
-//        }
     }
     
     /// 加载数据
@@ -218,7 +217,6 @@ extension ChapterViewController {
     /// - Parameter offset: 页码
     private func loadData(offset: Int) {
         currentPage = 0
-        pagingContents.removeAll()
         viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
             self?.chapterModel = model
             self?.title = model.current.title
@@ -228,7 +226,6 @@ extension ChapterViewController {
         }
     }
 }
-
 
 // MARK: - Read
 
@@ -244,6 +241,7 @@ extension ChapterViewController {
     /// 停止播放
     private func stopPlay() {
         speechViewModel.stopPlay()
+        isOpenSpeechPattern = false
         currentPagingVC?.speechContent(unread: pagingContents[currentPage])
     }
     
@@ -255,25 +253,11 @@ extension ChapterViewController {
     }
 }
 
-// MARK: - Common
-
-extension ChapterViewController {
-    
-    private func pageDown(completion: ((Bool) -> ())?) {
-        if currentPage <= pagingContents.count - 1 {
-            currentPage += 1
-            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: completion)
-        } else {
-            loadNextData()
-        }
-    }
-}
-
 // MARK: - Monitor
 
 extension ChapterViewController {
     
-    private func pageUpTap() {
+    @objc private func pageUpTap() {
         if currentPage > 0 {
             currentPage -= 1
             pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .reverse, animated: true, completion: nil)
@@ -282,8 +266,16 @@ extension ChapterViewController {
         }
     }
     
-    private func pageDownTap() {
-        pageDown(completion: nil)
+    @objc private func pageDownTap() {
+        if currentPage < pagingContents.count - 1 {
+            currentPage += 1
+            if isOpenSpeechPattern {
+                startPlay()
+            }
+            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
+        } else {
+            loadNextData()
+        }
     }
     
     private func textViewTap() {
@@ -309,16 +301,24 @@ extension ChapterViewController {
 
 extension ChapterViewController {
     
+    private func setupTextView() {
+        if let model = chapterModel {
+            getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
+        }
+        currentPagingVC?.speechContent(unread: pagingContents[currentPage])
+    }
+    
     private func getTotalPages(string: String) {
-        let rect = CGRect(x: 0, y: 0, width: view.width - 30, height: view.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom)
+        pagingContents.removeAll()
+        let rect = CGRect(x: 0, y: 0, width: pageVC.view.width - 30, height: pageVC.view.height)
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = 15
         let attributedString = NSAttributedString(string: string,
                                                   attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: SettingModel.textFontSize), NSAttributedString.Key.paragraphStyle: paragraph])
-
+        
         var rangeIndex = 0
         repeat{
-            let length = min(240, attributedString.length - rangeIndex)
+            let length = min(Int((rect.width - 30) / fontSize - 1) * Int((rect.height - 30) / (15 + fontSize) - 1), attributedString.length - rangeIndex)
             let childString = attributedString.attributedSubstring(from: NSRange(location: rangeIndex, length: length))
             let childFramesetter = CTFramesetterCreateWithAttributedString(childString)
             let bezierPath = UIBezierPath(rect: rect)
@@ -368,4 +368,3 @@ extension ChapterViewController {
     }
     
 }
-

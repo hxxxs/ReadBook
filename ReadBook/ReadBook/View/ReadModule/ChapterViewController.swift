@@ -36,13 +36,13 @@ class ChapterViewController: UIViewController {
             case 100003:
                 strongSelf.startPlay()
             case 100004:
-                if let model = strongSelf.chapterModel {
-                    strongSelf.fontSize -= 1
+                if let model = strongSelf.chapterModel, strongSelf.fontSize > 20 {
+                    strongSelf.fontSize -= 2
                     strongSelf.setupTextView()
                 }
             case 100005:
-                if let model = strongSelf.chapterModel {
-                    strongSelf.fontSize += 1
+                if let model = strongSelf.chapterModel, strongSelf.fontSize < 36 {
+                    strongSelf.fontSize += 2
                     strongSelf.setupTextView()
                 }
             default:
@@ -310,7 +310,7 @@ extension ChapterViewController {
     
     private func getTotalPages(string: String) {
         pagingContents.removeAll()
-        let rect = CGRect(x: 0, y: 0, width: pageVC.view.width - 30, height: pageVC.view.height)
+        let rect = CGRect(x: 0, y: 0, width: pageVC.view.width - 30 - fontSize / 2, height: pageVC.view.height - 2 * fontSize)
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = 15
         let attributedString = NSAttributedString(string: string,
@@ -318,7 +318,7 @@ extension ChapterViewController {
         
         var rangeIndex = 0
         repeat{
-            let length = min(Int((rect.width - 30) / fontSize - 1) * Int((rect.height - 30) / (15 + fontSize) - 1), attributedString.length - rangeIndex)
+            let length = min(400, attributedString.length - rangeIndex)
             let childString = attributedString.attributedSubstring(from: NSRange(location: rangeIndex, length: length))
             let childFramesetter = CTFramesetterCreateWithAttributedString(childString)
             let bezierPath = UIBezierPath(rect: rect)
@@ -329,7 +329,6 @@ extension ChapterViewController {
                 pagingContents.append((string as NSString).substring(with: r))
             }
             rangeIndex += r.length
-            
         } while (rangeIndex < attributedString.length  && Int(attributedString.length) > 0 )
     }
 }

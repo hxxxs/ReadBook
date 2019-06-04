@@ -76,7 +76,7 @@ extension BookShelfViewController: UICollectionViewDelegate {
         BookShelfModel.currentRead(with: model)
         vc.viewModel = ReadViewModel(bookInfo: model)
         let cell: BookShelfCell = collectionView.cellForItem(at: indexPath) as! BookShelfCell
-        vc.bookImage = cell.bookImage
+        vc.speechViewModel = SpeechViewModel(with: cell.bookImage)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

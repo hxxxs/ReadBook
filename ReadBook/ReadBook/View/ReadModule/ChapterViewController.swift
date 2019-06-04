@@ -17,15 +17,11 @@ class ChapterViewController: UIViewController {
     //  MARK: - Properties Public
     /// 阅读视图模型
     var viewModel: ReadViewModel!
-    /// 图书封面图片
-    var bookImage: UIImage!
+    /// 朗读视图模型
+    var speechViewModel: SpeechViewModel!
     
     /// 分页控制器
-    private lazy var pageVC: UIPageViewController = {
-        let vc = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
-        vc.dataSource = self
-        return vc
-    }()
+    private lazy var pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
     /// 蒙层视图
     private lazy var maskView: MaskView = {
@@ -68,8 +64,7 @@ class ChapterViewController: UIViewController {
             guard let strongSelf = self else { return }
             switch type {
             case 100001:
-                strongSelf.speechSynthesizer?.stopSpeaking(at: .immediate)
-//                strongSelf.setupTextViewText(unread: strongSelf.content)
+                strongSelf.stopPlay()
                 break
             case 100002:
                 strongSelf.timing(delay: 15 * 60)
@@ -103,9 +98,8 @@ class ChapterViewController: UIViewController {
         didSet {
             guard let model = chapterModel else { return }
             self.content = model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n")
-//            self.setupTextViewText(unread: self.content)
             
-            if speechSynthesizer != nil, speechSynthesizer!.isSpeaking {
+            if isOpenSpeechPattern {
                 self.startPlay()
             }
         }
@@ -113,20 +107,23 @@ class ChapterViewController: UIViewController {
     
     /// 分页内容
     private var pagingContents = [String]()
-    /// 语音合成器
-    private var speechSynthesizer: XSSpeechSynthesizer?
     /// 当前页
     private var currentPage: Int = 0
     /// 当前文本
     private var content = "" {
         didSet {
             getTotalPages(string: content)
-            
-            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
+            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
         }
     }
     /// 当前分页控制器
     private var currentPagingVC: PagingViewController?
+    
+    /// 翻页方向
+    private var direction = UIPageViewController.NavigationDirection.forward
+    
+    /// 是否开启朗读模式
+    private var isOpenSpeechPattern: Bool = false
     
     //  MARK: - override
     deinit {
@@ -139,6 +136,16 @@ class ChapterViewController: UIViewController {
 
         setup()
         loadData(offset: viewModel.bookInfo.offset)
+        
+        speechViewModel.speechDidFinishCompletion = {[weak self] in
+            self?.pageDown(completion: { (_) in
+                self?.startPlay()
+            })
+        }
+        
+        speechViewModel.speechProgressCompletion = {[weak self] (read, unread) in
+            self?.currentPagingVC?.speechContent(unread: unread, read: read)
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -161,9 +168,7 @@ class ChapterViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        speechSynthesizer?.stopSpeaking(at: .immediate)
-        UIApplication.shared.endReceivingRemoteControlEvents()
-        speechSynthesizer = nil
+        stopPlay()
     }
     
     override func remoteControlReceived(with event: UIEvent?) {
@@ -175,7 +180,7 @@ class ChapterViewController: UIViewController {
             case UIEvent.EventSubtype.remoteControlPause:// 暂停
                 fallthrough
             case UIEvent.EventSubtype.remoteControlTogglePlayPause:// 耳机暂停or播放
-                speechSynthesizer?.pauseOrContinuePlay()
+                speechViewModel.pauseOrContinuePlay()
             case UIEvent.EventSubtype.remoteControlNextTrack:// 下一章
                 loadNextData()
             case UIEvent.EventSubtype.remoteControlPreviousTrack:// 上一章
@@ -193,17 +198,19 @@ extension ChapterViewController {
     
     /// 上一章
     private func loadPreviousData() {
+        direction = .reverse
         loadData(offset: viewModel.bookInfo.offset - 1)
     }
     
     /// 下一章
     private func loadNextData() {
+        direction = .forward
         if let model = chapterModel, model.next.offset > 0 {
             loadData(offset: viewModel.bookInfo.offset + 1)
-        } else if speechSynthesizer != nil {
-//            setupTextViewText(unread: content)
-            speechSynthesizer?.stopSpeaking(at: .immediate)
         }
+//        else if speechSynthesizer != nil {
+//            speechSynthesizer?.stopSpeaking(at: .immediate)
+//        }
     }
     
     /// 加载数据
@@ -230,33 +237,35 @@ extension ChapterViewController {
     /// 定时关闭
     private func timing(delay: TimeInterval) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
-            self.speechSynthesizer?.stopSpeaking(at: .immediate)
+            self.stopPlay()
         }
     }
     
-    /// 锁屏信息
-    private func nowPlayingInfo() {
-        let artwork = MPMediaItemArtwork(boundsSize: bookImage.size) {[weak self]_ in
-            guard let sf = self else { return UIImage(imageLiteralResourceName: "noData") }
-            return sf.bookImage
-        }
-        let dic = [MPMediaItemPropertyTitle: viewModel.bookInfo.title,
-                   MPMediaItemPropertyArtist: chapterModel?.current.title ?? "",
-                   MPMediaItemPropertyArtwork: artwork] as [String : Any]
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = dic
+    /// 停止播放
+    private func stopPlay() {
+        speechViewModel.stopPlay()
+        currentPagingVC?.speechContent(unread: pagingContents[currentPage])
     }
     
     /// 开始播放
     private func startPlay() {
         maskView.isHidden = true
-        if speechSynthesizer == nil {
-            speechSynthesizer = XSSpeechSynthesizer()
-            speechSynthesizer?.delegate = self
-            UIApplication.shared.beginReceivingRemoteControlEvents()
+        isOpenSpeechPattern = true
+        speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.current.title ?? "", utterance: pagingContents[currentPage])
+    }
+}
+
+// MARK: - Common
+
+extension ChapterViewController {
+    
+    private func pageDown(completion: ((Bool) -> ())?) {
+        if currentPage <= pagingContents.count - 1 {
+            currentPage += 1
+            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: completion)
+        } else {
+            loadNextData()
         }
-        
-        speechSynthesizer?.startPlay(utterance: pagingContents[currentPage])
-        nowPlayingInfo()
     }
 }
 
@@ -264,21 +273,34 @@ extension ChapterViewController {
 
 extension ChapterViewController {
     
-    @objc private func maskViewTap() {
-        maskView.isHidden = true
+    private func pageUpTap() {
+        if currentPage > 0 {
+            currentPage -= 1
+            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .reverse, animated: true, completion: nil)
+        } else {
+            loadPreviousData()
+        }
     }
     
-    @objc private func textViewTap() {
-        if speechSynthesizer != nil, speechSynthesizer!.isSpeaking {
-            speechSynthesizer?.pauseOrContinuePlay()
+    private func pageDownTap() {
+        pageDown(completion: nil)
+    }
+    
+    private func textViewTap() {
+        if isOpenSpeechPattern  {
+            speechViewModel.pauseOrContinuePlay()
             playView.isHidden = false
         } else {
             maskView.isHidden = false
         }
     }
     
+    @objc private func maskViewTap() {
+        maskView.isHidden = true
+    }
+    
     @objc private func playViewTap() {
-        speechSynthesizer?.pauseOrContinuePlay()
+        speechViewModel.pauseOrContinuePlay()
         playView.isHidden = true
     }
 }
@@ -318,7 +340,6 @@ extension ChapterViewController {
     
     private func setup() {
         view.backgroundColor = UIColor(hex: 0xCDDFD1)
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textViewTap)))
         addChild(pageVC)
         view.addSubview(pageVC.view)
         pageVC.didMove(toParent: self)
@@ -329,56 +350,22 @@ extension ChapterViewController {
     
     private func pagingvc(page: Int) -> PagingViewController {
         let vc = PagingViewController()
-        vc.speechContent(unread: pagingContents[page], read: nil)
+        vc.speechContent(unread: pagingContents[page])
+        vc.monitorCompletion = {[weak self] type in
+            switch type {
+            case 100001:
+                self?.pageUpTap()
+            case 100002:
+                self?.pageDownTap()
+            case 100003:
+                self?.textViewTap()
+            default:
+                break
+            }
+        }
         currentPagingVC = vc
         return vc
     }
     
 }
 
-// MARK: - AVSpeechSynthesizerDelegate
-
-extension ChapterViewController: AVSpeechSynthesizerDelegate {
-    
-    /// 即将朗读
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-        
-        let read = (utterance.speechString as NSString).substring(to: characterRange.location + characterRange.length)
-        let unread = (utterance.speechString as NSString).substring(from: characterRange.location + characterRange.length)
-        
-        currentPagingVC?.speechContent(unread: unread, read: read)
-    }
-    
-    /// 完成
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if currentPage <= pagingContents.count - 1 {
-            currentPage += 1
-            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true) { (_) in
-                self.startPlay()
-            }
-        } else {
-            loadNextData()
-        }
-    }
-}
-
-
-// MARK: - UIPageViewControllerDataSource
-
-extension ChapterViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if currentPage <= 0 {
-            return nil
-        }
-        currentPage -= 1
-        return pagingvc(page: currentPage)
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if currentPage >= pagingContents.count - 1 {
-            return nil
-        }
-        currentPage += 1
-        return pagingvc(page: currentPage)
-    }
-}

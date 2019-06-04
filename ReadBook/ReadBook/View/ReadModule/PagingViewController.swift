@@ -10,12 +10,22 @@ import UIKit
 
 class PagingViewController: UIViewController {
     
+    var monitorCompletion: ((_ type: Int) -> ())?
+    
+    //  MARK: - Private
+    
     private lazy var textView: UITextView = {
         let v = UITextView()
         v.backgroundColor = UIColor.clear
         v.isUserInteractionEnabled = false
         return v
     }()
+    
+    /// 上一页
+    private lazy var pageUpButton = UIButton(target: self, action: #selector(pageUpButtonClick))
+    
+    /// 下一页
+    private lazy var pageDownButton = UIButton(target: self, action: #selector(pageDownButtonClick))
     
     //  MARK: - override
 
@@ -24,6 +34,11 @@ class PagingViewController: UIViewController {
         
         view.backgroundColor = UIColor(hex: 0xCDDFD1)
         view.addSubview(textView)
+        
+        view.addSubview(pageUpButton)
+        view.addSubview(pageDownButton)
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textViewTap)))
     }
     
     override func viewDidLayoutSubviews() {
@@ -33,11 +48,21 @@ class PagingViewController: UIViewController {
             make.left.right.equalToSuperview().inset(15)
             make.top.bottom.equalToSuperview()
         }
+        
+        pageUpButton.snp.makeConstraints { (make) in
+            make.left.top.bottom.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.25)
+        }
+        
+        pageDownButton.snp.makeConstraints { (make) in
+            make.right.top.bottom.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.25)
+        }
     }
     
     //  MARK: -
     
-    func speechContent(unread: String, read: String?) {
+    func speechContent(unread: String, read: String? = nil) {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = 15
         
@@ -49,5 +74,22 @@ class PagingViewController: UIViewController {
         let attr = NSMutableAttributedString(string: read ?? "", attributes: attr1)
         attr.append(NSAttributedString(string: unread, attributes: attr2))
         textView.attributedText = attr
+    }
+}
+
+// MARK: - Monitor
+
+extension PagingViewController {
+    
+    @objc private func pageUpButtonClick() {
+        monitorCompletion?(100001)
+    }
+    
+    @objc private func pageDownButtonClick() {
+        monitorCompletion?(100002)
+    }
+    
+    @objc private func textViewTap() {
+        monitorCompletion?(100003)
     }
 }

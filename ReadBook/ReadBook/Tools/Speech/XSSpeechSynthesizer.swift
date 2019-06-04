@@ -10,6 +10,8 @@ import AVFoundation
 
 class XSSpeechSynthesizer: AVSpeechSynthesizer {
     
+    static let shared = XSSpeechSynthesizer()
+    
     /// 开始播放
     ///
     /// - Parameters:

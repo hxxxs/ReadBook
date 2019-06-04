@@ -28,9 +28,14 @@ class SpeechViewModel: NSObject {
     
     var speechImage: UIImage?
     
-    var speechProgressCompletion: ((_ readString: String, _ unreadString: String) -> ())?
+    var speechProgressCompletion: ((_ readString: String, _ unreadString: String, _ isPageDown: Bool) -> ())?
     
     var speechDidFinishCompletion: (() -> ())?
+    
+    var nextPageLocation = 0
+    
+    /// 起始位置
+    private var beginLocation = 0
     
     /// 暂停恢复
     func pauseOrContinuePlay() {
@@ -46,6 +51,7 @@ class SpeechViewModel: NSObject {
     func startPlay(title: String, artist: String, utterance: String) {
         XSSpeechSynthesizer.shared.startPlay(utterance: utterance)
         nowPlayingInfo(title: title, artist: artist)
+        beginLocation = 0
     }
     
     /// 锁屏信息
@@ -68,10 +74,15 @@ extension SpeechViewModel: AVSpeechSynthesizerDelegate {
     /// 即将朗读
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         
-        let read = (utterance.speechString as NSString).substring(to: characterRange.location + characterRange.length)
+        let read = (utterance.speechString as NSString).substring(with: NSRange(location: beginLocation, length: characterRange.location + characterRange.length - beginLocation))//substring(to: characterRange.location + characterRange.length)
         let unread = (utterance.speechString as NSString).substring(from: characterRange.location + characterRange.length)
         
-        speechProgressCompletion?(read, unread)
+        let isPageDown = nextPageLocation <= characterRange.location + characterRange.length
+        
+        if isPageDown {
+            beginLocation = nextPageLocation
+        }
+        speechProgressCompletion?(read, unread, isPageDown)
     }
     
     /// 完成

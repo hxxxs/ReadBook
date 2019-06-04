@@ -108,6 +108,9 @@ class ChapterViewController: UIViewController {
     /// 分页内容
     private var pagingContents = [String]()
     
+    /// 分页范围
+    private var ranges = [NSRange]()
+    
     /// 当前页
     private var currentPage: Int = 0
     
@@ -133,11 +136,14 @@ class ChapterViewController: UIViewController {
         loadData(offset: viewModel.bookInfo.offset)
         
         speechViewModel.speechDidFinishCompletion = {[weak self] in
-            self?.pageDownTap()
+            self?.loadNextData()
         }
         
-        speechViewModel.speechProgressCompletion = {[weak self] (read, unread) in
+        speechViewModel.speechProgressCompletion = {[weak self] (read, unread, isPageDown) in
             self?.currentPagingVC?.speechContent(unread: unread, read: read)
+            if isPageDown {
+                self?.pageDownTap()
+            }
         }
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(pageDownTap))
@@ -209,6 +215,8 @@ extension ChapterViewController {
         direction = .forward
         if let model = chapterModel, model.next.offset > 0 {
             loadData(offset: viewModel.bookInfo.offset + 1)
+        } else {
+            stopPlay()
         }
     }
     
@@ -249,7 +257,17 @@ extension ChapterViewController {
     private func startPlay() {
         maskView.isHidden = true
         isOpenSpeechPattern = true
-        speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.current.title ?? "", utterance: pagingContents[currentPage])
+        
+        var utterance = ""
+        for i in currentPage..<pagingContents.count {
+            utterance.append(pagingContents[i])
+        }
+        speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.current.title ?? "", utterance: utterance)
+        if currentPage == ranges.count - 1 {
+            speechViewModel.nextPageLocation = ranges[currentPage].length
+        } else {
+            speechViewModel.nextPageLocation = ranges[currentPage + 1].location - ranges[currentPage].location
+        }
     }
 }
 
@@ -270,7 +288,11 @@ extension ChapterViewController {
         if currentPage < pagingContents.count - 1 {
             currentPage += 1
             if isOpenSpeechPattern {
-                startPlay()
+                if currentPage == ranges.count - 1 {
+                    speechViewModel.nextPageLocation = 99999999
+                } else {
+                    speechViewModel.nextPageLocation = ranges[currentPage + 1].location
+                }
             }
             pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
         } else {
@@ -310,6 +332,7 @@ extension ChapterViewController {
     
     private func getTotalPages(string: String) {
         pagingContents.removeAll()
+        ranges.removeAll()
         let rect = CGRect(x: 0, y: 0, width: pageVC.view.width - 30 - fontSize / 2, height: pageVC.view.height - 2 * fontSize)
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = 15
@@ -326,6 +349,7 @@ extension ChapterViewController {
             let range = CTFrameGetVisibleStringRange(frame)
             let r:NSRange = NSMakeRange(rangeIndex, range.length)
             if r.length > 0 {
+                ranges.append(r)
                 pagingContents.append((string as NSString).substring(with: r))
             }
             rangeIndex += r.length

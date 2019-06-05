@@ -138,6 +138,7 @@ class ChapterViewController: UIViewController {
         setup()
         setupSpeechViewModel()
         setupGesture()
+        RBSQlite.shared.delete(id: viewModel.bookInfo.id, offset: viewModel.bookInfo.offset)
         loadData(offset: viewModel.bookInfo.offset)
     }
 

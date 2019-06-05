@@ -59,14 +59,13 @@ class BookShelfCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.addSubview(imageView)
-        contentView.addSubview(textLabel)
-        contentView.addSubview(deleteButton)
-        contentView.addSubview(offsetLabel)
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        
+        setup()
     }
     
     override func layoutSubviews() {
@@ -92,6 +91,13 @@ class BookShelfCell: UICollectionViewCell {
             make.bottom.equalTo(imageView)
             make.centerX.equalTo(imageView)
         }
+    }
+    
+    private func setup() {
+        contentView.addSubview(imageView)
+        contentView.addSubview(textLabel)
+        contentView.addSubview(deleteButton)
+        contentView.addSubview(offsetLabel)
     }
     
 }

@@ -25,6 +25,8 @@ struct ReadViewModel {
         
         if let jsonString = RBSQlite.shared.prepare(id: bookInfo.id, offset: offset) {
             if let model = ReadModel.deserialize(from: jsonString) {
+                self.bookInfo.offset = model.current.offset
+                BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
                 completion(model)
                 return
             }

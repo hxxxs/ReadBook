@@ -23,8 +23,8 @@ class RBSQlite: NSObject {
     override init() {
         super.init()
         
-        guard let db = try? Connection(path) else { return }
         do {
+            let db = try Connection(path)
             try db.run(books.create(block: { (t) in
                 t.column(id, primaryKey: .autoincrement)
                 t.column(book_id)
@@ -32,7 +32,7 @@ class RBSQlite: NSObject {
                 t.column(jsonString)
             }))
         } catch {
-            print(error)
+            debugPrint(error)
         }
     }
     

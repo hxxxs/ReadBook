@@ -9,12 +9,21 @@
 import Foundation
 import Alamofire
 import XSUtil
+import SQLite
 
 struct ReadViewModel {
     
     var bookInfo: BookInfoModel
     
     func loadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> ()) {
+        
+        if let jsonString = RBSQlite.shared.prepare(id: bookInfo.id, offset: offset) {
+            if let model = ReadModel.deserialize(from: jsonString) {
+                completion(model)
+                return
+            }
+        }
+        
         let params = ["v": "5",
                       "type": "1",
                       "id": bookInfo.id,
@@ -37,7 +46,10 @@ struct ReadViewModel {
                 let model = ReadModel.deserialize(from: data.first) else {
                     return
             }
+            
             self.bookInfo.offset = model.current.offset
+//            RBSQlite.shared.insert(id: self.bookInfo.id, offset: "\(model.current.offset)", content: model.chapter.content, title: model.current.title)
+            RBSQlite.shared.insert(id: self.bookInfo.id, offset: model.current.offset, jsonString: model.toJSONString() ?? "")
             BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
             completion(model)
             XSHUD.dismiss()

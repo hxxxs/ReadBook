@@ -11,5 +11,6 @@ pod 'SnapKit'
 pod 'Alamofire'
 pod 'HandyJSON'
 pod 'SDWebImage'
+pod 'SQLite.swift'
 
 end

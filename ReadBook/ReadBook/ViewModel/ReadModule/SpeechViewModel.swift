@@ -13,14 +13,14 @@ import AVFoundation
 class SpeechViewModel: NSObject {
     
     deinit {
-        XSSpeechSynthesizer.shared.stopSpeaking(at: .immediate)
+        RBSpeechSynthesizer.shared.stopSpeaking(at: .immediate)
         UIApplication.shared.endReceivingRemoteControlEvents()
     }
     
     init(with image: UIImage) {
         super.init()
         
-        XSSpeechSynthesizer.shared.delegate = self
+        RBSpeechSynthesizer.shared.delegate = self
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
         speechImage = image
@@ -39,17 +39,17 @@ class SpeechViewModel: NSObject {
     
     /// 暂停恢复
     func pauseOrContinuePlay() {
-        XSSpeechSynthesizer.shared.pauseOrContinuePlay()
+        RBSpeechSynthesizer.shared.pauseOrContinuePlay()
     }
     
     /// 停止播放
     func stopPlay() {
-        XSSpeechSynthesizer.shared.stopSpeaking(at: .immediate)
+        RBSpeechSynthesizer.shared.stopSpeaking(at: .immediate)
     }
     
     /// 开始播放
     func startPlay(title: String, artist: String, utterance: String) {
-        XSSpeechSynthesizer.shared.startPlay(utterance: utterance)
+        RBSpeechSynthesizer.shared.startPlay(utterance: utterance)
         nowPlayingInfo(title: title, artist: artist)
         beginLocation = 0
     }

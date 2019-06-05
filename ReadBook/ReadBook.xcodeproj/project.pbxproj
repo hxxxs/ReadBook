@@ -19,13 +19,14 @@
 		9D6F003622A5013800CAA48E /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F003422A5013800CAA48E /* PagingViewController.swift */; };
 		9D6F003722A5013800CAA48E /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F003522A5013800CAA48E /* ChapterViewController.swift */; };
 		9D70E64122A74D3F004F8E45 /* RBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70E64022A74D3F004F8E45 /* RBExtension.swift */; };
+		9D70E66222A75F81004F8E45 /* RBSQlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70E66122A75F81004F8E45 /* RBSQlite.swift */; };
 		9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A800E228CEABC00737BF8 /* MaskView.swift */; };
 		9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8013228D008D00737BF8 /* ReadViewModel.swift */; };
 		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
 		9DAC8D9922A60F7000E9F52A /* SpeechViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC8D9822A60F7000E9F52A /* SpeechViewModel.swift */; };
 		9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033F9228E9584001CC884 /* BookShelfCell.swift */; };
 		9DD033FC228EA7BD001CC884 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */; };
-		9DDC9B7D229F6C9A0031AED5 /* XSSpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B7C229F6C9A0031AED5 /* XSSpeechSynthesizer.swift */; };
+		9DDC9B7D229F6C9A0031AED5 /* RBSpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B7C229F6C9A0031AED5 /* RBSpeechSynthesizer.swift */; };
 		9DDC9B7F229F77D70031AED5 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B7E229F77D70031AED5 /* PlayView.swift */; };
 		9DDC9B81229F81220031AED5 /* PlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B80229F81220031AED5 /* PlayView.xib */; };
 		9DDC9B83229F9BDE0031AED5 /* MaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B82229F9BDE0031AED5 /* MaskView.xib */; };
@@ -48,13 +49,14 @@
 		9D6F003422A5013800CAA48E /* PagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
 		9D6F003522A5013800CAA48E /* ChapterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
 		9D70E64022A74D3F004F8E45 /* RBExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBExtension.swift; sourceTree = "<group>"; };
+		9D70E66122A75F81004F8E45 /* RBSQlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBSQlite.swift; sourceTree = "<group>"; };
 		9D9A800E228CEABC00737BF8 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		9DAC8D9822A60F7000E9F52A /* SpeechViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewModel.swift; sourceTree = "<group>"; };
 		9DD033F9228E9584001CC884 /* BookShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfCell.swift; sourceTree = "<group>"; };
 		9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
-		9DDC9B7C229F6C9A0031AED5 /* XSSpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSSpeechSynthesizer.swift; sourceTree = "<group>"; };
+		9DDC9B7C229F6C9A0031AED5 /* RBSpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBSpeechSynthesizer.swift; sourceTree = "<group>"; };
 		9DDC9B7E229F77D70031AED5 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		9DDC9B80229F81220031AED5 /* PlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayView.xib; sourceTree = "<group>"; };
 		9DDC9B82229F9BDE0031AED5 /* MaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaskView.xib; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		9D0CA34822924437003B07F0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				9D70E66022A75F5F004F8E45 /* DB */,
 				9DDC9B7B229F68FA0031AED5 /* Speech */,
 				9D9A8015228D0C3E00737BF8 /* Common */,
 			);
@@ -186,6 +189,14 @@
 				9D70E64022A74D3F004F8E45 /* RBExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		9D70E66022A75F5F004F8E45 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				9D70E66122A75F81004F8E45 /* RBSQlite.swift */,
+			);
+			path = DB;
 			sourceTree = "<group>";
 		};
 		9D9A8010228CF1DB00737BF8 /* Resource */ = {
@@ -228,7 +239,7 @@
 		9DDC9B7B229F68FA0031AED5 /* Speech */ = {
 			isa = PBXGroup;
 			children = (
-				9DDC9B7C229F6C9A0031AED5 /* XSSpeechSynthesizer.swift */,
+				9DDC9B7C229F6C9A0031AED5 /* RBSpeechSynthesizer.swift */,
 			);
 			path = Speech;
 			sourceTree = "<group>";
@@ -384,12 +395,13 @@
 				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
 				9D0CA34022923C9A003B07F0 /* BookShelfModel.swift in Sources */,
 				9DDC9B7F229F77D70031AED5 /* PlayView.swift in Sources */,
-				9DDC9B7D229F6C9A0031AED5 /* XSSpeechSynthesizer.swift in Sources */,
+				9DDC9B7D229F6C9A0031AED5 /* RBSpeechSynthesizer.swift in Sources */,
 				9DD033FA228E9584001CC884 /* BookShelfCell.swift in Sources */,
 				9D6F003722A5013800CAA48E /* ChapterViewController.swift in Sources */,
 				9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */,
 				9DD033FC228EA7BD001CC884 /* BookShelfViewController.swift in Sources */,
 				9D00E7FB228BE5B000C5A0C0 /* ReadModel.swift in Sources */,
+				9D70E66222A75F81004F8E45 /* RBSQlite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

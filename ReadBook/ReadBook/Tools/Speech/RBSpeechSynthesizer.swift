@@ -1,5 +1,5 @@
 //
-//  XSSpeechSynthesizer.swift
+//  RBSpeechSynthesizer.swift
 //  ReadBook
 //
 //  Created by 123 on 2019/5/30.
@@ -8,9 +8,9 @@
 
 import AVFoundation
 
-class XSSpeechSynthesizer: AVSpeechSynthesizer {
+class RBSpeechSynthesizer: AVSpeechSynthesizer {
     
-    static let shared = XSSpeechSynthesizer()
+    static let shared = RBSpeechSynthesizer()
     
     /// 开始播放
     ///

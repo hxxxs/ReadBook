@@ -226,7 +226,6 @@ extension ChapterViewController {
     ///
     /// - Parameter offset: 页码
     private func loadData(offset: Int) {
-        currentPage = 0
         viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
             self?.chapterModel = model
             self?.title = model.current.title
@@ -359,6 +358,7 @@ extension ChapterViewController {
     }
     
     private func getTotalPages(string: String) {
+        currentPage = 0
         pagingContents.removeAll()
         ranges.removeAll()
         let rect = CGRect(x: 0, y: 0, width: pageVC.view.width - 30 - fontSize / 2, height: pageVC.view.height - 2 * fontSize)

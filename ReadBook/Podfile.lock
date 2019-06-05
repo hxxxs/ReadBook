@@ -5,6 +5,9 @@ PODS:
     - SDWebImage/Core (= 5.0.4)
   - SDWebImage/Core (5.0.4)
   - SnapKit (4.2.0)
+  - SQLite.swift (0.12.0):
+    - SQLite.swift/standard (= 0.12.0)
+  - SQLite.swift/standard (0.12.0)
   - XSExtension (1.1.5)
   - XSUtil (0.1.0):
     - SnapKit
@@ -15,6 +18,7 @@ DEPENDENCIES:
   - HandyJSON
   - SDWebImage
   - SnapKit
+  - SQLite.swift
   - XSUtil
 
 SPEC REPOS:
@@ -23,6 +27,7 @@ SPEC REPOS:
     - HandyJSON
     - SDWebImage
     - SnapKit
+    - SQLite.swift
     - XSExtension
     - XSUtil
 
@@ -31,9 +36,10 @@ SPEC CHECKSUMS:
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   SDWebImage: c739016e4bdf0a4a1f9a04b5e0385395ad63a282
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
   XSExtension: dba97ad6d8f09df3adec1dcca16b7143414ff7e1
   XSUtil: 751655a3e7a4b9e6994c97a42af808c43d6633ea
 
-PODFILE CHECKSUM: 5c4ae473e720e32a674d54b73cfe8c119d8ebed5
+PODFILE CHECKSUM: 20073aec8d6c20f9d23e504dc87aef462885a359
 
 COCOAPODS: 1.7.0

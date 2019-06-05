@@ -65,7 +65,7 @@ class ChapterViewController: UIViewController {
                 strongSelf.stopPlay()
                 break
             case 100002:
-                strongSelf.timing(delay: 15 * 60)
+                strongSelf.timing(delay: 15)
                 break
             case 100003:
                 strongSelf.timing(delay: 30 * 60)
@@ -104,6 +104,8 @@ class ChapterViewController: UIViewController {
             }
         }
     }
+    
+    private lazy var changeItem = UIBarButtonItem(title: "换源", style: .done, target: self, action: #selector(changeItemClick))
     
     /// 分页内容
     private var pagingContents = [String]()
@@ -241,6 +243,7 @@ extension ChapterViewController {
     
     /// 定时关闭
     private func timing(delay: TimeInterval) {
+        speechViewModel.pauseOrContinuePlay()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
             self.stopPlay()
         }
@@ -274,6 +277,32 @@ extension ChapterViewController {
 // MARK: - Monitor
 
 extension ChapterViewController {
+    
+    @objc private func changeItemClick() {
+        let vc = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+        vc.addTextField { (textField) in
+            textField.placeholder = "请输入章节地址"
+        }
+        vc.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
+        }))
+        
+        vc.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (_) in
+            guard let sself = self else { return }
+            if let tf = vc.textFields?.first,
+                let url = tf.text,
+                let params = url.urlParameters,
+                let id = params["id"] as? String {
+                
+                if sself.viewModel.bookInfo.id == id {
+                    sself.viewModel.bookInfo.md = params["md"] as! String
+                    sself.viewModel.bookInfo.cmd = params["cmd"] as! String
+                    sself.viewModel.bookInfo.encodeUrl = params["url"] as! String
+                    sself.loadData(offset: sself.viewModel.bookInfo.offset)
+                }
+            }
+        }))
+        present(vc, animated: true, completion: nil)
+    }
     
     @objc private func pageUpTap() {
         if currentPage > 0 {
@@ -315,7 +344,6 @@ extension ChapterViewController {
     
     @objc private func playViewTap() {
         speechViewModel.pauseOrContinuePlay()
-        playView.isHidden = true
     }
 }
 
@@ -369,6 +397,8 @@ extension ChapterViewController {
         
         view.addSubview(maskView)
         view.addSubview(playView)
+        
+        navigationItem.rightBarButtonItem = changeItem
     }
     
     private func pagingvc(page: Int) -> PagingViewController {

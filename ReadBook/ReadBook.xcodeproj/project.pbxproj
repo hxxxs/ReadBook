@@ -18,6 +18,7 @@
 		9D0CA34022923C9A003B07F0 /* BookShelfModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0CA33F22923C9A003B07F0 /* BookShelfModel.swift */; };
 		9D6F003622A5013800CAA48E /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F003422A5013800CAA48E /* PagingViewController.swift */; };
 		9D6F003722A5013800CAA48E /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F003522A5013800CAA48E /* ChapterViewController.swift */; };
+		9D70E64122A74D3F004F8E45 /* RBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70E64022A74D3F004F8E45 /* RBExtension.swift */; };
 		9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A800E228CEABC00737BF8 /* MaskView.swift */; };
 		9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8013228D008D00737BF8 /* ReadViewModel.swift */; };
 		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
@@ -46,6 +47,7 @@
 		9D0CA33F22923C9A003B07F0 /* BookShelfModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfModel.swift; sourceTree = "<group>"; };
 		9D6F003422A5013800CAA48E /* PagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
 		9D6F003522A5013800CAA48E /* ChapterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
+		9D70E64022A74D3F004F8E45 /* RBExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBExtension.swift; sourceTree = "<group>"; };
 		9D9A800E228CEABC00737BF8 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -178,6 +180,14 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		9D70E63F22A74D2A004F8E45 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9D70E64022A74D3F004F8E45 /* RBExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		9D9A8010228CF1DB00737BF8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +202,7 @@
 		9D9A8015228D0C3E00737BF8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9D70E63F22A74D2A004F8E45 /* Extension */,
 				9D9A8016228D0C4300737BF8 /* Model */,
 			);
 			path = Common;
@@ -369,6 +380,7 @@
 				9DAC8D9922A60F7000E9F52A /* SpeechViewModel.swift in Sources */,
 				9D00E7E7228BB6F400C5A0C0 /* AppDelegate.swift in Sources */,
 				9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */,
+				9D70E64122A74D3F004F8E45 /* RBExtension.swift in Sources */,
 				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
 				9D0CA34022923C9A003B07F0 /* BookShelfModel.swift in Sources */,
 				9DDC9B7F229F77D70031AED5 /* PlayView.swift in Sources */,

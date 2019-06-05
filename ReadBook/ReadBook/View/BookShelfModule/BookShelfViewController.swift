@@ -41,6 +41,8 @@ class BookShelfViewController: UIViewController {
         title = "书架"
        
         view.addSubview(collectionView)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemClick))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,14 +57,58 @@ class BookShelfViewController: UIViewController {
 
 extension BookShelfViewController {
     
+    /// 添加
+    @objc private func addItemClick() {
+        let vc = UIAlertController(title: "添加", message: nil, preferredStyle: .alert)
+        vc.addTextField { (textField) in
+            textField.placeholder = "请输入标题"
+            textField.font = UIFont.systemFont(ofSize: 20)
+        }
+        vc.addTextField { (textField) in
+            textField.placeholder = "请输入章节地址"
+            textField.font = UIFont.systemFont(ofSize: 20)
+            textField.keyboardType = .URL
+        }
+        vc.addTextField { (textField) in
+            textField.placeholder = "请输入offset"
+            textField.font = UIFont.systemFont(ofSize: 20)
+            textField.keyboardType = .numberPad
+        }
+        vc.addTextField { (textField) in
+            textField.placeholder = "请输入图片地址"
+            textField.font = UIFont.systemFont(ofSize: 20)
+            textField.keyboardType = .URL
+        }
+        vc.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
+        }))
+        
+        vc.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (_) in
+            guard let sself = self else { return }
+           
+            if let tf = vc.textFields?[1],
+                let url = tf.text,
+                let params = url.urlParameters,
+                let book = BookInfoModel.deserialize(from: params) {
+                book.title = vc.textFields?.first?.text ?? ""
+                if let offset = vc.textFields?[2].text {
+                    book.offset = Int(offset) ?? 0
+                }
+                book.picUrl = vc.textFields?[3].text ?? ""
+                BookShelfModel.addRead(with: book)
+                sself.collectionView.reloadData()
+            }
+        }))
+        present(vc, animated: true, completion: nil)
+    }
+    
     /// 完成
-    @objc func doneItemClick() {
+    @objc private func doneItemClick() {
         navigationItem.rightBarButtonItem = nil
         collectionView.reloadData()
     }
     
     /// 长按手势
-    @objc func longPressGestureClick() {
+    @objc private func longPressGestureClick() {
         if navigationItem.rightBarButtonItem == nil {
             navigationItem.rightBarButtonItem = doneItem
             collectionView.reloadData()

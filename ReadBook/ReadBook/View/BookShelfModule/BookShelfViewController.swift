@@ -4,7 +4,7 @@
 //
 //  Created by 123 on 2019/5/17.
 //  Copyright © 2019 hxs. All rights reserved.
-//
+//  书架控制器
 
 import UIKit
 import XSExtension
@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 
 class BookShelfViewController: UIViewController {
 
+    /// 集合视图
     private lazy var collectionView: UICollectionView = {
         let fl = UICollectionViewFlowLayout()
         fl.itemSize = CGSize(width: wScreen / 2, height: 150)
@@ -31,6 +32,7 @@ class BookShelfViewController: UIViewController {
         return v
     }()
     
+    /// 完成按钮
     private lazy var doneItem = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(doneItemClick))
     
     override func viewDidLoad() {
@@ -53,11 +55,13 @@ class BookShelfViewController: UIViewController {
 
 extension BookShelfViewController {
     
+    /// 完成
     @objc func doneItemClick() {
         navigationItem.rightBarButtonItem = nil
         collectionView.reloadData()
     }
     
+    /// 长按手势
     @objc func longPressGestureClick() {
         if navigationItem.rightBarButtonItem == nil {
             navigationItem.rightBarButtonItem = doneItem

@@ -4,7 +4,7 @@
 //
 //  Created by 123 on 2019/6/3.
 //  Copyright © 2019 hxs. All rights reserved.
-//
+//  章节控制器
 
 import UIKit
 import SnapKit
@@ -38,12 +38,12 @@ class ChapterViewController: UIViewController {
             case 100004:
                 if let model = strongSelf.chapterModel, strongSelf.fontSize > 20 {
                     strongSelf.fontSize -= 2
-                    strongSelf.setupTextView()
+                    strongSelf.resetTextView()
                 }
             case 100005:
                 if let model = strongSelf.chapterModel, strongSelf.fontSize < 36 {
                     strongSelf.fontSize += 2
-                    strongSelf.setupTextView()
+                    strongSelf.resetTextView()
                 }
             default:
                 break
@@ -105,6 +105,7 @@ class ChapterViewController: UIViewController {
         }
     }
     
+    /// 换源按钮
     private lazy var changeItem = UIBarButtonItem(title: "换源", style: .done, target: self, action: #selector(changeItemClick))
     
     /// 分页内容
@@ -135,26 +136,9 @@ class ChapterViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        setupSpeechViewModel()
+        setupGesture()
         loadData(offset: viewModel.bookInfo.offset)
-        
-        speechViewModel.speechDidFinishCompletion = {[weak self] in
-            self?.loadNextData()
-        }
-        
-        speechViewModel.speechProgressCompletion = {[weak self] (read, unread, isPageDown) in
-            self?.currentPagingVC?.speechContent(unread: unread, read: read)
-            if isPageDown {
-                self?.pageDownTap()
-            }
-        }
-        
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(pageDownTap))
-        leftSwipe.direction = .left
-        view.addGestureRecognizer(leftSwipe)
-        
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(pageUpTap))
-        rightSwipe.direction = .right
-        view.addGestureRecognizer(rightSwipe)
     }
 
     override func viewDidLayoutSubviews() {
@@ -277,6 +261,7 @@ extension ChapterViewController {
 
 extension ChapterViewController {
     
+    /// 更换数据源
     @objc private func changeItemClick() {
         let vc = UIAlertController(title: "", message: nil, preferredStyle: .alert)
         vc.addTextField { (textField) in
@@ -303,6 +288,7 @@ extension ChapterViewController {
         present(vc, animated: true, completion: nil)
     }
     
+    /// 上翻页
     @objc private func pageUpTap() {
         if currentPage > 0 {
             currentPage -= 1
@@ -312,6 +298,7 @@ extension ChapterViewController {
         }
     }
     
+    /// 下翻页
     @objc private func pageDownTap() {
         if currentPage < pagingContents.count - 1 {
             currentPage += 1
@@ -328,6 +315,7 @@ extension ChapterViewController {
         }
     }
     
+    /// 文本视图点击
     private func textViewTap() {
         if isOpenSpeechPattern  {
             speechViewModel.pauseOrContinuePlay()
@@ -337,10 +325,12 @@ extension ChapterViewController {
         }
     }
     
+    /// 蒙版视图点击
     @objc private func maskViewTap() {
         maskView.isHidden = true
     }
     
+    /// 播放视图点击
     @objc private func playViewTap() {
         speechViewModel.pauseOrContinuePlay()
     }
@@ -350,13 +340,7 @@ extension ChapterViewController {
 
 extension ChapterViewController {
     
-    private func setupTextView() {
-        if let model = chapterModel {
-            getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
-        }
-        currentPagingVC?.speechContent(unread: pagingContents[currentPage])
-    }
-    
+    /// 获取总页数
     private func getTotalPages(string: String) {
         currentPage = 0
         pagingContents.removeAll()
@@ -389,6 +373,7 @@ extension ChapterViewController {
 
 extension ChapterViewController {
     
+    /// 设置
     private func setup() {
         view.backgroundColor = UIColor(hex: 0xCDDFD1)
         addChild(pageVC)
@@ -401,6 +386,40 @@ extension ChapterViewController {
         navigationItem.rightBarButtonItem = changeItem
     }
     
+    /// 配置手势
+    private func setupGesture() {
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(pageDownTap))
+        leftSwipe.direction = .left
+        view.addGestureRecognizer(leftSwipe)
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(pageUpTap))
+        rightSwipe.direction = .right
+        view.addGestureRecognizer(rightSwipe)
+    }
+    
+    /// 配置朗读视图模型
+    private func setupSpeechViewModel() {
+        speechViewModel.speechDidFinishCompletion = {[weak self] in
+            self?.loadNextData()
+        }
+        
+        speechViewModel.speechProgressCompletion = {[weak self] (read, unread, isPageDown) in
+            self?.currentPagingVC?.speechContent(unread: unread, read: read)
+            if isPageDown {
+                self?.pageDownTap()
+            }
+        }
+    }
+    
+    /// 重新设置文本视图
+    private func resetTextView() {
+        if let model = chapterModel {
+            getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
+        }
+        currentPagingVC?.speechContent(unread: pagingContents[currentPage])
+    }
+    
+    /// 分页控制器
     private func pagingvc(page: Int) -> PagingViewController {
         let vc = PagingViewController()
         vc.speechContent(unread: pagingContents[page])

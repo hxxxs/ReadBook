@@ -4,16 +4,18 @@
 //
 //  Created by 123 on 2019/6/3.
 //  Copyright © 2019 hxs. All rights reserved.
-//
+//  分页控制器
 
 import UIKit
 
 class PagingViewController: UIViewController {
     
+    /// 事件完成回调
     var monitorCompletion: ((_ type: Int) -> ())?
     
     //  MARK: - Private
     
+    /// 文本视图
     private lazy var textView: UITextView = {
         let v = UITextView()
         v.backgroundColor = UIColor.clear
@@ -62,6 +64,11 @@ class PagingViewController: UIViewController {
     
     //  MARK: -
     
+    /// 朗读内容
+    ///
+    /// - Parameters:
+    ///   - unread: 未读文本
+    ///   - read: 已读文本
     func speechContent(unread: String, read: String? = nil) {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = 15
@@ -81,14 +88,17 @@ class PagingViewController: UIViewController {
 
 extension PagingViewController {
     
+    /// 上翻页
     @objc private func pageUpButtonClick() {
         monitorCompletion?(100001)
     }
     
+    /// 下翻页
     @objc private func pageDownButtonClick() {
         monitorCompletion?(100002)
     }
     
+    /// 文本视图点击
     @objc private func textViewTap() {
         monitorCompletion?(100003)
     }

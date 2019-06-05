@@ -4,13 +4,14 @@
 //
 //  Created by 123 on 2019/5/17.
 //  Copyright © 2019 hxs. All rights reserved.
-//
+//  书架单元格
 
 import UIKit
 import SDWebImage
 
 class BookShelfCell: UICollectionViewCell {
 
+    /// 书信息模型
     var model: BookInfoModel! {
         didSet {
             if let url = URL(string: model.picUrl) {
@@ -21,19 +22,25 @@ class BookShelfCell: UICollectionViewCell {
         }
     }
     
+    /// 章节标签
     private lazy var offsetLabel: UILabel = {
         let label = UILabel(textColor: UIColor.darkGray)
         label.backgroundColor = UIColor.white
         return label
     }()
+    /// 图片
     private lazy var imageView = UIImageView()
+    /// 标题
     private lazy var textLabel = UILabel(font: UIFont.systemFont(ofSize: 20), textColor: UIColor.darkGray, textAlignment: .center)
+    /// 删除按钮
     private lazy var deleteButton = UIButton(title: "\u{e613}", titleColor: UIColor.red, bgImage: UIImage.create(color: .white), font: UIFont(name: "iconFont", size: 20)!, target: self, action: #selector(deleteButtonClick), type: .custom)
     
+    /// 书封面
     var bookImage: UIImage {
         return imageView.image!
     }
     
+    /// 是否展示删除按钮
     var showDeleteButton = true {
         didSet {
             deleteButton.isHidden = showDeleteButton
@@ -44,6 +51,7 @@ class BookShelfCell: UICollectionViewCell {
         }
     }
     
+    /// 删除按钮点击回调
     var deleteButtonCallBack: ((BookInfoModel) -> ())?
     
     override init(frame: CGRect) {
@@ -90,6 +98,7 @@ class BookShelfCell: UICollectionViewCell {
 
 extension BookShelfCell {
     
+    /// 删除按钮点击
     @objc func deleteButtonClick() {
         deleteButtonCallBack?(model)
     }

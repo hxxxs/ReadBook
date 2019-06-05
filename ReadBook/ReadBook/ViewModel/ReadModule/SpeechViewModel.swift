@@ -4,7 +4,7 @@
 //
 //  Created by 123 on 2019/6/4.
 //  Copyright © 2019 hxs. All rights reserved.
-//
+//  朗读视图模型
 
 import UIKit
 import MediaPlayer
@@ -26,12 +26,16 @@ class SpeechViewModel: NSObject {
         speechImage = image
     }
     
+    /// 书封面
     var speechImage: UIImage?
     
+    /// 朗读进度回调
     var speechProgressCompletion: ((_ readString: String, _ unreadString: String, _ isPageDown: Bool) -> ())?
     
+    /// 朗读结束回调
     var speechDidFinishCompletion: (() -> ())?
     
+    /// 下一页位置
     var nextPageLocation = 0
     
     /// 起始位置

@@ -4,12 +4,13 @@
 //
 //  Created by 123 on 2019/5/16.
 //  Copyright © 2019 hxs. All rights reserved.
-//
+//  蒙版视图
 
 import UIKit
 
 class MaskView: UIView {
     
+    /// 事件点击回调
     var monitorCompletion: ((_ type: Int) -> ())?
     
     //  MARK: - lazy
@@ -40,11 +41,17 @@ class MaskView: UIView {
         playerButton.titleLabel?.font = UIFont(name: "iconFont", size: 30)
     }
     
+    /// 章节按钮可点击状态
+    ///
+    /// - Parameters:
+    ///   - previous: 上一章状态
+    ///   - next: 下一章状态
     func chapterButtonEnable(previous: Bool, next: Bool) {
         previousButton.isEnabled = previous
         nextButton.isEnabled = next
     }
     
+    /// 按钮点击事件
     @IBAction func buttonsClick(_ sender: UIButton) {
         monitorCompletion?(sender.tag)
     }

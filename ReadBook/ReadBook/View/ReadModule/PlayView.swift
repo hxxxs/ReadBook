@@ -10,13 +10,16 @@ import UIKit
 
 class PlayView: UIView {
     
+    /// 事件点击回调
     var monitorCompletion: ((_ view: UIView, _ type: Int) -> ())?
     // MARK: - Monitor
     
+    /// 停止按钮点击
     @IBAction func stopButtonClick() {
         monitorCompletion?(self, 100001)
     }
     
+    /// 定时
     @IBAction func timingButtonClick(_ sender: UIButton) {
         monitorCompletion?(self, sender.tag)
     }

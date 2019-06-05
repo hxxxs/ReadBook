@@ -276,11 +276,12 @@ extension ChapterViewController {
                 let url = tf.text,
                 let params = url.urlParameters,
                 let id = params["id"] as? String {
-                
+
                 if sself.viewModel.bookInfo.id == id {
                     sself.viewModel.bookInfo.md = params["md"] as! String
                     sself.viewModel.bookInfo.cmd = params["cmd"] as! String
                     sself.viewModel.bookInfo.encodeUrl = params["url"] as! String
+                    RBSQlite.shared.delete(id: sself.viewModel.bookInfo.id, offset: sself.viewModel.bookInfo.offset)
                     sself.loadData(offset: sself.viewModel.bookInfo.offset)
                 }
             }

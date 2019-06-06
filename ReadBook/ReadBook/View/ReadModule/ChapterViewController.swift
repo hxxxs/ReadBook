@@ -93,18 +93,7 @@ class ChapterViewController: UIViewController {
     }
     
     /// 章节模型
-    private var chapterModel: ReadModel? {
-        didSet {
-            guard let model = chapterModel else { return }
-            
-            getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
-            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
-            
-            if isOpenSpeechPattern {
-                self.startPlay()
-            }
-        }
-    }
+    private var chapterModel: ReadModel?
     
     /// 换源按钮
     private lazy var changeItem = UIBarButtonItem(title: "换源", style: .done, target: self, action: #selector(changeItemClick))
@@ -143,7 +132,7 @@ class ChapterViewController: UIViewController {
         setupSpeechViewModel()
         setupGesture()
         RBSQlite.shared.delete(id: viewModel.bookInfo.id, offset: viewModel.bookInfo.offset)
-        loadData(offset: viewModel.bookInfo.offset)
+        loadData(offset: viewModel.bookInfo.offset, false)
     }
 
     override func viewDidLayoutSubviews() {
@@ -196,16 +185,16 @@ class ChapterViewController: UIViewController {
 extension ChapterViewController {
     
     /// 上一章
-    private func loadPreviousData() {
+    private func loadPreviousData(_ isShowLastPage: Bool = false) {
         direction = .reverse
-        loadData(offset: viewModel.bookInfo.offset - 1)
+        loadData(offset: viewModel.bookInfo.offset - 1, isShowLastPage)
     }
     
     /// 下一章
     private func loadNextData() {
         direction = .forward
         if let model = chapterModel, model.next.offset > 0 {
-            loadData(offset: viewModel.bookInfo.offset + 1)
+            loadData(offset: viewModel.bookInfo.offset + 1, false)
         } else {
             stopPlay()
         }
@@ -214,13 +203,15 @@ extension ChapterViewController {
     /// 加载数据
     ///
     /// - Parameter offset: 页码
-    private func loadData(offset: Int) {
+    private func loadData(offset: Int, _ isShowLastPage: Bool) {
         viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
             self?.chapterModel = model
             self?.title = model.current.title
             self?.maskView.isHidden = true
             
             self?.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
+            
+            self?.setupPageVC(isShowLastPage)
         }
     }
 }
@@ -287,7 +278,7 @@ extension ChapterViewController {
                     sself.viewModel.bookInfo.cmd = params["cmd"] as! String
                     sself.viewModel.bookInfo.encodeUrl = params["url"] as! String
                     RBSQlite.shared.delete(id: sself.viewModel.bookInfo.id, offset: sself.viewModel.bookInfo.offset)
-                    sself.loadData(offset: sself.viewModel.bookInfo.offset)
+                    sself.loadData(offset: sself.viewModel.bookInfo.offset, false)
                 }
             }
         }))
@@ -300,7 +291,7 @@ extension ChapterViewController {
             currentPage -= 1
             pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .reverse, animated: true, completion: nil)
         } else {
-            loadPreviousData()
+            loadPreviousData(true)
         }
     }
     
@@ -414,6 +405,21 @@ extension ChapterViewController {
             if isPageDown {
                 self?.pageDownTap()
             }
+        }
+    }
+    
+    /// 设置分页控制器
+    private func setupPageVC(_ isShowLastPage: Bool) {
+        guard let model = chapterModel else { return }
+        
+        getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
+        if isShowLastPage {
+            currentPage = pagingContents.count - 1
+        }
+        pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
+        
+        if isOpenSpeechPattern {
+            startPlay()
         }
     }
     

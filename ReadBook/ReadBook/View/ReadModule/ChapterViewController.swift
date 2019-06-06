@@ -18,6 +18,7 @@ class ChapterViewController: UIViewController {
     /// 朗读视图模型
     var speechViewModel: SpeechViewModel!
     
+    //  MARK: - Properties Private
     /// 分页控制器
     private lazy var pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     

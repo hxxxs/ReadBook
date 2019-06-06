@@ -50,6 +50,8 @@
 		9D6F003522A5013800CAA48E /* ChapterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
 		9D70E64022A74D3F004F8E45 /* RBExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBExtension.swift; sourceTree = "<group>"; };
 		9D70E66122A75F81004F8E45 /* RBSQlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBSQlite.swift; sourceTree = "<group>"; };
+		9D7A002022A8B13200CD857E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		9D7A002122A8B13200CD857E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		9D9A800E228CEABC00737BF8 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 9D00E7DA228BB6F400C5A0C0;
 			productRefGroup = 9D00E7E4228BB6F400C5A0C0 /* Products */;
@@ -412,6 +415,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9D00E7EB228BB6F400C5A0C0 /* Base */,
+				9D7A002022A8B13200CD857E /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -420,6 +424,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9D00E7F0228BB6F600C5A0C0 /* Base */,
+				9D7A002122A8B13200CD857E /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -493,6 +499,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

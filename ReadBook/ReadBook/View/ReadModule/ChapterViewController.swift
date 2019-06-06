@@ -126,6 +126,9 @@ class ChapterViewController: UIViewController {
     /// 是否开启朗读模式
     private var isOpenSpeechPattern: Bool = false
     
+    /// 未读字符数量
+    private var unreadCount: Int = 0
+    
     //  MARK: - override
     deinit {
         print("ReadViewController OUT")
@@ -250,10 +253,10 @@ extension ChapterViewController {
             utterance.append(pagingContents[i])
         }
         speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.current.title ?? "", utterance: utterance)
-        if currentPage == ranges.count - 1 {
-            speechViewModel.nextPageLocation = ranges[currentPage].length
-        } else {
-            speechViewModel.nextPageLocation = ranges[currentPage + 1].location - ranges[currentPage].location
+        speechViewModel.nextPageLocation = ranges[currentPage].length
+        
+        if let lastRange = ranges.last {
+            unreadCount = lastRange.location + lastRange.length - utterance.count
         }
     }
 }
@@ -308,7 +311,7 @@ extension ChapterViewController {
                 if currentPage == ranges.count - 1 {
                     speechViewModel.nextPageLocation = 99999999
                 } else {
-                    speechViewModel.nextPageLocation = ranges[currentPage + 1].location
+                    speechViewModel.nextPageLocation = ranges[currentPage + 1].location - unreadCount
                 }
             }
             pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
@@ -355,7 +358,7 @@ extension ChapterViewController {
         
         var rangeIndex = 0
         repeat{
-            let length = min(400, attributedString.length - rangeIndex)
+            let length = min(750, attributedString.length - rangeIndex)
             let childString = attributedString.attributedSubstring(from: NSRange(location: rangeIndex, length: length))
             let childFramesetter = CTFramesetterCreateWithAttributedString(childString)
             let bezierPath = UIBezierPath(rect: rect)

@@ -78,7 +78,7 @@ extension SpeechViewModel: AVSpeechSynthesizerDelegate {
     /// 即将朗读
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         
-        let read = (utterance.speechString as NSString).substring(with: NSRange(location: beginLocation, length: characterRange.location + characterRange.length - beginLocation))//substring(to: characterRange.location + characterRange.length)
+        let read = (utterance.speechString as NSString).substring(with: NSRange(location: beginLocation, length: characterRange.location + characterRange.length - beginLocation))
         let unread = (utterance.speechString as NSString).substring(from: characterRange.location + characterRange.length)
         
         let isPageDown = nextPageLocation <= characterRange.location + characterRange.length

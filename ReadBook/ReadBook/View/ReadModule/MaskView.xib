@@ -28,6 +28,7 @@
                                     <state key="normal" title="上一章">
                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <state key="disabled" title="没有更多章节"/>
                                     <connections>
                                         <action selector="buttonsClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lfl-aW-nSu"/>
                                     </connections>

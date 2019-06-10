@@ -187,7 +187,9 @@ extension ChapterViewController {
     /// 上一章
     private func loadPreviousData(_ isShowLastPage: Bool = false) {
         direction = .reverse
-        loadData(offset: viewModel.bookInfo.offset - 1, isShowLastPage)
+        if let model = chapterModel, model.previous.offset > 0 {
+            loadData(offset: viewModel.bookInfo.offset - 1, isShowLastPage)
+        }
     }
     
     /// 下一章

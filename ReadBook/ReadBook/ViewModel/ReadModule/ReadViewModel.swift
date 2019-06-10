@@ -28,10 +28,18 @@ struct ReadViewModel {
                 self.bookInfo.offset = model.current.offset
                 BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
                 completion(model)
-                return
             }
+        } else {
+            networkLoadChapterInfo(offset: offset, completion: completion)
         }
-        
+    }
+    
+    /// 网络加载章节信息
+    ///
+    /// - Parameters:
+    ///   - offset: 章节编码
+    ///   - completion: 完成结果
+    func networkLoadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> ()) {
         let params = ["v": "5",
                       "type": "1",
                       "id": bookInfo.id,

@@ -305,8 +305,9 @@ extension ChapterViewController {
                 } else {
                     speechViewModel.nextPageLocation = ranges[currentPage + 1].location - unreadCount
                 }
+            } else {
+                pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
             }
-            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
         } else {
             loadNextData()
         }

@@ -121,7 +121,7 @@ class ChapterViewController: UIViewController {
     
     //  MARK: - override
     deinit {
-        print("ReadViewController OUT")
+        print("ChapterViewController deinit")
         XSHUD.dismiss()
     }
     
@@ -345,6 +345,7 @@ extension ChapterViewController {
         currentPage = 0
         pagingContents.removeAll()
         ranges.removeAll()
+        
         let rect = CGRect(x: 0, y: 0, width: pageVC.view.width - 30 - fontSize / 2, height: pageVC.view.height - 2 * fontSize)
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = 15

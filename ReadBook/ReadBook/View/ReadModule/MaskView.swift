@@ -33,12 +33,12 @@ class MaskView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        addFontButton.setTitle("\u{e60f}", for: .normal)
-        addFontButton.titleLabel?.font = UIFont(name: "iconFont", size: 30)
-        reduceFontButton.setTitle("\u{e60e}", for: .normal)
-        reduceFontButton.titleLabel?.font = UIFont(name: "iconFont", size: 30)
-        playerButton.setTitle("\u{e610}", for: .normal)
-        playerButton.titleLabel?.font = UIFont(name: "iconFont", size: 30)
+        addFontButton.setTitle(addFontTitle, for: .normal)
+        addFontButton.titleLabel?.font = IconFont(ofSize: 30)
+        reduceFontButton.setTitle(reduceFontTitle, for: .normal)
+        reduceFontButton.titleLabel?.font = IconFont(ofSize: 30)
+        playerButton.setTitle(speechTitle, for: .normal)
+        playerButton.titleLabel?.font = IconFont(ofSize: 30)
     }
     
     /// 章节按钮可点击状态

@@ -15,7 +15,6 @@ class RBNetwork {
     private init() {}
     
     func requestDataTargetJSON<T: TargetType>(target: T, successClosure: @escaping ([String: Any]) -> Void, failClosure: @escaping (String) -> Void) {
-        XSHUD.show(text: "正在加载中...", autoDismiss: false)
         let provider = MoyaProvider<T>()
         provider.request(target) { (result) in
             switch result {
@@ -28,7 +27,6 @@ class RBNetwork {
             case let .failure(error):
                 failClosure(error.errorDescription ?? "")
             }
-            XSHUD.dismiss()
         }
     }
 }

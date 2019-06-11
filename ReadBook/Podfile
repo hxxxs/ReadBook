@@ -13,5 +13,6 @@ pod 'HandyJSON'
 pod 'Kingfisher'
 pod 'SQLite.swift'
 pod 'Moya'
+pod 'NVActivityIndicatorView'
 
 end

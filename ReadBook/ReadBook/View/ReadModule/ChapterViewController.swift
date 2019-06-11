@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-import XSUtil
+import NVActivityIndicatorView
 
 class ChapterViewController: UIViewController {
     
@@ -117,7 +117,6 @@ class ChapterViewController: UIViewController {
     //  MARK: - override
     deinit {
         print("ChapterViewController deinit")
-        XSHUD.dismiss()
     }
     
     override func viewDidLoad() {
@@ -173,7 +172,7 @@ class ChapterViewController: UIViewController {
 
 // MARK: - Net
 
-extension ChapterViewController {
+extension ChapterViewController: NVActivityIndicatorViewable {
     
     /// 上一章
     private func loadPreviousData(_ isShowLastPage: Bool = false) {
@@ -197,6 +196,7 @@ extension ChapterViewController {
     ///
     /// - Parameter offset: 页码
     private func loadData(offset: Int, _ isShowLastPage: Bool) {
+        startAnimating(CGSize(width: 30, height: 30), type: .ballRotateChase)
         viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
             self?.chapterModel = model
             self?.title = model.current.title
@@ -205,6 +205,7 @@ extension ChapterViewController {
             self?.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
             
             self?.setupPageVC(isShowLastPage)
+            self?.stopAnimating()
         }
     }
 }

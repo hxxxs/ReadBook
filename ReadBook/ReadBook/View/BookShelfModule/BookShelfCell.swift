@@ -7,18 +7,14 @@
 //  书架单元格
 
 import UIKit
-import SDWebImage
+import Kingfisher
 
 class BookShelfCell: UICollectionViewCell {
 
     /// 书信息模型
     var model: BookInfoModel! {
         didSet {
-            if let url = URL(string: model.picUrl) {
-                imageView.sd_setImage(with: url, placeholderImage: UIImage(imageLiteralResourceName: "noData"))
-            } else {
-                imageView.image = UIImage(imageLiteralResourceName: "noData")
-            }
+            imageView.kf.setImage(with: URL(string: model.picUrl))
             textLabel.text = model.title
             offsetLabel.text = "\(model.offset)"
         }

@@ -10,7 +10,7 @@ pod 'XSUtil'
 pod 'SnapKit'
 pod 'Alamofire'
 pod 'HandyJSON'
-pod 'SDWebImage'
+pod 'Kingfisher'
 pod 'SQLite.swift'
 
 end

@@ -21,7 +21,6 @@ PODS:
     - XSExtension
 
 DEPENDENCIES:
-  - Alamofire
   - HandyJSON
   - Kingfisher
   - Moya
@@ -55,6 +54,6 @@ SPEC CHECKSUMS:
   XSExtension: dba97ad6d8f09df3adec1dcca16b7143414ff7e1
   XSUtil: 751655a3e7a4b9e6994c97a42af808c43d6633ea
 
-PODFILE CHECKSUM: 29a66f0ff3d3529866a6655a9afde51477916dc3
+PODFILE CHECKSUM: 1e5bd0d1add475f7f57f6367c11ff1eb566e4cae
 
 COCOAPODS: 1.7.0

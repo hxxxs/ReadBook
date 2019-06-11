@@ -8,7 +8,6 @@ target 'ReadBook' do
   # Pods for ReadBook
 pod 'XSUtil'
 pod 'SnapKit'
-pod 'Alamofire'
 pod 'HandyJSON'
 pod 'Kingfisher'
 pod 'SQLite.swift'

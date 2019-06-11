@@ -24,7 +24,7 @@ class ChapterViewController: UIViewController {
     
     /// 蒙层视图
     private lazy var maskView: MaskView = {
-        guard let v  = MaskView.viewFromNib() as? MaskView else { return MaskView() }
+        let v  = MaskView.viewFromNib() as! MaskView // swiftlint:disable:this force_cast
         v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(maskViewTap)))
         v.monitorCompletion = {[weak self] type in
@@ -55,7 +55,7 @@ class ChapterViewController: UIViewController {
     
     /// 播放视图
     private lazy var playView: PlayView = {
-        guard let v  = PlayView.viewFromNib() as? PlayView else { return PlayView() }
+        let v  = PlayView.viewFromNib() as! PlayView // swiftlint:disable:this force_cast
         v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playViewTap)))
         v.monitorCompletion = {[weak self] (view, type) in

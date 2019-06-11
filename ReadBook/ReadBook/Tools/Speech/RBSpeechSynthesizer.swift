@@ -22,11 +22,11 @@ class RBSpeechSynthesizer: AVSpeechSynthesizer {
     ///   - postUtteranceDelay: 播放下一句时有短暂的停顿，默认1s
     ///   - language: 语言，默认中文
     func startPlay(utterance: String,
-               rate: Float = 0.6,
-               volume: Float = 1,
-               pitchMutiplier: Float = 0.9,
-               postUtteranceDelay: TimeInterval = 1,
-               language: String = "zh-CN") {
+                   rate: Float = 0.6,
+                   volume: Float = 1,
+                   pitchMutiplier: Float = 0.9,
+                   postUtteranceDelay: TimeInterval = 1,
+                   language: String = "zh-CN") {
         let u = AVSpeechUtterance(string: utterance)
         u.rate = rate
         u.volume = volume

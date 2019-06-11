@@ -11,7 +11,7 @@ import UIKit
 class PlayView: UIView {
     
     /// 事件点击回调
-    var monitorCompletion: ((_ view: UIView, _ type: Int) -> ())?
+    var monitorCompletion: ((_ view: UIView, _ type: Int) -> Void)?
     // MARK: - Monitor
     
     /// 停止按钮点击

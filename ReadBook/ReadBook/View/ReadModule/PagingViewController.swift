@@ -11,7 +11,7 @@ import UIKit
 class PagingViewController: UIViewController {
     
     /// 事件完成回调
-    var monitorCompletion: ((_ type: Int) -> ())?
+    var monitorCompletion: ((_ type: Int) -> Void)?
     
     //  MARK: - Private
     

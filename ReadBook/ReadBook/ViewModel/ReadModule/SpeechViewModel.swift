@@ -30,10 +30,10 @@ class SpeechViewModel: NSObject {
     var speechImage: UIImage?
     
     /// 朗读进度回调
-    var speechProgressCompletion: ((_ readString: String, _ unreadString: String, _ isPageDown: Bool) -> ())?
+    var speechProgressCompletion: ((_ readString: String, _ unreadString: String, _ isPageDown: Bool) -> Void)?
     
     /// 朗读结束回调
-    var speechDidFinishCompletion: (() -> ())?
+    var speechDidFinishCompletion: (() -> Void)?
     
     /// 下一页位置
     var nextPageLocation = 0

@@ -11,7 +11,7 @@ import UIKit
 class MaskView: UIView {
     
     /// 事件点击回调
-    var monitorCompletion: ((_ type: Int) -> ())?
+    var monitorCompletion: ((_ type: Int) -> Void)?
     
     //  MARK: - lazy
 

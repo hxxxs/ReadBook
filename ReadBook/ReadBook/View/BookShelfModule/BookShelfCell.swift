@@ -50,7 +50,7 @@ class BookShelfCell: UICollectionViewCell {
     }
     
     /// 删除按钮点击回调
-    var deleteButtonCallBack: ((BookInfoModel) -> ())?
+    var deleteButtonCallBack: ((BookInfoModel) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

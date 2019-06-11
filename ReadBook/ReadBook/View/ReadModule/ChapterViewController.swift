@@ -24,7 +24,7 @@ class ChapterViewController: UIViewController {
     
     /// 蒙层视图
     private lazy var maskView: MaskView = {
-        let v = MaskView.viewFromNib() as! MaskView
+        guard let v  = MaskView.viewFromNib() as? MaskView else { return MaskView() }
         v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(maskViewTap)))
         v.monitorCompletion = {[weak self] type in
@@ -55,7 +55,7 @@ class ChapterViewController: UIViewController {
     
     /// 播放视图
     private lazy var playView: PlayView = {
-        let v = PlayView.viewFromNib() as! PlayView
+        guard let v  = PlayView.viewFromNib() as? PlayView else { return PlayView() }
         v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playViewTap)))
         v.monitorCompletion = {[weak self] (view, type) in
@@ -64,19 +64,14 @@ class ChapterViewController: UIViewController {
             switch type {
             case 100001:
                 strongSelf.stopPlay()
-                break
             case 100002:
-                strongSelf.timing(delay: 15)
-                break
+                strongSelf.timing(delay: 15 * 60)
             case 100003:
                 strongSelf.timing(delay: 30 * 60)
-                break
             case 100004:
                 strongSelf.timing(delay: 60 * 60)
-                break
             case 100005:
                 strongSelf.timing(delay: 120 * 60)
-                break
             default:
                 break
             }
@@ -163,15 +158,11 @@ class ChapterViewController: UIViewController {
         guard let event = event else { return }
         if event.type == UIEvent.EventType.remoteControl {
             switch event.subtype {
-            case UIEvent.EventSubtype.remoteControlPlay://  播放
-                fallthrough
-            case UIEvent.EventSubtype.remoteControlPause:// 暂停
-                fallthrough
-            case UIEvent.EventSubtype.remoteControlTogglePlayPause:// 耳机暂停or播放
+            case .remoteControlPlay, .remoteControlPause, .remoteControlTogglePlayPause://  播放,暂停,耳机暂停or播放
                 speechViewModel.pauseOrContinuePlay()
-            case UIEvent.EventSubtype.remoteControlNextTrack:// 下一章
+            case .remoteControlNextTrack:// 下一章
                 loadNextData()
-            case UIEvent.EventSubtype.remoteControlPreviousTrack:// 上一章
+            case .remoteControlPreviousTrack:// 上一章
                 loadPreviousData()
             default:
                 break
@@ -273,12 +264,15 @@ extension ChapterViewController {
             if let tf = vc.textFields?.first,
                 let url = tf.text,
                 let params = url.urlParameters,
-                let id = params["id"] as? String {
+                let id = params["id"] as? String,
+                let md = params["md"] as? String,
+                let cmd = params["cmd"] as? String,
+                let encodeUrl = params["url"] as? String {
 
                 if sself.viewModel.bookInfo.id == id {
-                    sself.viewModel.bookInfo.md = params["md"] as! String
-                    sself.viewModel.bookInfo.cmd = params["cmd"] as! String
-                    sself.viewModel.bookInfo.encodeUrl = params["url"] as! String
+                    sself.viewModel.bookInfo.md = md
+                    sself.viewModel.bookInfo.cmd = cmd
+                    sself.viewModel.bookInfo.encodeUrl = encodeUrl
                     RBSQlite.shared.delete(id: sself.viewModel.bookInfo.id, offset: sself.viewModel.bookInfo.offset)
                     sself.loadData(offset: sself.viewModel.bookInfo.offset, false)
                 }
@@ -317,7 +311,7 @@ extension ChapterViewController {
     
     /// 文本视图点击
     private func textViewTap() {
-        if isOpenSpeechPattern  {
+        if isOpenSpeechPattern {
             speechViewModel.pauseOrContinuePlay()
             playView.isHidden = false
         } else {
@@ -353,14 +347,14 @@ extension ChapterViewController {
                                                   attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: SettingModel.textFontSize), NSAttributedString.Key.paragraphStyle: paragraph])
         
         var rangeIndex = 0
-        repeat{
+        repeat {
             let length = min(750, attributedString.length - rangeIndex)
             let childString = attributedString.attributedSubstring(from: NSRange(location: rangeIndex, length: length))
             let childFramesetter = CTFramesetterCreateWithAttributedString(childString)
             let bezierPath = UIBezierPath(rect: rect)
             let frame = CTFramesetterCreateFrame(childFramesetter, CFRangeMake(0, 0), bezierPath.cgPath, nil)
             let range = CTFrameGetVisibleStringRange(frame)
-            let r:NSRange = NSMakeRange(rangeIndex, range.length)
+            let r = NSRange(location: rangeIndex, length: range.length)
             if r.length > 0 {
                 ranges.append(r)
                 pagingContents.append((string as NSString).substring(with: r))
@@ -454,5 +448,4 @@ extension ChapterViewController {
         currentPagingVC = vc
         return vc
     }
-    
 }

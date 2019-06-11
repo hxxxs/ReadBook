@@ -21,7 +21,7 @@ struct ReadViewModel {
     /// - Parameters:
     ///   - offset: 章节编码
     ///   - completion: 完成结果
-    func loadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> ()) {
+    func loadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> Void) {
         
         if let jsonString = RBSQlite.shared.prepare(id: bookInfo.id, offset: offset) {
             if let model = ReadModel.deserialize(from: jsonString) {
@@ -39,7 +39,7 @@ struct ReadViewModel {
     /// - Parameters:
     ///   - offset: 章节编码
     ///   - completion: 完成结果
-    func networkLoadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> ()) {
+    func networkLoadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> Void) {
         let params = ["v": "5",
                       "type": "1",
                       "id": bookInfo.id,

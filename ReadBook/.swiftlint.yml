@@ -1,0 +1,12 @@
+
+excluded: # 执行时忽略的路径
+    - Pods
+disabled_rules: # 执行时排除掉的规则
+    - line_length
+    - trailing_whitespace
+    - identifier_name
+    - trailing_newline
+    - comma
+    - colon
+    - mark
+    - file_length

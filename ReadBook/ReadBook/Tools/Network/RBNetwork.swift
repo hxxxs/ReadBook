@@ -9,18 +9,12 @@
 import XSUtil
 import Moya
 
-/// 成功
-typealias SuccessJSONClosure = (_ result: [String: Any]) -> Void
-/// 失败
-typealias FailClosure = (_ errorMsg: String?) -> Void
-
 class RBNetwork {
     static let shared = RBNetwork()
     
     private init() {}
     
-    func requestDataTargetJSON<T: TargetType>(target: T, successClosure: @escaping SuccessJSONClosure, failClosure: @escaping FailClosure) {
-        
+    func requestDataTargetJSON<T: TargetType>(target: T, successClosure: @escaping ([String: Any]) -> Void, failClosure: @escaping (String) -> Void) {
         XSHUD.show(text: "正在加载中...", autoDismiss: false)
         let provider = MoyaProvider<T>()
         provider.request(target) { (result) in
@@ -32,7 +26,7 @@ class RBNetwork {
                     failClosure("数据解析失败")
                 }
             case let .failure(error):
-                failClosure(error.errorDescription)
+                failClosure(error.errorDescription ?? "")
             }
             XSHUD.dismiss()
         }

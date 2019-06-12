@@ -49,7 +49,7 @@ struct ReadViewModel {
             BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
             completion(model)
         }) { (text) in
-            debugPrint(text ?? "")
+            debugPrint(text)
         }
     }
 }

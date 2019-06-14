@@ -4,9 +4,9 @@
         "id": "10899536148534750089",
         "md": "3163220789412855037",
         "cmd": "3163220789412840554",
-        "encodeUrl": "http%3A%2F%2Fwww.31xs.com%2F14%2F14572%2F49270756.html",
+        "encodeUrl": "http://www.31xs.com/14/14572/49270756.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012237441/150",
-        "offset": "1130"
+        "offset": "1133"
     },
     {
         "title" : "民国谍影",
@@ -15,7 +15,7 @@
         "cmd": "6916298100905853685",
         "encodeUrl": "http://www.wutuxs.com/html/8/8002/7071536.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011489683/150",
-        "offset": "786"
+        "offset": "790"
     },
     {
         "title" : "我有一座恐怖屋",
@@ -24,7 +24,7 @@
         "cmd": "8383042783195628151",
         "encodeUrl": "http://www.31xs.com/92/92232/48885448.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012284323/150",
-        "offset": "666"
+        "offset": "669"
     },
     {
         "title" : "重生野性时代",
@@ -33,7 +33,7 @@
         "cmd": "931814114071265755",
         "encodeUrl": "http://www.bxwx.la/b/345/345277/2089094.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013026063/150",
-        "offset": "505"
+        "offset": "513"
     },
     {
         "title" : "大医凌然",
@@ -42,7 +42,7 @@
         "cmd": "18111477967913943738",
         "encodeUrl": "http://www.31xs.com/14/14410/48893110.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011486666/150",
-        "offset": "766"
+        "offset": "768"
     },
     {
         "title" : "诡秘之主",
@@ -51,6 +51,15 @@
         "cmd": "3269024951590208309",
         "encodeUrl": "http://www.31xs.com/14/14157/48891488.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1010868264/150",
+        "offset": "100"
+    },
+    {
+        "title" : "凡人修仙传",
+        "id": "17345435046741874085",
+        "md": "17211470973107630200",
+        "cmd": "17211470973107620240",
+        "encodeUrl": "http://www.31xs.com/0/5/6567526.html",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/107580/150",
         "offset": "0"
     }
 ]

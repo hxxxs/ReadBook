@@ -256,12 +256,27 @@ extension ChapterViewController {
         let vc = UIAlertController(title: "更换章节内容来源", message: nil, preferredStyle: .alert)
         vc.addTextField { (textField) in
             textField.placeholder = "请输入章节地址"
+            textField.font = UIFont.systemFont(ofSize: 20)
+        }
+        vc.addTextField { (textField) in
+            textField.placeholder = "请输入offset"
+            textField.font = UIFont.systemFont(ofSize: 20)
+            textField.keyboardType = .numberPad
         }
         vc.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
         }))
         
         vc.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (_) in
             guard let sself = self else { return }
+            
+            if let tf = vc.textFields?.last,
+                let text = tf.text,
+                let offset = Int(text),
+                offset != sself.viewModel.bookInfo.offset {
+                sself.direction = offset > sself.viewModel.bookInfo.offset ? .forward : .reverse
+                sself.loadData(offset: offset, false)
+            }
+            
             if let tf = vc.textFields?.first,
                 let url = tf.text,
                 let params = url.urlParameters,

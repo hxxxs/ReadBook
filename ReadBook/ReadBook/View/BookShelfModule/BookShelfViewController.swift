@@ -59,7 +59,7 @@ extension BookShelfViewController {
     
     /// 添加
     @objc private func addItemClick() {
-        let vc = UIAlertController(title: "添加", message: nil, preferredStyle: .alert)
+        let vc = RBAlertController(title: "添加", message: nil, preferredStyle: .alert)
         vc.addTextField { (textField) in
             textField.placeholder = "请输入标题"
             textField.font = UIFont.systemFont(ofSize: 20)

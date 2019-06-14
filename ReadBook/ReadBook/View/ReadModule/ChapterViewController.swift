@@ -253,7 +253,7 @@ extension ChapterViewController {
     
     /// 更换数据源
     @objc private func changeItemClick() {
-        let vc = UIAlertController(title: "更换章节内容来源", message: nil, preferredStyle: .alert)
+        let vc = RBAlertController(title: "更换章节内容来源", message: nil, preferredStyle: .alert)
         vc.addTextField { (textField) in
             textField.placeholder = "请输入章节地址"
             textField.font = UIFont.systemFont(ofSize: 20)

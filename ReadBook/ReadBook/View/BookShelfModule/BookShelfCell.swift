@@ -14,7 +14,7 @@ class BookShelfCell: UICollectionViewCell {
     /// 书信息模型
     var model: BookInfoModel! {
         didSet {
-            imageView.kf.setImage(with: URL(string: model.picUrl))
+            imageView.kf.setImage(with: URL(string: model.picUrl), placeholder: UIImage(imageLiteralResourceName: "noData"))
             textLabel.text = model.title
             offsetLabel.text = "\(model.offset)"
         }
@@ -27,7 +27,7 @@ class BookShelfCell: UICollectionViewCell {
         return label
     }()
     /// 图片
-    private lazy var imageView = UIImageView(image: UIImage(imageLiteralResourceName: "noData"))
+    private lazy var imageView = UIImageView()
     /// 标题
     private lazy var textLabel = UILabel(font: UIFont.systemFont(ofSize: 20), textColor: UIColor.darkGray, textAlignment: .center)
     /// 删除按钮

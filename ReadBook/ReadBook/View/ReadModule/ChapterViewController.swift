@@ -343,6 +343,7 @@ extension ChapterViewController {
     /// 播放视图点击
     @objc private func playViewTap() {
         speechViewModel.pauseOrContinuePlay()
+        playView.isHidden = true
     }
 }
 

@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.8.2)
   - HandyJSON (5.0.0)
-  - Kingfisher (5.5.0)
+  - Kingfisher (5.6.0)
   - Moya (13.0.1):
     - Moya/Core (= 13.0.1)
   - Moya/Core (13.0.1):
@@ -11,7 +11,7 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
   - Result (4.1.0)
-  - SnapKit (4.2.0)
+  - SnapKit (5.0.0)
   - SQLite.swift (0.12.0):
     - SQLite.swift/standard (= 0.12.0)
   - SQLite.swift/standard (0.12.0)
@@ -45,11 +45,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
-  Kingfisher: 6fe5e67a90fd335e49b0f5c075ff55ac5ebedd94
+  Kingfisher: 1a50df6880a60bae26f3e21a0df3d17b892f5e0b
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
   XSExtension: dba97ad6d8f09df3adec1dcca16b7143414ff7e1
   XSUtil: 751655a3e7a4b9e6994c97a42af808c43d6633ea

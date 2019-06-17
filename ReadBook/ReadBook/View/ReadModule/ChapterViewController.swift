@@ -133,9 +133,9 @@ class ChapterViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         pageVC.view.snp.makeConstraints { (make) in
-            make.top.equalTo(topLayoutGuide.snp.top)
+            make.top.equalTo(topLayoutGuide.snp.bottom)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(bottomLayoutGuide.snp.bottom)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
         }
         
         maskView.snp.makeConstraints { (make) in

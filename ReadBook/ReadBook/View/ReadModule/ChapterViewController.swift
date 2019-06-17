@@ -133,9 +133,9 @@ class ChapterViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         pageVC.view.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(topLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(bottomLayoutGuide.snp.bottom)
         }
         
         maskView.snp.makeConstraints { (make) in
@@ -431,10 +431,11 @@ extension ChapterViewController {
         if isShowLastPage {
             currentPage = pagingContents.count - 1
         }
-        pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
         
         if isOpenSpeechPattern {
             startPlay()
+        } else {
+            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
         }
     }
     

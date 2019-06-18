@@ -6,9 +6,6 @@
 //  Copyright © 2019 hxs. All rights reserved.
 //
 
-import XSUtil
-import Moya
-
 class RBNetwork {
     static let shared = RBNetwork()
     
@@ -26,17 +23,18 @@ class RBNetwork {
     
     func requestDataTargetJSON<T: TargetType>(target: T, successClosure: @escaping ([String: Any]) -> Void, failClosure: @escaping (String) -> Void) {
         let provider = MoyaProvider<T>(requestClosure: requestClose)
-        provider.request(target) { (result) in
-            switch result {
-            case let .success(value):
-                if let result = try? value.mapJSON() as? [String: Any] {
-                    successClosure(result)
+        provider.rx
+            .request(target)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .subscribe(onSuccess: { (result) in
+                if let value = result as? [String: Any] {
+                    successClosure(value)
                 } else {
                     failClosure("数据解析失败")
                 }
-            case let .failure(error):
-                failClosure(error.errorDescription ?? "")
-            }
-        }
+            }, onError: { (error) in
+                failClosure(error.localizedDescription)
+            })
     }
 }

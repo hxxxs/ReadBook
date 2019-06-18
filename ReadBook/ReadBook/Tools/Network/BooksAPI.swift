@@ -6,8 +6,6 @@
 //  Copyright © 2019 hxs. All rights reserved.
 //
 
-import Moya
-
 enum BooksAPI {
     case chapter(offset: Int,
         id: String,
@@ -28,7 +26,7 @@ extension BooksAPI: TargetType {
         }
     }
     
-    var method: Method {
+    var method: Moya.Method {
         return .get
     }
     
@@ -62,5 +60,4 @@ extension BooksAPI: TargetType {
             ]
         }
     }
-    
 }

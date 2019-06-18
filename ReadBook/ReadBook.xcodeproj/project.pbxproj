@@ -21,6 +21,7 @@
 		9D6F003722A5013800CAA48E /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F003522A5013800CAA48E /* ChapterViewController.swift */; };
 		9D70E64122A74D3F004F8E45 /* RBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70E64022A74D3F004F8E45 /* RBExtension.swift */; };
 		9D70E66222A75F81004F8E45 /* RBSQlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D70E66122A75F81004F8E45 /* RBSQlite.swift */; };
+		9D88877622B88F8600AC3202 /* SwiftImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88877522B88F8600AC3202 /* SwiftImport.swift */; };
 		9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A800E228CEABC00737BF8 /* MaskView.swift */; };
 		9D9A8014228D008D00737BF8 /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8013228D008D00737BF8 /* ReadViewModel.swift */; };
 		9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A8017228D0C6200737BF8 /* SettingModel.swift */; };
@@ -58,6 +59,7 @@
 		9D70E66122A75F81004F8E45 /* RBSQlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBSQlite.swift; sourceTree = "<group>"; };
 		9D7A002022A8B13200CD857E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		9D7A002122A8B13200CD857E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		9D88877522B88F8600AC3202 /* SwiftImport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftImport.swift; sourceTree = "<group>"; };
 		9D9A800E228CEABC00737BF8 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		9D9A8013228D008D00737BF8 /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		9D9A8017228D0C6200737BF8 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				9D00E7ED228BB6F600C5A0C0 /* Assets.xcassets */,
 				9D00E7FE228BF92700C5A0C0 /* Books.json */,
 				9D43F67322ADFBAA009046CF /* IconFont.swift */,
+				9D88877522B88F8600AC3202 /* SwiftImport.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				9D9A8018228D0C6200737BF8 /* SettingModel.swift in Sources */,
 				9D70E64122A74D3F004F8E45 /* RBExtension.swift in Sources */,
 				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
+				9D88877622B88F8600AC3202 /* SwiftImport.swift in Sources */,
 				9D0CA34022923C9A003B07F0 /* BookShelfModel.swift in Sources */,
 				9DDC9B7F229F77D70031AED5 /* PlayView.swift in Sources */,
 				9DDC9B7D229F6C9A0031AED5 /* RBSpeechSynthesizer.swift in Sources */,

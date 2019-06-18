@@ -7,9 +7,6 @@
 //  章节控制器
 
 import UIKit
-import SnapKit
-import NVActivityIndicatorView
-import XSUtil
 
 class ChapterViewController: UIViewController {
     
@@ -209,9 +206,9 @@ extension ChapterViewController: NVActivityIndicatorViewable {
                 
                 self?.setupPageVC(isShowLastPage)
             } else {
-                XSHUD.show(text: error ?? "")
+//                XSHUD.show(text: error ?? "")
+                debugPrint(error ?? "")
             }
-            
         }
     }
 }

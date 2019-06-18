@@ -7,7 +7,6 @@
 //  书架控制器
 
 import UIKit
-import XSExtension
 
 private let reuseIdentifier = "Cell"
 

@@ -6,12 +6,12 @@ target 'ReadBook' do
   use_frameworks!
 
   # Pods for ReadBook
-pod 'XSUtil'
+pod 'XSExtension'
 pod 'SnapKit'
 pod 'HandyJSON'
 pod 'Kingfisher'
 pod 'SQLite.swift'
-pod 'Moya'
+pod 'Moya/RxSwift'
 pod 'NVActivityIndicatorView'
 
 end

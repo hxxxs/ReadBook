@@ -7,7 +7,6 @@
 //  书本信息模型
 
 import UIKit
-import HandyJSON
 
 class BookInfoModel: HandyJSON {
     var title = ""

@@ -7,7 +7,6 @@
 //  书架单元格
 
 import UIKit
-import Kingfisher
 
 class BookShelfCell: UICollectionViewCell {
 

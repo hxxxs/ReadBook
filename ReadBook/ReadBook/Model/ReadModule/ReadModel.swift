@@ -7,7 +7,6 @@
 //  阅读模型
 
 import UIKit
-import HandyJSON
 
 class ReadModel: HandyJSON {
     var previous = PreviousModel()

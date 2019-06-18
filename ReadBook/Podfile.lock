@@ -11,6 +11,7 @@ PODS:
   - NVActivityIndicatorView (4.7.0):
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
+  - ObjectMapper (3.5.0)
   - Result (4.1.0)
   - RxSwift (4.5.0)
   - SnapKit (5.0.0)
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - Kingfisher
   - Moya/RxSwift
   - NVActivityIndicatorView
+  - ObjectMapper
   - SnapKit
   - SQLite.swift
   - XSExtension
@@ -35,6 +37,7 @@ SPEC REPOS:
     - Kingfisher
     - Moya
     - NVActivityIndicatorView
+    - ObjectMapper
     - Result
     - RxSwift
     - SnapKit
@@ -47,12 +50,13 @@ SPEC CHECKSUMS:
   Kingfisher: 1a50df6880a60bae26f3e21a0df3d17b892f5e0b
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
+  ObjectMapper: 078b564ed25c6578b62588e306bf1da3924636d4
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
   XSExtension: fe52c53226d2aeeeaf358939c9f4edc337f72a3f
 
-PODFILE CHECKSUM: b3fb0a186aadd816f1969215d62133786a20fec8
+PODFILE CHECKSUM: 61c99255e928482ffa35ce7018f96e5a0fdd81d0
 
 COCOAPODS: 1.7.0

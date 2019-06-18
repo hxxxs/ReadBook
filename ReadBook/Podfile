@@ -13,5 +13,6 @@ pod 'Kingfisher'
 pod 'SQLite.swift'
 pod 'Moya/RxSwift'
 pod 'NVActivityIndicatorView'
+pod 'ObjectMapper'
 
 end

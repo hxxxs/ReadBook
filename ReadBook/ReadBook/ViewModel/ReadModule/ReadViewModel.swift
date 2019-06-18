@@ -38,18 +38,33 @@ struct ReadViewModel {
     ///   - completion: 完成结果
     func networkLoadChapterInfo(offset: Int, completion: @escaping (ReadModel?, String?) -> Void) {
         let target = BooksAPI.chapter(offset: offset, id: bookInfo.id, md: bookInfo.md, cmd: bookInfo.cmd, encodeUrl: bookInfo.encodeUrl)
-        RBNetwork.shared.requestDataTargetJSON(target: target, successClosure: { (result) in
-            guard let data = result["data"] as? [[String: Any]],
-                let model = ReadModel.deserialize(from: data.first) else {
-                    return
+        let provider = MoyaProvider<BooksAPI>(requestClosure: { (endpoint: Endpoint, done: MoyaProvider.RequestResultClosure) in
+            do {
+                var request = try endpoint.urlRequest()
+                request.timeoutInterval = 30
+                done(.success(request))
+            } catch {
+                done(.failure(MoyaError.underlying(error, nil)))
             }
-            
-            self.bookInfo.offset = model.current.offset
-            RBSQlite.shared.insert(id: self.bookInfo.id, offset: model.current.offset, jsonString: model.toJSONString() ?? "")
-            BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
-            completion(model, nil)
-        }) { (text) in
-            completion(nil, text)
-        }
+        })
+        
+        provider.rx
+            .request(target)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .subscribe(onSuccess: { (result) in
+                if let value = result as? [String: Any],
+                    let data = value["data"] as? [[String: Any]],
+                    let model = ReadModel.deserialize(from: data.first) {
+                    self.bookInfo.offset = model.current.offset
+                    RBSQlite.shared.insert(id: self.bookInfo.id, offset: model.current.offset, jsonString: model.toJSONString() ?? "")
+                    BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
+                    completion(model, nil)
+                } else {
+                    completion(nil, "数据解析失败")
+                }
+            }, onError: { (error) in
+                completion(nil, error.localizedDescription)
+            })
     }
 }

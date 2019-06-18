@@ -34,7 +34,6 @@
 		9DDC9B81229F81220031AED5 /* PlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B80229F81220031AED5 /* PlayView.xib */; };
 		9DDC9B83229F9BDE0031AED5 /* MaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B82229F9BDE0031AED5 /* MaskView.xib */; };
 		9DDD65AF22AF3A760079A131 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9DDD65AE22AF3A760079A131 /* .swiftlint.yml */; };
-		9DDD65B222AF443B0079A131 /* RBNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDD65B122AF443B0079A131 /* RBNetwork.swift */; };
 		9DDD65B422AF547A0079A131 /* BooksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDD65B322AF547A0079A131 /* BooksAPI.swift */; };
 		9F4F5235229EB7D7006B6733 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F4F5234229EB7D7006B6733 /* iconfont.ttf */; };
 /* End PBXBuildFile section */
@@ -72,7 +71,6 @@
 		9DDC9B80229F81220031AED5 /* PlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayView.xib; sourceTree = "<group>"; };
 		9DDC9B82229F9BDE0031AED5 /* MaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaskView.xib; sourceTree = "<group>"; };
 		9DDD65AE22AF3A760079A131 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		9DDD65B122AF443B0079A131 /* RBNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBNetwork.swift; sourceTree = "<group>"; };
 		9DDD65B322AF547A0079A131 /* BooksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksAPI.swift; sourceTree = "<group>"; };
 		9F4F5234229EB7D7006B6733 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,7 +272,6 @@
 		9DDD65B022AF441B0079A131 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9DDD65B122AF443B0079A131 /* RBNetwork.swift */,
 				9DDD65B322AF547A0079A131 /* BooksAPI.swift */,
 			);
 			path = Network;
@@ -443,7 +440,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DDD65B222AF443B0079A131 /* RBNetwork.swift in Sources */,
 				9D00E7FD228BF82400C5A0C0 /* BookInfoModel.swift in Sources */,
 				9D6F003622A5013800CAA48E /* PagingViewController.swift in Sources */,
 				9D43F67422ADFBAA009046CF /* IconFont.swift in Sources */,

@@ -6,8 +6,6 @@
 //  Copyright © 2019 hxs. All rights reserved.
 //
 
-import Foundation
-
 @_exported import RxSwift
 @_exported import XSExtension
 @_exported import SnapKit
@@ -16,3 +14,4 @@ import Foundation
 @_exported import NVActivityIndicatorView
 @_exported import SQLite
 @_exported import HandyJSON
+@_exported import ObjectMapper

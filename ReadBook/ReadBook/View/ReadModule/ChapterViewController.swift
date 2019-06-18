@@ -175,7 +175,7 @@ extension ChapterViewController: NVActivityIndicatorViewable {
     /// 上一章
     private func loadPreviousData(_ isShowLastPage: Bool = false) {
         direction = .reverse
-        if let model = chapterModel, model.previous.offset > 0 {
+        if let model = chapterModel, model.previousOffset > 0 {
             loadData(offset: viewModel.bookInfo.offset - 1, isShowLastPage)
         }
     }
@@ -183,7 +183,7 @@ extension ChapterViewController: NVActivityIndicatorViewable {
     /// 下一章
     private func loadNextData() {
         direction = .forward
-        if let model = chapterModel, model.next.offset > 0 {
+        if let model = chapterModel, model.nextOffset > 0 {
             loadData(offset: viewModel.bookInfo.offset + 1, false)
         } else {
             stopPlay()
@@ -199,10 +199,10 @@ extension ChapterViewController: NVActivityIndicatorViewable {
             self?.stopAnimating()
             if let model = model {
                 self?.chapterModel = model
-                self?.title = model.current.title
+                self?.title = model.title
                 self?.maskView.isHidden = true
                 
-                self?.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
+                self?.maskView.chapterButtonEnable(previous: model.previousOffset > 0, next: model.nextOffset > 0)
                 
                 self?.setupPageVC(isShowLastPage)
             } else {
@@ -241,7 +241,7 @@ extension ChapterViewController {
         for i in currentPage..<pagingContents.count {
             utterance.append(pagingContents[i])
         }
-        speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.current.title ?? "", utterance: utterance)
+        speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.title ?? "", utterance: utterance)
         speechViewModel.nextPageLocation = ranges[currentPage].length
         
         if let lastRange = ranges.last {
@@ -430,7 +430,7 @@ extension ChapterViewController {
     private func setupPageVC(_ isShowLastPage: Bool) {
         guard let model = chapterModel else { return }
         
-        getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
+        getTotalPages(string: model.content.replacingOccurrences(of: "<br/>", with: "\n"))
         if isShowLastPage {
             currentPage = pagingContents.count - 1
         }
@@ -445,7 +445,7 @@ extension ChapterViewController {
     /// 重新设置文本视图
     private func resetTextView() {
         if let model = chapterModel {
-            getTotalPages(string: model.chapter.content.replacingOccurrences(of: "<br/>", with: "\n"))
+            getTotalPages(string: model.content.replacingOccurrences(of: "<br/>", with: "\n"))
         }
         currentPagingVC?.speechContent(unread: pagingContents[currentPage])
     }

@@ -7,43 +7,23 @@
 //  阅读模型
 
 import UIKit
+import ObjectMapper
 
-class ReadModel: HandyJSON {
-    var previous = PreviousModel()
-    var current = CurrentModel()
-    var next = NextModel()
-    var chapter = ChapterModel()
-    required init() {}
-}
-
-class ChapterModel: HandyJSON {
+class ReadModel: Mappable {
+    var previousOffset = -1
+    var nextOffset = -1
+    var offset: Int = -1
+    var title = ""
     var content = ""
-    required init() {}
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        content <- map["chapter.content"]
+        previousOffset <- map["previous.offset"]
+        nextOffset <- map["next.offset"]
+        title <- map["current.title"]
+        offset <- map["current.offset"]
+    }
 }
 
-class PreviousModel: HandyJSON {
-    var cmd = ""
-    var url = ""
-    var encodeUrl = ""
-    var offset: Int = -1
-    var title = ""
-    required init() {}
-}
-
-class CurrentModel: HandyJSON {
-    var cmd = ""
-    var url = ""
-    var encodeUrl = ""
-    var offset: Int = -1
-    var title = ""
-    required init() {}
-}
-
-class NextModel: HandyJSON {
-    var cmd = ""
-    var url = ""
-    var encodeUrl = ""
-    var offset: Int = -1
-    var title = ""
-    required init() {}
-}

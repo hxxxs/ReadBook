@@ -7,11 +7,9 @@
 //
 
 @_exported import RxSwift
+@_exported import RxCocoa
 @_exported import XSExtension
 @_exported import SnapKit
 @_exported import Moya
 @_exported import Kingfisher
 @_exported import NVActivityIndicatorView
-@_exported import SQLite
-@_exported import HandyJSON
-@_exported import ObjectMapper

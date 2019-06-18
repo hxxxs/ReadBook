@@ -8,11 +8,12 @@ target 'ReadBook' do
   # Pods for ReadBook
 pod 'XSExtension'
 pod 'SnapKit'
-pod 'HandyJSON'
 pod 'Kingfisher'
 pod 'SQLite.swift'
 pod 'Moya/RxSwift'
 pod 'NVActivityIndicatorView'
 pod 'ObjectMapper'
+pod 'RxSwift'
+pod 'RxCocoa'
 
 end

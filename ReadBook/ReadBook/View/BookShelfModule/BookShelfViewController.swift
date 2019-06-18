@@ -87,7 +87,7 @@ extension BookShelfViewController {
             if let tf = vc.textFields?[1],
                 let url = tf.text,
                 let params = url.urlParameters,
-                let book = BookInfoModel.deserialize(from: params) {
+                let book = BookInfoModel(JSON: params) {
                 book.title = vc.textFields?.first?.text ?? ""
                 if let offset = vc.textFields?[2].text {
                     book.offset = Int(offset) ?? 0

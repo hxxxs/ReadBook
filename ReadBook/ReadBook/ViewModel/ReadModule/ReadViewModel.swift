@@ -21,8 +21,8 @@ struct ReadViewModel {
     func loadChapterInfo(offset: Int, completion: @escaping (ReadModel?, String?) -> Void) {
         
         if let jsonString = RBSQlite.shared.prepare(id: bookInfo.id, offset: offset) {
-            if let model = ReadModel.deserialize(from: jsonString) {
-                self.bookInfo.offset = model.current.offset
+            if let model = ReadModel(JSONString: jsonString) {
+                self.bookInfo.offset = model.offset
                 BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
                 completion(model, nil)
             }
@@ -55,9 +55,10 @@ struct ReadViewModel {
             .subscribe(onSuccess: { (result) in
                 if let value = result as? [String: Any],
                     let data = value["data"] as? [[String: Any]],
-                    let model = ReadModel.deserialize(from: data.first) {
-                    self.bookInfo.offset = model.current.offset
-                    RBSQlite.shared.insert(id: self.bookInfo.id, offset: model.current.offset, jsonString: model.toJSONString() ?? "")
+                    let json = data.first,
+                    let model = ReadModel(JSON: json) {
+                    self.bookInfo.offset = model.offset
+                    RBSQlite.shared.insert(id: self.bookInfo.id, offset: model.offset, jsonString: model.toJSONString() ?? "")
                     BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
                     completion(model, nil)
                 } else {

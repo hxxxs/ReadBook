@@ -7,8 +7,9 @@
 //  书本信息模型
 
 import UIKit
+import ObjectMapper
 
-class BookInfoModel: HandyJSON {
+class BookInfoModel: Mappable {
     var title = ""
     var `id` = ""
     var md = ""
@@ -16,5 +17,16 @@ class BookInfoModel: HandyJSON {
     var offset = 0
     var encodeUrl = ""
     var picUrl = ""
-    required init() {}
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        title <- map["title"]
+        id <- map["id"]
+        md <- map["md"]
+        cmd <- map["cmd"]
+        offset <- map["offset"]
+        encodeUrl <- map["encodeUrl"]
+        picUrl <- map["picUrl"]
+    }
 }

@@ -18,13 +18,13 @@ struct ReadViewModel {
     /// - Parameters:
     ///   - offset: 章节编码
     ///   - completion: 完成结果
-    func loadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> Void) {
+    func loadChapterInfo(offset: Int, completion: @escaping (ReadModel?, String?) -> Void) {
         
         if let jsonString = RBSQlite.shared.prepare(id: bookInfo.id, offset: offset) {
             if let model = ReadModel.deserialize(from: jsonString) {
                 self.bookInfo.offset = model.current.offset
                 BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
-                completion(model)
+                completion(model, nil)
             }
         } else {
             networkLoadChapterInfo(offset: offset, completion: completion)
@@ -36,7 +36,7 @@ struct ReadViewModel {
     /// - Parameters:
     ///   - offset: 章节编码
     ///   - completion: 完成结果
-    func networkLoadChapterInfo(offset: Int, completion: @escaping (ReadModel) -> Void) {
+    func networkLoadChapterInfo(offset: Int, completion: @escaping (ReadModel?, String?) -> Void) {
         let target = BooksAPI.chapter(offset: offset, id: bookInfo.id, md: bookInfo.md, cmd: bookInfo.cmd, encodeUrl: bookInfo.encodeUrl)
         RBNetwork.shared.requestDataTargetJSON(target: target, successClosure: { (result) in
             guard let data = result["data"] as? [[String: Any]],
@@ -47,9 +47,9 @@ struct ReadViewModel {
             self.bookInfo.offset = model.current.offset
             RBSQlite.shared.insert(id: self.bookInfo.id, offset: model.current.offset, jsonString: model.toJSONString() ?? "")
             BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
-            completion(model)
+            completion(model, nil)
         }) { (text) in
-            debugPrint(text)
+            completion(nil, text)
         }
     }
 }

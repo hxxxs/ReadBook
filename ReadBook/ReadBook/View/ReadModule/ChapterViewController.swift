@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import NVActivityIndicatorView
+import XSUtil
 
 class ChapterViewController: UIViewController {
     
@@ -197,15 +198,20 @@ extension ChapterViewController: NVActivityIndicatorViewable {
     /// - Parameter offset: 页码
     private func loadData(offset: Int, _ isShowLastPage: Bool) {
         startAnimating(CGSize(width: 30, height: 30), type: .ballRotateChase)
-        viewModel.loadChapterInfo(offset: offset) {[weak self] (model) in
-            self?.chapterModel = model
-            self?.title = model.current.title
-            self?.maskView.isHidden = true
-            
-            self?.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
-            
-            self?.setupPageVC(isShowLastPage)
+        viewModel.loadChapterInfo(offset: offset) {[weak self] (model, error) in
             self?.stopAnimating()
+            if let model = model {
+                self?.chapterModel = model
+                self?.title = model.current.title
+                self?.maskView.isHidden = true
+                
+                self?.maskView.chapterButtonEnable(previous: model.previous.offset > 0, next: model.next.offset > 0)
+                
+                self?.setupPageVC(isShowLastPage)
+            } else {
+                XSHUD.show(text: error ?? "")
+            }
+            
         }
     }
 }

@@ -19,7 +19,10 @@ PODS:
   - SQLite.swift (0.12.0):
     - SQLite.swift/standard (= 0.12.0)
   - SQLite.swift/standard (0.12.0)
-  - XSExtension (1.1.6)
+  - XSExtension (2.0.0)
+  - XSUtil (2.0.0):
+    - SnapKit
+    - XSExtension
 
 DEPENDENCIES:
   - Kingfisher
@@ -31,6 +34,7 @@ DEPENDENCIES:
   - SnapKit
   - SQLite.swift
   - XSExtension
+  - XSUtil
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -45,6 +49,7 @@ SPEC REPOS:
     - SnapKit
     - SQLite.swift
     - XSExtension
+    - XSUtil
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -57,8 +62,9 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
-  XSExtension: fe52c53226d2aeeeaf358939c9f4edc337f72a3f
+  XSExtension: e5ac7cd0eccf46dd18677b8d959b3a5148f3653f
+  XSUtil: 5577abf250caa8af3d205e3645d22e406485df48
 
-PODFILE CHECKSUM: bda1b970cca3053b314d868892552a7d02acb861
+PODFILE CHECKSUM: be5d23b538b473f1a62f2e1208a077fc9c9736a9
 
 COCOAPODS: 1.7.0

@@ -7,6 +7,7 @@ target 'ReadBook' do
 
   # Pods for ReadBook
 pod 'XSExtension'
+pod 'XSUtil'
 pod 'SnapKit'
 pod 'Kingfisher'
 pod 'SQLite.swift'

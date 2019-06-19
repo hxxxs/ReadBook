@@ -206,8 +206,7 @@ extension ChapterViewController: NVActivityIndicatorViewable {
                 
                 self?.setupPageVC(isShowLastPage)
             } else {
-//                XSHUD.show(text: error ?? "")
-                debugPrint(error ?? "")
+                XSHUD.show(text: error ?? "")
             }
         }
     }

@@ -11,22 +11,18 @@ import ObjectMapper
 
 class BookInfoModel: Mappable {
     var title = ""
-    var `id` = ""
-    var md = ""
-    var cmd = ""
-    var offset = 0
-    var encodeUrl = ""
+    var gid = ""
+    var cid = ""
+    var url = ""
     var picUrl = ""
     
     required init?(map: Map) {}
     
     func mapping(map: Map) {
         title <- map["title"]
-        id <- map["id"]
-        md <- map["md"]
-        cmd <- map["cmd"]
-        offset <- map["offset"]
-        encodeUrl <- map["encodeUrl"]
+        gid <- map["gid"]
+        cid <- map["cid"]
+        url <- map["url"]
         picUrl <- map["picUrl"]
     }
 }

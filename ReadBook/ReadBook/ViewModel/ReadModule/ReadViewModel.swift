@@ -18,16 +18,17 @@ struct ReadViewModel {
     /// - Parameters:
     ///   - offset: 章节编码
     ///   - completion: 完成结果
-    func loadChapterInfo(offset: Int, completion: @escaping (ReadModel?, String?) -> Void) {
+    func loadChapterInfo(cid: String, url: String, completion: @escaping (ReadModel?, String?) -> Void) {
         
-        if let jsonString = RBSQlite.shared.prepare(id: bookInfo.id, offset: offset) {
+        if let jsonString = RBSQlite.shared.prepare(id: bookInfo.gid, url: url) {
             if let model = ReadModel(JSONString: jsonString) {
-                self.bookInfo.offset = model.offset
+                self.bookInfo.cid = cid
+                self.bookInfo.url = url
                 BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
                 completion(model, nil)
             }
         } else {
-            networkLoadChapterInfo(offset: offset, completion: completion)
+            networkLoadChapterInfo(cid: cid, url: url, completion: completion)
         }
     }
     
@@ -36,8 +37,8 @@ struct ReadViewModel {
     /// - Parameters:
     ///   - offset: 章节编码
     ///   - completion: 完成结果
-    func networkLoadChapterInfo(offset: Int, completion: @escaping (ReadModel?, String?) -> Void) {
-        let target = BooksAPI.chapter(offset: offset, id: bookInfo.id, md: bookInfo.md, cmd: bookInfo.cmd, encodeUrl: bookInfo.encodeUrl)
+    func networkLoadChapterInfo(cid: String, url: String, completion: @escaping (ReadModel?, String?) -> Void) {
+        let target = BooksAPI.chapter(gid: bookInfo.gid, cid: cid, url: url)
         let provider = MoyaProvider<BooksAPI>(requestClosure: { (endpoint: Endpoint, done: MoyaProvider.RequestResultClosure) in
             do {
                 var request = try endpoint.urlRequest()
@@ -54,11 +55,11 @@ struct ReadViewModel {
             .mapJSON()
             .subscribe(onSuccess: { (result) in
                 if let value = result as? [String: Any],
-                    let data = value["data"] as? [[String: Any]],
-                    let json = data.first,
-                    let model = ReadModel(JSON: json) {
-                    self.bookInfo.offset = model.offset
-                    RBSQlite.shared.insert(id: self.bookInfo.id, offset: model.offset, jsonString: model.toJSONString() ?? "")
+                    let data = value["data"] as? [String: Any],
+                    let model = ReadModel(JSON: data) {
+                    self.bookInfo.cid = cid
+                    self.bookInfo.url = url
+                    RBSQlite.shared.insert(id: self.bookInfo.gid, url: url, jsonString: model.toJSONString() ?? "")
                     BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
                     completion(model, nil)
                 } else {

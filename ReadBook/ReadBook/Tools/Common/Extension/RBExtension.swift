@@ -33,7 +33,7 @@ extension String {
                 // 生成Key/Value
                 let pairComponents = keyValuePair.components(separatedBy: "=")
                 let key = pairComponents.first
-                let value = pairComponents.last
+                let value = pairComponents.last?.replacingOccurrences(of: "%7C", with: "|").replacingOccurrences(of: "%3A", with: ":").replacingOccurrences(of: "%2F", with: "/")
                 // 判断参数是否是数组
                 if let key = key, let value = value {
                     // 已存在的值，生成数组

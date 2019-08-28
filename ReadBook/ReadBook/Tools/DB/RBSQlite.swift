@@ -15,7 +15,7 @@ class RBSQlite: NSObject {
     
     private let id = Expression<Int>("id")
     private let book_id = Expression<String>("book_id")
-    private let offset = Expression<Int>("offset")
+    private let url = Expression<String>("url")
     private let jsonString = Expression<String>("jsonString")
     private let books = Table("books")
     private let path = "books.sqlite3".appendDocumentDir
@@ -28,7 +28,7 @@ class RBSQlite: NSObject {
             try db.run(books.create(block: { (t) in
                 t.column(id, primaryKey: .autoincrement)
                 t.column(book_id)
-                t.column(offset)
+                t.column(url)
                 t.column(jsonString)
             }))
         } catch {
@@ -37,10 +37,10 @@ class RBSQlite: NSObject {
     }
     
     /// 删除数据
-    func delete(id: String, offset: Int) {
+    func delete(id: String, url: String) {
         do {
             let db = try Connection(path)
-            let query = books.filter(self.book_id == id).filter(self.offset == offset)
+            let query = books.filter(self.book_id == id).filter(self.url == url)
             if try db.run(query.delete()) > 0 {
                 debugPrint("数据删除成功")
             } else {
@@ -52,11 +52,11 @@ class RBSQlite: NSObject {
     }
     
     /// 插入数据
-    func insert(id: String, offset: Int, jsonString: String) {
+    func insert(id: String, url: String, jsonString: String) {
         do {
             let db = try Connection(path)
             
-            if try db.run(books.insert(book_id <- id, self.offset <- offset, self.jsonString <- jsonString)) > 0 {
+            if try db.run(books.insert(book_id <- id, self.url <- url, self.jsonString <- jsonString)) > 0 {
                 debugPrint("数据插入成功")
             } else {
                 debugPrint("数据插入失败")
@@ -67,10 +67,10 @@ class RBSQlite: NSObject {
     }
     
     /// 查询数据
-    func prepare(id: String, offset: Int) -> String? {
+    func prepare(id: String, url: String) -> String? {
         do {
             let db = try Connection(path)
-            let query = books.filter(self.book_id == id).filter(self.offset == offset)
+            let query = books.filter(self.book_id == id).filter(self.url == url)
             let arr = try Array(db.prepare(query))
             if arr.count > 0 {
                 debugPrint("本地数据获取成功")

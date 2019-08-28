@@ -1,65 +1,93 @@
 [
     {
-        "title" : "全球高武",
-        "id": "10899536148534750089",
-        "md": "3163220789412855037",
-        "cmd": "3163220789412840554",
-        "encodeUrl": "http://www.31xs.com/14/14572/49270756.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012237441/150",
-        "offset": "1133"
-    },
-    {
-        "title" : "民国谍影",
-        "id": "7897166711122501765",
-        "md": "6916298100905867271",
-        "cmd": "6916298100905853685",
-        "encodeUrl": "http://www.wutuxs.com/html/8/8002/7071536.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011489683/150",
-        "offset": "790"
-    },
-    {
-        "title" : "我有一座恐怖屋",
-        "id": "3019808482739621334",
-        "md": "8383042783195631618",
-        "cmd": "8383042783195628151",
-        "encodeUrl": "http://www.31xs.com/92/92232/48885448.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012284323/150",
-        "offset": "669"
-    },
-    {
-        "title" : "重生野性时代",
-        "id": "1204992885943035615",
-        "md": "931814114071280266",
-        "cmd": "931814114071265755",
-        "encodeUrl": "http://www.bxwx.la/b/345/345277/2089094.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013026063/150",
-        "offset": "513"
-    },
-    {
-        "title" : "大医凌然",
-        "id": "16037941194780208370",
-        "md": "18111477967913955611",
-        "cmd": "18111477967913943738",
-        "encodeUrl": "http://www.31xs.com/14/14410/48893110.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011486666/150",
-        "offset": "768"
+        "title" : "九星毒奶",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013432302/150",
+        "gid": "3328224284",
+        "cid": "3328224284|16986660053301601126",
+        "url": "http://www.uctxt.com/book/25/25726/15267495.html"
     },
     {
         "title" : "诡秘之主",
-        "id": "6240997256672097298",
-        "md": "3269024951590209717",
-        "cmd": "3269024951590208309",
-        "encodeUrl": "http://www.31xs.com/14/14157/48891488.html",
         "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1010868264/150",
-        "offset": "100"
+        "gid": "1139386004",
+        "cid": "1139386004|3496731186733587690",
+        "url": "http://www.560xs.com/guimizhizhu/1551652.html"
     },
     {
-        "title" : "凡人修仙传",
-        "id": "17345435046741874085",
-        "md": "17211470973107630200",
-        "cmd": "17211470973107620240",
-        "encodeUrl": "http://www.31xs.com/0/5/6567526.html",
-        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/107580/150",
-        "offset": "0"
+        "title" : "全球高武",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012237441/150",
+        "gid": "3883298415",
+        "cid": "3883298415|3825361865063646259",
+        "url": "http://www.wuxianxs.com/ls18-18195/16185771.html"
+    },
+    {
+        "title" : "民国谍影",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011489683/150",
+        "gid": "1601807189",
+        "cid": "1601807189|13097168176617340392",
+        "url": "http://www.560xs.com/minguodieying/1603263.html"
+    },
+    {
+        "title" : "我有一座恐怖屋",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1012284323/150",
+        "gid": "1089363343",
+        "cid": "1089363343|15027021070106047691",
+        "url": "http://www.wenxuedu.com/html/864/864342/63592520.html"
+    },
+    {
+        "title" : "重生野性时代",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013026063/150",
+        "gid": "712604606",
+        "cid": "712604606|18278637211448699788",
+        "url": "http://www.uctxt.com/book/25/25168/15260351.html"
+    },
+    {
+        "title" : "大医凌然",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011486666/150",
+        "gid": "400901602",
+        "cid": "400901602|5796210734322629615",
+        "url": "http://www.ouoou.com/ou_34612/33367465.html"
+    },
+    {
+        "title" : "忍界修正带",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1014196854/150",
+        "gid": "2306161208",
+        "cid": "2306161208|872729790111690358",
+        "url": "http://www.wenxuedu.com/html/878/878417/61822446.html"
+    },
+    {
+        "title" : "全球影帝",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013390519/150",
+        "gid": "1552433986",
+        "cid": "1552433986|13195729330025549160",
+        "url": "http://www.wenxuedu.com/html/870/870533/63763307.html"
+    },
+    {
+        "title" : "超神机械师",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1009480992/150",
+        "gid": "1495188536",
+        "cid": "1495188536|5792644489822165591",
+        "url": "http://www.ouoou.com/ou_32254/33446436.html"
+    },
+    {
+        "title" : "手术直播间",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1013414929/150",
+        "gid": "2410367374",
+        "cid": "2410367374|8024485704405517454",
+        "url": "http://www.wuyanxia.net/read/204573/36290827.html"
+    },
+    {
+        "title" : "学霸的黑科技系统",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011449273/150",
+        "gid": "2601996047",
+        "cid": "2601996047|9800064250184417242",
+        "url": "http://www.560xs.com/xuebadeheikejixitong/1480389.html"
+    },
+    {
+        "title" : "怪物聊天群",
+        "picUrl": "https://bookcover.yuewen.com/qdbimg/349573/1011483714/150",
+        "gid": "2761500069",
+        "cid": "2761500069|1278765184837870138",
+        "url": "http://www.lanseshuba.com/seshu/63449/11363181.html"
     }
 ]

@@ -69,11 +69,6 @@ extension BookShelfViewController {
             textField.keyboardType = .URL
         }
         vc.addTextField { (textField) in
-            textField.placeholder = "请输入offset"
-            textField.font = UIFont.systemFont(ofSize: 20)
-            textField.keyboardType = .numberPad
-        }
-        vc.addTextField { (textField) in
             textField.placeholder = "请输入图片地址"
             textField.font = UIFont.systemFont(ofSize: 20)
             textField.keyboardType = .URL
@@ -89,10 +84,7 @@ extension BookShelfViewController {
                 let params = url.urlParameters,
                 let book = BookInfoModel(JSON: params) {
                 book.title = vc.textFields?.first?.text ?? ""
-                if let offset = vc.textFields?[2].text {
-                    book.offset = Int(offset) ?? 0
-                }
-                book.picUrl = vc.textFields?[3].text ?? ""
+                book.picUrl = vc.textFields?[2].text ?? ""
                 BookShelfModel.addRead(with: book)
                 sself.collectionView.reloadData()
             }

@@ -63,7 +63,7 @@ struct BookShelfModel {
     static func changeCurrentReadOffset(with model: BookInfoModel) {
         shared.books = shared.books.map { (book) in
             if book.title == model.title {
-                book.offset = model.offset
+                book.url = model.url
             }
             return book
         }

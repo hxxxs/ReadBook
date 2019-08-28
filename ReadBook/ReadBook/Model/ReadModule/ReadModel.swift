@@ -10,20 +10,22 @@ import UIKit
 import ObjectMapper
 
 class ReadModel: Mappable {
-    var previousOffset = -1
-    var nextOffset = -1
-    var offset: Int = -1
     var title = ""
     var content = ""
+    var next_cid = ""
+    var next_url = ""
+    var pre_cid = ""
+    var pre_url = ""
     
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        content <- map["chapter.content"]
-        previousOffset <- map["previous.offset"]
-        nextOffset <- map["next.offset"]
-        title <- map["current.title"]
-        offset <- map["current.offset"]
+        title <- map["title"]
+        content <- map["content"]
+        next_cid <- map["pt.next_cid"]
+        next_url <- map["pt.next_url"]
+        pre_cid <- map["pt.pre_cid"]
+        pre_url <- map["pt.pre_url"]
     }
 }
 

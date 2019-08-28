@@ -123,8 +123,8 @@ class ChapterViewController: UIViewController {
         setup()
         setupSpeechViewModel()
         setupGesture()
-        RBSQlite.shared.delete(id: viewModel.bookInfo.id, offset: viewModel.bookInfo.offset)
-        loadData(offset: viewModel.bookInfo.offset, false)
+        RBSQlite.shared.delete(id: viewModel.bookInfo.gid, url: viewModel.bookInfo.url)
+        loadData(cid: viewModel.bookInfo.cid, url: viewModel.bookInfo.url, false)
     }
 
     override func viewDidLayoutSubviews() {
@@ -175,16 +175,16 @@ extension ChapterViewController: NVActivityIndicatorViewable {
     /// 上一章
     private func loadPreviousData(_ isShowLastPage: Bool = false) {
         direction = .reverse
-        if let model = chapterModel, model.previousOffset > 0 {
-            loadData(offset: viewModel.bookInfo.offset - 1, isShowLastPage)
+        if let model = chapterModel, model.pre_url.count > 0 {
+            loadData(cid: model.pre_cid, url: model.pre_url, isShowLastPage)
         }
     }
     
     /// 下一章
     private func loadNextData() {
         direction = .forward
-        if let model = chapterModel, model.nextOffset > 0 {
-            loadData(offset: viewModel.bookInfo.offset + 1, false)
+        if let model = chapterModel, model.next_url.count > 0 {
+            loadData(cid: model.next_cid, url: model.next_url, false)
         } else {
             stopPlay()
         }
@@ -193,16 +193,16 @@ extension ChapterViewController: NVActivityIndicatorViewable {
     /// 加载数据
     ///
     /// - Parameter offset: 页码
-    private func loadData(offset: Int, _ isShowLastPage: Bool) {
+    private func loadData(cid: String, url: String, _ isShowLastPage: Bool) {
         startAnimating(CGSize(width: 30, height: 30), type: .ballRotateChase)
-        viewModel.loadChapterInfo(offset: offset) {[weak self] (model, error) in
+        viewModel.loadChapterInfo(cid: cid, url: url) {[weak self] (model, error) in
             self?.stopAnimating()
             if let model = model {
                 self?.chapterModel = model
                 self?.title = model.title
                 self?.maskView.isHidden = true
                 
-                self?.maskView.chapterButtonEnable(previous: model.previousOffset > 0, next: model.nextOffset > 0)
+                self?.maskView.chapterButtonEnable(previous: model.pre_cid.count > 0, next: model.next_cid.count > 0)
                 
                 self?.setupPageVC(isShowLastPage)
             } else {
@@ -255,48 +255,48 @@ extension ChapterViewController {
     
     /// 更换数据源
     @objc private func changeItemClick() {
-        let vc = RBAlertController(title: "更换章节内容来源", message: nil, preferredStyle: .alert)
-        vc.addTextField { (textField) in
-            textField.placeholder = "请输入章节地址"
-            textField.font = UIFont.systemFont(ofSize: 20)
-        }
-        vc.addTextField { (textField) in
-            textField.placeholder = "请输入offset"
-            textField.font = UIFont.systemFont(ofSize: 20)
-            textField.keyboardType = .numberPad
-        }
-        vc.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
-        }))
-        
-        vc.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (_) in
-            guard let sself = self else { return }
-            
-            if let tf = vc.textFields?.last,
-                let text = tf.text,
-                let offset = Int(text),
-                offset != sself.viewModel.bookInfo.offset {
-                sself.direction = offset > sself.viewModel.bookInfo.offset ? .forward : .reverse
-                sself.loadData(offset: offset, false)
-            }
-            
-            if let tf = vc.textFields?.first,
-                let url = tf.text,
-                let params = url.urlParameters,
-                let id = params["id"] as? String,
-                let md = params["md"] as? String,
-                let cmd = params["cmd"] as? String,
-                let encodeUrl = params["url"] as? String {
-
-                if sself.viewModel.bookInfo.id == id {
-                    sself.viewModel.bookInfo.md = md
-                    sself.viewModel.bookInfo.cmd = cmd
-                    sself.viewModel.bookInfo.encodeUrl = encodeUrl
-                    RBSQlite.shared.delete(id: sself.viewModel.bookInfo.id, offset: sself.viewModel.bookInfo.offset)
-                    sself.loadData(offset: sself.viewModel.bookInfo.offset, false)
-                }
-            }
-        }))
-        present(vc, animated: true, completion: nil)
+//        let vc = RBAlertController(title: "更换章节内容来源", message: nil, preferredStyle: .alert)
+//        vc.addTextField { (textField) in
+//            textField.placeholder = "请输入章节地址"
+//            textField.font = UIFont.systemFont(ofSize: 20)
+//        }
+//        vc.addTextField { (textField) in
+//            textField.placeholder = "请输入offset"
+//            textField.font = UIFont.systemFont(ofSize: 20)
+//            textField.keyboardType = .numberPad
+//        }
+//        vc.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
+//        }))
+//        
+//        vc.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (_) in
+//            guard let sself = self else { return }
+//            
+//            if let tf = vc.textFields?.last,
+//                let text = tf.text,
+//                let offset = Int(text),
+//                offset != sself.viewModel.bookInfo.offset {
+//                sself.direction = offset > sself.viewModel.bookInfo.offset ? .forward : .reverse
+//                sself.loadData(offset: offset, false)
+//            }
+//            
+//            if let tf = vc.textFields?.first,
+//                let url = tf.text,
+//                let params = url.urlParameters,
+//                let id = params["id"] as? String,
+//                let md = params["md"] as? String,
+//                let cmd = params["cmd"] as? String,
+//                let encodeUrl = params["url"] as? String {
+//
+//                if sself.viewModel.bookInfo.id == id {
+//                    sself.viewModel.bookInfo.md = md
+//                    sself.viewModel.bookInfo.cmd = cmd
+//                    sself.viewModel.bookInfo.encodeUrl = encodeUrl
+//                    RBSQlite.shared.delete(id: sself.viewModel.bookInfo.id, offset: sself.viewModel.bookInfo.offset)
+//                    sself.loadData(offset: sself.viewModel.bookInfo.offset, false)
+//                }
+//            }
+//        }))
+//        present(vc, animated: true, completion: nil)
     }
     
     /// 上翻页

@@ -15,7 +15,7 @@ class BookShelfCell: UICollectionViewCell {
         didSet {
             imageView.kf.setImage(with: URL(string: model.picUrl), placeholder: UIImage(imageLiteralResourceName: "noData"))
             textLabel.text = model.title
-            offsetLabel.text = "\(model.offset)"
+//            offsetLabel.text = "\(model.offset)"
         }
     }
     

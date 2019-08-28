@@ -14,7 +14,10 @@ pod 'SQLite.swift'
 pod 'Moya/RxSwift'
 pod 'NVActivityIndicatorView'
 pod 'ObjectMapper'
+  # Rx
 pod 'RxSwift'
 pod 'RxCocoa'
+pod 'RxDataSources'
+pod 'RxWebKit'
 
 end

@@ -86,7 +86,13 @@ class ChapterViewController: UIViewController {
     }
     
     /// 章节模型
-    private var chapterModel: ReadModel?
+    private var chapterModel: ReadModel? {
+        willSet {
+            if newValue != nil {
+                newValue?.content = newValue!.content.replacingOccurrences(of: " ", with: "")
+            }
+        }
+    }
     
     /// 分页内容
     private var pagingContents = [String]()
@@ -116,6 +122,8 @@ class ChapterViewController: UIViewController {
         setupGesture()
         RBSQlite.shared.delete(id: viewModel.bookInfo.gid, url: viewModel.bookInfo.url)
         loadData(cid: viewModel.bookInfo.cid, url: viewModel.bookInfo.url, false)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(jump))
     }
 
     override func viewDidLayoutSubviews() {
@@ -156,6 +164,25 @@ class ChapterViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    @objc func jump() {
+        let vc = UIAlertController(title: "跳转", message: nil, preferredStyle: .alert)
+        vc.addTextField { (textField) in
+            textField.placeholder = "请输入章节地址"
+            textField.font = UIFont.systemFont(ofSize: 20)
+            textField.keyboardType = .URL
+        }
+        vc.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        vc.addAction(UIAlertAction(title: "跳转", style: .default, handler: {[weak self] (_) in
+            if let tf = vc.textFields?.first,
+                let url = tf.text,
+                let params = url.urlParameters,
+                let book = BookInfoModel(JSON: params) {
+                self?.loadData(cid: book.cid, url: book.url, false)
+            }
+        }))
+        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -354,7 +381,7 @@ extension ChapterViewController {
     private func setupPageVC(_ isShowLastPage: Bool) {
         guard let model = chapterModel else { return }
         
-        getTotalPages(string: model.content.replacingOccurrences(of: "<br/>", with: "\n"))
+        getTotalPages(string: model.content)
         if isShowLastPage {
             currentPage = pagingContents.count - 1
         }
@@ -369,7 +396,7 @@ extension ChapterViewController {
     /// 重新设置文本视图
     private func resetTextView() {
         if let model = chapterModel {
-            getTotalPages(string: model.content.replacingOccurrences(of: "<br/>", with: "\n"))
+            getTotalPages(string: model.content)
         }
         currentPagingVC?.speechContent(unread: pagingContents[currentPage])
     }

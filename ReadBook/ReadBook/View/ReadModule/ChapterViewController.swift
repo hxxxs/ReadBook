@@ -91,9 +91,6 @@ class ChapterViewController: UIViewController {
     /// 分页内容
     private var pagingContents = [String]()
     
-    /// 分页范围
-    private var ranges = [NSRange]()
-    
     /// 当前页
     private var currentPage: Int = 0
     
@@ -105,9 +102,6 @@ class ChapterViewController: UIViewController {
     
     /// 是否开启朗读模式
     private var isOpenSpeechPattern: Bool = false
-    
-    /// 未读字符数量
-    private var unreadCount: Int = 0
     
     //  MARK: - override
     deinit {
@@ -233,16 +227,11 @@ extension ChapterViewController {
         maskView.isHidden = true
         isOpenSpeechPattern = true
         
-        var utterance = ""
+        var utterances = [String]()
         for i in currentPage..<pagingContents.count {
-            utterance.append(pagingContents[i])
+            utterances.append(pagingContents[i])
         }
-        speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.title ?? "", utterance: utterance)
-        speechViewModel.nextPageLocation = ranges[currentPage].length
-        
-        if let lastRange = ranges.last {
-            unreadCount = lastRange.location + lastRange.length - utterance.count
-        }
+        speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.title ?? "", utterances: utterances)
     }
 }
 
@@ -264,15 +253,7 @@ extension ChapterViewController {
     @objc private func pageDownTap() {
         if currentPage < pagingContents.count - 1 {
             currentPage += 1
-            if isOpenSpeechPattern {
-                if currentPage == ranges.count - 1 {
-                    speechViewModel.nextPageLocation = 99999999
-                } else {
-                    speechViewModel.nextPageLocation = ranges[currentPage + 1].location - unreadCount
-                }
-            } else {
-                pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
-            }
+            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
         } else {
             loadNextData()
         }
@@ -308,7 +289,6 @@ extension ChapterViewController {
     private func getTotalPages(string: String) {
         currentPage = 0
         pagingContents.removeAll()
-        ranges.removeAll()
         
         let rect = CGRect(x: 0, y: 0, width: pageVC.view.width - 30 - fontSize / 2, height: pageVC.view.height - 2 * fontSize)
         let paragraph = NSMutableParagraphStyle()
@@ -326,7 +306,6 @@ extension ChapterViewController {
             let range = CTFrameGetVisibleStringRange(frame)
             let r = NSRange(location: rangeIndex, length: range.length)
             if r.length > 0 {
-                ranges.append(r)
                 pagingContents.append((string as NSString).substring(with: r))
             }
             rangeIndex += r.length
@@ -363,14 +342,11 @@ extension ChapterViewController {
     /// 配置朗读视图模型
     private func setupSpeechViewModel() {
         speechViewModel.speechDidFinishCompletion = {[weak self] in
-            self?.loadNextData()
+            self?.pageDownTap()
         }
         
-        speechViewModel.speechProgressCompletion = {[weak self] (read, unread, isPageDown) in
+        speechViewModel.speechProgressCompletion = {[weak self] (read, unread) in
             self?.currentPagingVC?.speechContent(unread: unread, read: read)
-            if isPageDown {
-                self?.pageDownTap()
-            }
         }
     }
     

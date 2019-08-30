@@ -73,12 +73,12 @@ class SpeechViewModel: NSObject {
 extension SpeechViewModel: AVSpeechSynthesizerDelegate {
     
     /// 即将朗读
-//    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-//        let index = utterance.speechString.index(utterance.speechString.startIndex, offsetBy: characterRange.location + characterRange.length)
-//        let read = String(utterance.speechString[..<index])
-//        let unread = String(utterance.speechString[index...])
-//        speechProgressCompletion?(read, unread)
-//    }
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        let index = utterance.speechString.index(utterance.speechString.startIndex, offsetBy: characterRange.location + characterRange.length)
+        let read = String(utterance.speechString[..<index])
+        let unread = String(utterance.speechString[index...])
+        speechProgressCompletion?(read, unread)
+    }
     
     /// 完成
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {

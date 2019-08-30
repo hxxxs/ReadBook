@@ -86,7 +86,21 @@ class ChapterViewController: UIViewController {
     }
     
     /// 章节模型
-    private var chapterModel: ReadModel?
+    private var chapterModel: ReadModel? {
+        willSet {
+            if newValue != nil {
+                newValue?.content = newValue!.content
+                    .replacingOccurrences(of: "“", with: "\"")
+                    .replacingOccurrences(of: "”", with: "\"")
+                    .replacingOccurrences(of: "!", with: "！")
+                    .replacingOccurrences(of: "……", with: "......")
+                    .replacingOccurrences(of: "?", with: "？")
+                    .replacingOccurrences(of: "。", with: "。")
+                    .replacingOccurrences(of: ",", with: "，")
+                    .replacingOccurrences(of: ":", with: "：")
+            }
+        }
+    }
     
     /// 分页内容
     private var pagingContents = [String]()

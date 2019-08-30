@@ -74,8 +74,9 @@ extension SpeechViewModel: AVSpeechSynthesizerDelegate {
     
     /// 即将朗读
 //    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-//        let read = (utterance.speechString as NSString).substring(with: NSRange(location: 0, length: characterRange.location + characterRange.length))
-//        let unread = (utterance.speechString as NSString).substring(from: characterRange.location + characterRange.length)
+//        let index = utterance.speechString.index(utterance.speechString.startIndex, offsetBy: characterRange.location + characterRange.length)
+//        let read = String(utterance.speechString[..<index])
+//        let unread = String(utterance.speechString[index...])
 //        speechProgressCompletion?(read, unread)
 //    }
     

@@ -14,10 +14,6 @@ struct ReadViewModel {
     var bookInfo: BookInfoModel
     
     /// 加载章节信息
-    ///
-    /// - Parameters:
-    ///   - offset: 章节编码
-    ///   - completion: 完成结果
     func loadChapterInfo(cid: String, url: String, completion: @escaping (ReadModel?, String?) -> Void) {
         
         if let jsonString = RBSQlite.shared.prepare(id: bookInfo.gid, url: url) {
@@ -33,10 +29,6 @@ struct ReadViewModel {
     }
     
     /// 网络加载章节信息
-    ///
-    /// - Parameters:
-    ///   - offset: 章节编码
-    ///   - completion: 完成结果
     func networkLoadChapterInfo(cid: String, url: String, completion: @escaping (ReadModel?, String?) -> Void) {
         let target = BooksAPI.chapter(gid: bookInfo.gid, cid: cid, url: url)
         let provider = MoyaProvider<BooksAPI>(requestClosure: { (endpoint: Endpoint, done: MoyaProvider.RequestResultClosure) in

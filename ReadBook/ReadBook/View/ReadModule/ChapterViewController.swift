@@ -203,8 +203,6 @@ extension ChapterViewController: NVActivityIndicatorViewable {
     }
     
     /// 加载数据
-    ///
-    /// - Parameter offset: 页码
     private func loadData(cid: String, url: String, _ isShowLastPage: Bool) {
         startAnimating(CGSize(width: 30, height: 30), type: .ballRotateChase)
         viewModel.loadChapterInfo(cid: cid, url: url) {[weak self] (model, error) in
@@ -275,7 +273,11 @@ extension ChapterViewController {
     @objc private func pageDownTap() {
         if currentPage < pagingContents.count - 1 {
             currentPage += 1
-            pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
+            if isOpenSpeechPattern {
+                currentPagingVC?.speechContent(unread: pagingContents[currentPage])
+            } else {
+                pageVC.setViewControllers([pagingvc(page: currentPage)], direction: .forward, animated: true, completion: nil)
+            }
         } else {
             loadNextData()
         }
@@ -383,7 +385,7 @@ extension ChapterViewController {
         
         if isOpenSpeechPattern {
             startPlay()
-            pageVC.setViewControllers([pagingvc(page: 0)], direction: direction, animated: true, completion: nil)
+            currentPagingVC?.speechContent(unread: pagingContents[0])
         } else {
             pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
         }

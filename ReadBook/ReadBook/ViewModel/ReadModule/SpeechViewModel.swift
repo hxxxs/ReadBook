@@ -20,7 +20,7 @@ class SpeechViewModel: NSObject {
     init(with image: UIImage) {
         super.init()
         
-//        RBSpeechSynthesizer.shared.delegate = self
+        RBSpeechSynthesizer.shared.delegate = self
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
         speechImage = image
@@ -50,6 +50,10 @@ class SpeechViewModel: NSObject {
         RBSpeechSynthesizer.shared.startPlay(utterances: utterances)
         nowPlayingInfo(title: title, artist: artist)
     }
+    func startPlay(title: String, artist: String, utterance: String) {
+        RBSpeechSynthesizer.shared.startPlay(utterance: utterance)
+        nowPlayingInfo(title: title, artist: artist)
+    }
     
     /// 锁屏信息
     private func nowPlayingInfo(title: String, artist: String) {
@@ -69,11 +73,11 @@ class SpeechViewModel: NSObject {
 extension SpeechViewModel: AVSpeechSynthesizerDelegate {
     
     /// 即将朗读
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-        let read = (utterance.speechString as NSString).substring(with: NSRange(location: 0, length: characterRange.location + characterRange.length))
-        let unread = (utterance.speechString as NSString).substring(from: characterRange.location + characterRange.length)
-        speechProgressCompletion?(read, unread)
-    }
+//    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+//        let read = (utterance.speechString as NSString).substring(with: NSRange(location: 0, length: characterRange.location + characterRange.length))
+//        let unread = (utterance.speechString as NSString).substring(from: characterRange.location + characterRange.length)
+//        speechProgressCompletion?(read, unread)
+//    }
     
     /// 完成
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {

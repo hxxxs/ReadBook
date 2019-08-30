@@ -86,13 +86,7 @@ class ChapterViewController: UIViewController {
     }
     
     /// 章节模型
-    private var chapterModel: ReadModel? {
-        willSet {
-            if newValue != nil {
-                newValue?.content = newValue!.content.replacingOccurrences(of: " ", with: "")
-            }
-        }
-    }
+    private var chapterModel: ReadModel?
     
     /// 分页内容
     private var pagingContents = [String]()
@@ -258,6 +252,7 @@ extension ChapterViewController {
         for i in currentPage..<pagingContents.count {
             utterances.append(pagingContents[i])
         }
+
         speechViewModel.startPlay(title: viewModel.bookInfo.title, artist: chapterModel?.title ?? "", utterances: utterances)
     }
 }
@@ -388,6 +383,7 @@ extension ChapterViewController {
         
         if isOpenSpeechPattern {
             startPlay()
+            pageVC.setViewControllers([pagingvc(page: 0)], direction: direction, animated: true, completion: nil)
         } else {
             pageVC.setViewControllers([pagingvc(page: currentPage)], direction: direction, animated: true, completion: nil)
         }

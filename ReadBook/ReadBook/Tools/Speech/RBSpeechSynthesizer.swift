@@ -48,13 +48,13 @@ class RBSpeechSynthesizer: AVSpeechSynthesizer {
     ///   - rate: 语速，默认0.6
     ///   - volume: 音量，默认1
     ///   - pitchMutiplier: 音调，默认0.9
-    ///   - postUtteranceDelay: 播放下一句时有短暂的停顿，默认1s
+    ///   - postUtteranceDelay: 播放下一句时有短暂的停顿，默认0s
     ///   - language: 语言，默认中文
     func startPlay(utterance: String,
                    rate: Float = 0.6,
                    volume: Float = 1,
                    pitchMutiplier: Float = 0.9,
-                   postUtteranceDelay: TimeInterval = 1,
+                   postUtteranceDelay: TimeInterval = 0,
                    language: String = "zh-CN") {
         if isSpeaking {
             stopSpeaking(at: .immediate)

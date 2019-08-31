@@ -26,23 +26,23 @@ class ChapterViewController: UIViewController {
         v.isHidden = true
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(maskViewTap)))
         v.monitorCompletion = {[weak self] type in
-            guard let strongSelf = self else { return }
+            guard let `self` = self else { return }
             switch type {
             case 100001: // 上一章
-                strongSelf.loadPreviousData()
+                self.loadPreviousData()
             case 100002: // 下一章
-                strongSelf.loadNextData()
+                self.loadNextData()
             case 100003:
-                strongSelf.startPlay()
+                self.startPlay()
             case 100004:
-                if let model = strongSelf.chapterModel, strongSelf.fontSize > 20 {
-                    strongSelf.fontSize -= 2
-                    strongSelf.resetTextView()
+                if let model = self.chapterModel, self.fontSize > 20 {
+                    self.fontSize -= 2
+                    self.resetTextView()
                 }
             case 100005:
-                if let model = strongSelf.chapterModel, strongSelf.fontSize < 36 {
-                    strongSelf.fontSize += 2
-                    strongSelf.resetTextView()
+                if let model = self.chapterModel, self.fontSize < 36 {
+                    self.fontSize += 2
+                    self.resetTextView()
                 }
             default:
                 break
@@ -58,18 +58,18 @@ class ChapterViewController: UIViewController {
         v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(playViewTap)))
         v.monitorCompletion = {[weak self] (view, type) in
             view.isHidden = true
-            guard let strongSelf = self else { return }
+            guard let `self` = self else { return }
             switch type {
             case 100001:
-                strongSelf.stopPlay()
+                self.stopPlay()
             case 100002:
-                strongSelf.timing(delay: 15 * 60)
+                self.timing(delay: 15 * 60)
             case 100003:
-                strongSelf.timing(delay: 30 * 60)
+                self.timing(delay: 30 * 60)
             case 100004:
-                strongSelf.timing(delay: 60 * 60)
+                self.timing(delay: 60 * 60)
             case 100005:
-                strongSelf.timing(delay: 120 * 60)
+                self.timing(delay: 120 * 60)
             default:
                 break
             }

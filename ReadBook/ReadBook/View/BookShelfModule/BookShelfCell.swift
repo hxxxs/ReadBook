@@ -15,16 +15,9 @@ class BookShelfCell: UICollectionViewCell {
         didSet {
             imageView.kf.setImage(with: URL(string: model.picUrl), placeholder: UIImage(imageLiteralResourceName: "noData"))
             textLabel.text = model.title
-//            offsetLabel.text = "\(model.offset)"
         }
     }
     
-    /// 章节标签
-    private lazy var offsetLabel: UILabel = {
-        let label = UILabel(textColor: UIColor.darkGray)
-        label.backgroundColor = UIColor.white
-        return label
-    }()
     /// 图片
     private lazy var imageView = UIImageView()
     /// 标题
@@ -41,7 +34,6 @@ class BookShelfCell: UICollectionViewCell {
     var showDeleteButton = true {
         didSet {
             deleteButton.isHidden = showDeleteButton
-            offsetLabel.isHidden = showDeleteButton
             if !showDeleteButton {            
                 imageView.animationShaker()
             }
@@ -81,18 +73,12 @@ class BookShelfCell: UICollectionViewCell {
             make.centerX.equalTo(imageView.snp.right)
             make.centerY.equalTo(imageView.snp.top)
         }
-        
-        offsetLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(imageView)
-            make.centerX.equalTo(imageView)
-        }
     }
     
     private func setup() {
         contentView.addSubview(imageView)
         contentView.addSubview(textLabel)
         contentView.addSubview(deleteButton)
-        contentView.addSubview(offsetLabel)
     }
     
 }

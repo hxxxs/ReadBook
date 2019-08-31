@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Book Shelf View Controller-->
+        <!--书架-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="BookShelfViewController" customModule="ReadBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,11 +20,141 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VsM-4E-XR3"/>
+                    <navigationItem key="navigationItem" title="书架" id="dsR-h0-Ybw">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="8ux-WI-QgZ">
+                            <connections>
+                                <segue destination="gGC-EZ-WDP" kind="show" id="MhC-gQ-p4m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1072.8" y="124.58770614692655"/>
+        </scene>
+        <!--添加-->
+        <scene sceneID="7w8-Om-8fM">
+            <objects>
+                <tableViewController id="gGC-EZ-WDP" customClass="AddBookViewController" customModule="ReadBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FJ7-ER-dZD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                        <sections>
+                            <tableViewSection id="fhr-k6-DNe">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wN6-Zw-gpr">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wN6-Zw-gpr" id="VgJ-Sg-deu">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="书籍名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdq-AN-kQS">
+                                                    <rect key="frame" x="16" y="14.5" width="69.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入书籍名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2oh-uF-YmB">
+                                                    <rect key="frame" x="95.5" y="10" width="264.5" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2oh-uF-YmB" firstAttribute="leading" secondItem="vdq-AN-kQS" secondAttribute="trailing" constant="10" id="26j-ac-dJ2"/>
+                                                <constraint firstItem="2oh-uF-YmB" firstAttribute="centerY" secondItem="VgJ-Sg-deu" secondAttribute="centerY" id="Af8-4S-TWE"/>
+                                                <constraint firstAttribute="trailing" secondItem="2oh-uF-YmB" secondAttribute="trailing" constant="15" id="LHz-K0-DOP"/>
+                                                <constraint firstItem="vdq-AN-kQS" firstAttribute="leading" secondItem="VgJ-Sg-deu" secondAttribute="leadingMargin" id="MmR-S2-DmH"/>
+                                                <constraint firstItem="vdq-AN-kQS" firstAttribute="centerY" secondItem="VgJ-Sg-deu" secondAttribute="centerY" id="Y29-bh-rR0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3oG-pX-Rba">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3oG-pX-Rba" id="E2b-x6-luY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="封面图片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHF-Pc-93t">
+                                                    <rect key="frame" x="16" y="14.5" width="69.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入封面图片地址" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="t6D-jP-EWs">
+                                                    <rect key="frame" x="95.5" y="10" width="264.5" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="t6D-jP-EWs" firstAttribute="centerY" secondItem="E2b-x6-luY" secondAttribute="centerY" id="0Lb-8F-7br"/>
+                                                <constraint firstItem="LHF-Pc-93t" firstAttribute="centerY" secondItem="E2b-x6-luY" secondAttribute="centerY" id="IfD-v0-nSf"/>
+                                                <constraint firstAttribute="trailing" secondItem="t6D-jP-EWs" secondAttribute="trailing" constant="15" id="Ili-Zh-Nan"/>
+                                                <constraint firstItem="LHF-Pc-93t" firstAttribute="leading" secondItem="E2b-x6-luY" secondAttribute="leadingMargin" id="VRS-PR-s4H"/>
+                                                <constraint firstItem="t6D-jP-EWs" firstAttribute="leading" secondItem="LHF-Pc-93t" secondAttribute="trailing" constant="10" id="kqk-dH-gkq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="YDw-yo-8a1">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YDw-yo-8a1" id="zG3-PA-iIx">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="章节地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LH-u4-lLJ">
+                                                    <rect key="frame" x="16" y="14.5" width="69.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入章节地址" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZTe-XX-4HA">
+                                                    <rect key="frame" x="95.5" y="10" width="264.5" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9LH-u4-lLJ" firstAttribute="centerY" secondItem="zG3-PA-iIx" secondAttribute="centerY" id="4jO-yQ-q8g"/>
+                                                <constraint firstItem="ZTe-XX-4HA" firstAttribute="centerY" secondItem="zG3-PA-iIx" secondAttribute="centerY" id="Cze-PA-NXn"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZTe-XX-4HA" secondAttribute="trailing" constant="15" id="Vqm-rn-azu"/>
+                                                <constraint firstItem="ZTe-XX-4HA" firstAttribute="leading" secondItem="9LH-u4-lLJ" secondAttribute="trailing" constant="10" id="gDC-Hj-ThE"/>
+                                                <constraint firstItem="9LH-u4-lLJ" firstAttribute="leading" secondItem="zG3-PA-iIx" secondAttribute="leadingMargin" id="p42-wf-zXU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="gGC-EZ-WDP" id="ICX-kG-lW3"/>
+                            <outlet property="delegate" destination="gGC-EZ-WDP" id="IVo-NB-566"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="添加" id="erv-vC-kEz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="WvR-eo-vMx">
+                            <connections>
+                                <action selector="saveBook:" destination="gGC-EZ-WDP" id="Ndo-pq-6PQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bookImageTF" destination="t6D-jP-EWs" id="AzB-Tr-ofk"/>
+                        <outlet property="bookNameTF" destination="2oh-uF-YmB" id="1VC-q4-zEe"/>
+                        <outlet property="chapterURLTF" destination="ZTe-XX-4HA" id="a8M-h2-JdI"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="flq-g6-Wr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1762" y="125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kId-1w-jKP">

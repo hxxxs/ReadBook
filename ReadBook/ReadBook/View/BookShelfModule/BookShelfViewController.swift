@@ -15,7 +15,7 @@ class BookShelfViewController: UIViewController {
     /// 集合视图
     private lazy var collectionView: UICollectionView = {
         let fl = UICollectionViewFlowLayout()
-        fl.itemSize = CGSize(width: wScreen / 2, height: 150)
+        fl.itemSize = CGSize(width: wScreen / 3, height: 150)
         fl.minimumLineSpacing = 0
         fl.minimumInteritemSpacing = 0
         
@@ -37,11 +37,7 @@ class BookShelfViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        title = "书架"
-       
         view.addSubview(collectionView)
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemClick))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,42 +51,6 @@ class BookShelfViewController: UIViewController {
 // MARK: - Monitor
 
 extension BookShelfViewController {
-    
-    /// 添加
-    @objc private func addItemClick() {
-        let vc = RBAlertController(title: "添加", message: nil, preferredStyle: .alert)
-        vc.addTextField { (textField) in
-            textField.placeholder = "请输入标题"
-            textField.font = UIFont.systemFont(ofSize: 20)
-        }
-        vc.addTextField { (textField) in
-            textField.placeholder = "请输入章节地址"
-            textField.font = UIFont.systemFont(ofSize: 20)
-            textField.keyboardType = .URL
-        }
-        vc.addTextField { (textField) in
-            textField.placeholder = "请输入图片地址"
-            textField.font = UIFont.systemFont(ofSize: 20)
-            textField.keyboardType = .URL
-        }
-        vc.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
-        }))
-        
-        vc.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (_) in
-            guard let sself = self else { return }
-           
-            if let tf = vc.textFields?[1],
-                let url = tf.text,
-                let params = url.urlParameters,
-                let book = BookInfoModel(JSON: params) {
-                book.title = vc.textFields?.first?.text ?? ""
-                book.picUrl = vc.textFields?[2].text ?? ""
-                BookShelfModel.addRead(with: book)
-                sself.collectionView.reloadData()
-            }
-        }))
-        present(vc, animated: true, completion: nil)
-    }
     
     /// 完成
     @objc private func doneItemClick() {

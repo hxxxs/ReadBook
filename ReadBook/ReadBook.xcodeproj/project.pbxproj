@@ -35,6 +35,7 @@
 		9DDC9B83229F9BDE0031AED5 /* MaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B82229F9BDE0031AED5 /* MaskView.xib */; };
 		9DDD65AF22AF3A760079A131 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9DDD65AE22AF3A760079A131 /* .swiftlint.yml */; };
 		9DDD65B422AF547A0079A131 /* BooksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDD65B322AF547A0079A131 /* BooksAPI.swift */; };
+		9F4CA659231A90D600A2F378 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4CA658231A90D500A2F378 /* AddBookViewController.swift */; };
 		9F4F5235229EB7D7006B6733 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F4F5234229EB7D7006B6733 /* iconfont.ttf */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		9DDC9B82229F9BDE0031AED5 /* MaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaskView.xib; sourceTree = "<group>"; };
 		9DDD65AE22AF3A760079A131 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9DDD65B322AF547A0079A131 /* BooksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksAPI.swift; sourceTree = "<group>"; };
+		9F4CA658231A90D500A2F378 /* AddBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 		9F4F5234229EB7D7006B6733 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		CB242B198183428D3A92DD93 /* Pods_ReadBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -257,6 +259,7 @@
 			children = (
 				9DD033F9228E9584001CC884 /* BookShelfCell.swift */,
 				9DD033FB228EA7BD001CC884 /* BookShelfViewController.swift */,
+				9F4CA658231A90D500A2F378 /* AddBookViewController.swift */,
 			);
 			path = BookShelfModule;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				9D70E64122A74D3F004F8E45 /* RBExtension.swift in Sources */,
 				9D9A800F228CEABC00737BF8 /* MaskView.swift in Sources */,
 				9D88877622B88F8600AC3202 /* SwiftImport.swift in Sources */,
+				9F4CA659231A90D600A2F378 /* AddBookViewController.swift in Sources */,
 				9D0CA34022923C9A003B07F0 /* BookShelfModel.swift in Sources */,
 				9DDC9B7F229F77D70031AED5 /* PlayView.swift in Sources */,
 				9DDC9B7D229F6C9A0031AED5 /* RBSpeechSynthesizer.swift in Sources */,

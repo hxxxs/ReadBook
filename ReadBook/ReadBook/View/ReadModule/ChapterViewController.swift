@@ -90,6 +90,10 @@ class ChapterViewController: UIViewController {
         willSet {
             if newValue != nil {
                 newValue?.content = newValue!.content
+                    .replacingOccurrences(of: "\n\n", with: "\n")
+                    .replacingOccurrences(of: " ", with: "")
+                    .replacingOccurrences(of: "'", with: "“")
+                    .replacingOccurrences(of: "!", with: "！")
                     .replacingOccurrences(of: "?", with: "？")
             }
         }

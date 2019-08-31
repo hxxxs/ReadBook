@@ -17,7 +17,5 @@ pod 'ObjectMapper'
   # Rx
 pod 'RxSwift'
 pod 'RxCocoa'
-pod 'RxDataSources'
-pod 'RxWebKit'
 
 end

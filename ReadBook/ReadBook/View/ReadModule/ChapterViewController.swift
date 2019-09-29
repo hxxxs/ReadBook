@@ -125,7 +125,7 @@ class ChapterViewController: UIViewController {
         setup()
         setupSpeechViewModel()
         setupGesture()
-        RBSQlite.shared.delete(id: viewModel.bookInfo.gid, url: viewModel.bookInfo.url)
+        RBSQlite.shared.delete(id: viewModel.bookInfo.gid, cid: viewModel.bookInfo.cid)
         loadData(cid: viewModel.bookInfo.cid, url: viewModel.bookInfo.url, false)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(jump))
@@ -198,7 +198,7 @@ extension ChapterViewController: NVActivityIndicatorViewable {
     /// 上一章
     private func loadPreviousData(_ isShowLastPage: Bool = false) {
         direction = .reverse
-        if let model = chapterModel, model.pre_url.count > 0 {
+        if let model = chapterModel, model.pre_cid.count > 0 {
             loadData(cid: model.pre_cid, url: model.pre_url, isShowLastPage)
         }
     }

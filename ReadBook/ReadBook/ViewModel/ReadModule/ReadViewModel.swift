@@ -16,7 +16,7 @@ struct ReadViewModel {
     /// 加载章节信息
     func loadChapterInfo(cid: String, url: String, completion: @escaping (ReadModel?, String?) -> Void) {
         
-        if let jsonString = RBSQlite.shared.prepare(id: bookInfo.gid, url: url) {
+        if let jsonString = RBSQlite.shared.prepare(id: bookInfo.gid, cid: cid) {
             if let model = ReadModel(JSONString: jsonString) {
                 self.bookInfo.cid = cid
                 self.bookInfo.url = url
@@ -51,7 +51,7 @@ struct ReadViewModel {
                     let model = ReadModel(JSON: data) {
                     self.bookInfo.cid = cid
                     self.bookInfo.url = url
-                    RBSQlite.shared.insert(id: self.bookInfo.gid, url: url, jsonString: model.toJSONString() ?? "")
+                    RBSQlite.shared.insert(id: self.bookInfo.gid, cid: cid, jsonString: model.toJSONString() ?? "")
                     BookShelfModel.changeCurrentReadOffset(with: self.bookInfo)
                     completion(model, nil)
                 } else {
